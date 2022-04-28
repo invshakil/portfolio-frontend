@@ -10,7 +10,7 @@ export default function Home() {
         const timer = setTimeout(() => {
             setToggle(!toggle)
             setCurrentTheme(localStorage.theme)
-        }, 1);
+        }, 0);
         return () => clearTimeout(timer);
     }, [toggle]);
 
@@ -26,7 +26,7 @@ export default function Home() {
                     <br/>
                     <a>RESUME</a>
                 </div>
-                <div className={(currentTheme==='dark')?'info':'infoLight'}>
+                <div className={(currentTheme==='light')?'infoLight':(currentTheme === 'dark') &&'info'}>
                     <h1>MD. SYFUL ISLAM SHAKIL</h1>
                     <hr/>
                     <h2>SOFTWARE ENGINEER</h2>

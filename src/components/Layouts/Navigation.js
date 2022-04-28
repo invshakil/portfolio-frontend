@@ -18,12 +18,12 @@ const Navigation = () => {
         const timer = setTimeout(() => {
             setToggle(!toggle)
             setCurrentTheme(localStorage.theme)
-        }, 1);
+        }, 0);
         return () => clearTimeout(timer);
     }, [toggle]);
 
     return (
-        <nav className={(currentTheme === 'dark') ? 'darkNavBar' : 'navBar'}>
+        <nav className={(currentTheme === 'light') ? 'navBar' :(currentTheme === 'dark') && 'darkNavBar'}>
             {/* Primary Navigation Menu */}
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="flex justify-between h-16">

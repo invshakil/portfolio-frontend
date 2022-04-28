@@ -11,12 +11,12 @@ const CareerCard = ({title, name, subject, result, year, index, experience}) => 
         const timer = setTimeout(() => {
             setToggle(!toggle)
             setCurrentTheme(localStorage.theme)
-        }, 1);
+        }, 0);
         return () => clearTimeout(timer);
     }, [toggle]);
 
     return (
-        <div className={(currentTheme==='dark')?'careerInfoCard':'careerInfoCardLight'}>
+        <div className={(currentTheme==='light')?'careerInfoCardLight':(currentTheme === 'dark') &&'careerInfoCard'}>
             <div className='icon'>
                 {
                     (experience) ?

@@ -16,7 +16,7 @@ const App = ({Component, pageProps}) =>
         attribute="class"
         defaultTheme="dark"
     >
-        <NextNProgress />
+        <NextNProgress color='#5e00ff'/>
         <Component {...pageProps} />
     </ThemeProvider>
 
