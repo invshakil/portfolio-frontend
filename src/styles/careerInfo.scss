@@ -1,0 +1,105 @@
+@import "variables";
+@import "mixin";
+
+.educationContainer {
+    @include container();
+    padding: 50px 10px 10px 10px;
+
+    .divider {
+        position: absolute;
+        left: 50.4%;
+        margin-top: 20px;
+        min-height: 90%;
+        border-left: 2px solid $body-hr;
+        @media screen and (max-width: $bp-mobile) {
+            display: none;
+        }
+    }
+
+    .divider2 {
+        position: absolute;
+        left: 50.4%;
+        margin-top: 20px;
+        min-height: 175%;
+        border-left: 2px solid $body-hr;
+        @media screen and (max-width: $bp-mobile) {
+            display: none;
+        }
+    }
+
+    h1 {
+        @include centerHeader();
+    }
+
+    .splitter {
+        min-height: 100vh;
+        padding: 30px;
+
+        .centerIcon {
+            display: block;
+            margin: 20px 0;
+            text-align: center;
+            min-height: 20px;
+            position: relative;
+            @media screen and (max-width: $bp-mobile) {
+                display: none;
+            }
+
+            .icon {
+                padding: 10px;
+                border-radius: 100%;
+                background-color: $pink;
+            }
+        }
+
+        .left {
+            padding: 30px;
+            @include flexCenter();
+            justify-content: space-around;
+            @media screen and (max-width: $bp-mobile) {
+                flex-direction: column-reverse;
+            }
+
+            .passingYear {
+                margin-right: 29%;
+                @media screen and (max-width: $bp-mobile) {
+                    display: none;
+                }
+
+                h2 {
+                    width: 170px;
+                    @include gradientText3();
+                }
+            }
+        }
+
+        .right {
+            @include flexCenter();
+            justify-content: space-around;
+            flex-direction: row-reverse;
+            @media screen and (max-width: $bp-mobile) {
+                flex-direction: column-reverse;
+            }
+
+            .passingYear {
+                margin-left: 29%;
+                @media screen and (max-width: $bp-mobile) {
+                    display: none;
+                }
+
+                h2 {
+                    width: 170px;
+                    @include gradientText2();
+                }
+            }
+        }
+
+        .careerInfoCard {
+            @include careerInfoCard($gradientDarkTheme, true);
+        }
+
+        .careerInfoCardLight {
+            @include careerInfoCard($gradientLight, false);
+        }
+    }
+}

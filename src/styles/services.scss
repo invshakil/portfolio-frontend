@@ -1,0 +1,50 @@
+@import "variables";
+@import "mixin";
+
+.servicesContainer {
+    @include container();
+
+    .headerTitle{
+        @include centerHeader();
+    }
+
+    .services{
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 35px;
+        @media screen and (max-width: $bp-mobile) {
+            grid-template-columns: auto;
+        }
+    }
+
+    .serviceCard {
+        @include serviceCard($gradientDarkTheme);
+    }
+    .serviceCardLight {
+        @include serviceCard($gradientLightTheme);
+    }
+
+        .serviceContainer {
+            line-height: 2;
+            text-align: center;
+
+            .icon{
+                margin: 2rem 44% 1rem 45%;
+                padding: 15px;
+                background-color: $pink;
+                border-radius: 100%;
+            }
+            h1{
+                font-size: 1.2rem;
+                color: tomato;
+                font-weight: 700;
+                margin-bottom: 1rem;
+            }
+            h2{
+                font-weight: 600;
+                line-height: 1.5;
+                //color: $white;
+                font-size: .85rem;
+            }
+        }
+}

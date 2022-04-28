@@ -1,0 +1,9 @@
+@import "variables";
+@import "mixin";
+
+.footerContainer {
+    min-height: 15.2vh;
+    text-align: center;
+    padding: 20px;
+    background-image: url("../assets/footer.jpg");
+}

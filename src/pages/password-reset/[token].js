@@ -31,7 +31,7 @@ const PasswordReset = () => {
             password_confirmation,
             setErrors,
             setStatus,
-        })
+        }).then(r => r)
     }
 
     useEffect(() => {

@@ -1,0 +1,19 @@
+@import "variables";
+@import "mixin";
+
+.darkNavBar {
+    background-image: $gradientDarkTheme;
+}
+
+.navBar {
+    background-image: $gradientLightTheme;
+}
+
+.title {
+    @include flexCenter();
+    //color: white;
+    font-weight: 700;
+    font-size: .95rem;
+}
+
+

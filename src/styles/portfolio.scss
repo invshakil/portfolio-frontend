@@ -1,0 +1,85 @@
+@import "variables";
+@import "mixin";
+
+.portfolioContainer {
+    @include container();
+
+    h1 {
+        @include centerHeader();
+    }
+
+    .filterPortfolio {
+        ul {
+            @include flexCenter();
+            //justify-content: space-evenly;
+            background-image: $gradient;
+            border-radius: 8px;
+            padding-left: 20%;
+            @media screen and (max-width: $bp-tablet) {
+                flex-direction: column;
+                padding-left: 0;
+            }
+
+            hr {
+                @media screen and (max-width: $bp-tablet) {
+                    width: 68vw;
+                    color: $body-hr;
+                }
+            }
+
+            .inActiveHr:hover hr {
+                border-color: $pink
+            }
+
+            .activeHr hr {
+                border-color: $pink
+            }
+
+            .inActive {
+                cursor: pointer;
+                padding: 1.1rem;
+
+                &:hover {
+                    background-color: $themeDark;
+                }
+            }
+
+            .active {
+                cursor: pointer;
+                padding: 1.1rem;
+                background-color: $themeDark;
+            }
+        }
+    }
+
+    .portfolio {
+        padding:2rem;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 20px;
+        @media screen and (max-width: $bp-tablet) {
+            grid-template-columns: auto auto;
+            padding: 2rem 0 0 0;
+        }
+        @media screen and (max-width: $bp-mobile) {
+            grid-template-columns: auto;
+            padding: 2rem 0 0 0;
+        }
+
+        h2 {
+            padding: 20px;
+            text-align: center;
+            font-weight: 800;
+            background-color: $theme;
+        }
+    }
+
+
+    h3 {
+        text-align: center;
+        padding: 1rem;
+        margin: 5rem;
+        background-color: $pinkDark;
+    }
+}
+

@@ -1,0 +1,21 @@
+//$body-bg: #282e49;
+$body-bg: linear-gradient(to right, #282e49, #1b202f);
+$body-hr: #4c5369;
+$theme: #6150a9;
+$themeDark: #5e00ff;
+$lightTheme: #596dbb;
+$lightBlue: #737af1;
+$white: #dcdcdc;
+$green: #19b275;
+$pink: #a65dad;
+$pinkDark: #811b8c;
+$gradient:linear-gradient(to right, $lightTheme, $theme);
+$gradientLight:linear-gradient(to right, #ffffff, #dde4f6, #cbb5ff);
+$gradientLightTheme:linear-gradient(to right, #dfd6ff, #dee4ff, #ffffff);
+$gradientDarkTheme:linear-gradient(to right,#4b689d, #4d5b88, #574486);
+
+$bp-tablet: 768px;
+$bp-mobile: 426px;
+$bp-laptop: 1281px;
+$bp-mediumDesktop: 1921px;
+$bp-largeDesktop: 3841px;
