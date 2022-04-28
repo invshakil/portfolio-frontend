@@ -9,6 +9,9 @@ import '../styles/global.css'
 import '../styles/portfolio.scss'
 import {ThemeProvider} from "next-themes"
 import NextNProgress from 'nextjs-progressbar';
+import React from 'react';
+import reducer, {initialState} from "@/states/reducer";
+import {StateProvider} from "@/states/StateProvider";
 
 const App = ({Component, pageProps}) =>
     <ThemeProvider
@@ -17,7 +20,11 @@ const App = ({Component, pageProps}) =>
         defaultTheme="dark"
     >
         <NextNProgress color='#5e00ff'/>
-        <Component {...pageProps} />
+        <React.StrictMode>
+            <StateProvider initialState={initialState} reducer={reducer}>
+                <Component {...pageProps} />
+            </StateProvider>
+        </React.StrictMode>
     </ThemeProvider>
 
 export default App

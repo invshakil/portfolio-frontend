@@ -1,18 +1,9 @@
 import Head from 'next/head'
 import GuestLayout from "@/components/Layouts/GuestLayout"
-import {useEffect, useState} from "react";
+import {useStateValue} from "@/states/StateProvider";
 
 export default function Home() {
-    const [currentTheme, setCurrentTheme] = useState('')
-    const [toggle, setToggle] = useState(false)
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setToggle(!toggle)
-            setCurrentTheme(localStorage.theme)
-        }, 0);
-        return () => clearTimeout(timer);
-    }, [toggle]);
+    const [{theme}] = useStateValue()
 
     return (
         <GuestLayout>
@@ -26,16 +17,18 @@ export default function Home() {
                     <br/>
                     <a>RESUME</a>
                 </div>
-                <div className={(currentTheme==='light')?'infoLight':(currentTheme === 'dark') &&'info'}>
+                <div className={(theme === 'light') ? 'infoLight' : (theme === 'dark') && 'info'}>
                     <h1>MD. SYFUL ISLAM SHAKIL</h1>
                     <hr/>
                     <h2>SOFTWARE ENGINEER</h2>
                     <p>
-                        I'm a dedicated software engineer. I'm passionate about implementing something new. I love to play with code. I have 36 month+ experience of doing projects. Oh another thing. I am a football freak and a Liverpool Supporter!
+                        I'm a dedicated software engineer. I'm passionate about implementing something new. I love to
+                        play with code. I have 36 month+ experience of doing projects. Oh another thing. I am a football
+                        freak and a Liverpool Supporter!
                     </p>
                     <br/>
                     <h3>SUMMERY</h3>
-                    <div className={currentTheme==='dark'?'summery':'summeryLight'}>
+                    <div className={theme === 'dark' ? 'summery' : theme === 'light' && 'summeryLight'}>
                         <div>
                             <h4>AGE: </h4>
                             <h4>NATIONALITY: </h4>

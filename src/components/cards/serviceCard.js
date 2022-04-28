@@ -1,20 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import {useStateValue} from "@/states/StateProvider";
 
 const ServiceCard = ({title, service, icon}) => {
-    const [currentTheme, setCurrentTheme] = useState('')
-    const [toggle, setToggle] = useState(false)
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setToggle(!toggle)
-            setCurrentTheme(localStorage.theme)
-        }, 0);
-        return () => clearTimeout(timer);
-    }, [toggle]);
+    const [{theme}] = useStateValue()
 
     return (
-        <div className={(currentTheme==='light')?'serviceCardLight':(currentTheme==='dark')&&'serviceCard'}>
+        <div className={(theme==='light')?'serviceCardLight':(theme==='dark')&&'serviceCard'}>
             <div className='serviceContainer'>
                 <div className='icon'>  {icon}</div>
                 <h1>{title}</h1>
@@ -29,4 +21,5 @@ export default ServiceCard
 ServiceCard.propTypes = {
     title: PropTypes.string,
     service: PropTypes.string,
+    icon:PropTypes.element
 }

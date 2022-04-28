@@ -3,27 +3,19 @@ import Link from 'next/link'
 import NavLink from '@/components/NavLink'
 import ResponsiveNavLink from '@/components/ResponsiveNavLink'
 import {useRouter} from 'next/router'
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Routes from "@/routes/routes"
 import ThemeChanger from "@/components/themeChanger";
+import {useStateValue} from "@/states/StateProvider";
 
 
 const Navigation = () => {
     const router = useRouter()
     const [open, setOpen] = useState(false)
-    const [toggle, setToggle] = useState(false)
-    const [currentTheme, setCurrentTheme] = useState('')
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setToggle(!toggle)
-            setCurrentTheme(localStorage.theme)
-        }, 0);
-        return () => clearTimeout(timer);
-    }, [toggle]);
+    const [{theme}] = useStateValue()
 
     return (
-        <nav className={(currentTheme === 'light') ? 'navBar' :(currentTheme === 'dark') && 'darkNavBar'}>
+        <nav className={(theme === 'light') ? 'navBar' :(theme === 'dark') && 'darkNavBar'}>
             {/* Primary Navigation Menu */}
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="flex justify-between h-16">

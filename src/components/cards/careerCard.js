@@ -2,21 +2,14 @@ import React, {useEffect, useState} from "react";
 import {FaGraduationCap} from "react-icons/fa";
 import {BsBriefcaseFill} from "react-icons/bs";
 import * as propTypes from "prop-types";
+import {useStateValue} from "@/states/StateProvider";
 
 const CareerCard = ({title, name, subject, result, year, index, experience}) => {
-    const [toggle, setToggle] = useState(false)
-    const [currentTheme, setCurrentTheme] = useState('')
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setToggle(!toggle)
-            setCurrentTheme(localStorage.theme)
-        }, 0);
-        return () => clearTimeout(timer);
-    }, [toggle]);
+    const [{theme}] = useStateValue()
 
     return (
-        <div className={(currentTheme==='light')?'careerInfoCardLight':(currentTheme === 'dark') &&'careerInfoCard'}>
+        <div className={(theme==='light')?'careerInfoCardLight':(theme === 'dark') &&'careerInfoCard'}>
             <div className='icon'>
                 {
                     (experience) ?

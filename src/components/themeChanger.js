@@ -1,12 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {useTheme} from 'next-themes';
 import {MoonIcon, SunIcon} from "@heroicons/react/solid";
+import {useStateValue} from "@/states/StateProvider";
 
 const ThemeChanger = () => {
 
     const {systemTheme, theme, setTheme} = useTheme();
     const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
+    const [{}, dispatch] = useStateValue()
+
+    useEffect(() => {
+        setMounted(true)
+        dispatch({
+            type: 'SET_THEME',
+            item: localStorage.theme
+        })
+    }, [theme]);
+
     if (!mounted) return null;
 
     const renderThemeChanger = () => {

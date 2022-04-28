@@ -57,12 +57,12 @@ const Portfolio = ({isVisible}) => {
                             {
                                 data.map(item => (
                                     <motion.div
+                                        key={item.id}
                                         initial="hidden"
                                         animate="visible"
                                         variants={variants.fadeIn}
                                     >
                                         <PortfolioCard
-                                            key={item.id}
                                             title={item.title}
                                             image={item.image}
                                             service={item.Service}
