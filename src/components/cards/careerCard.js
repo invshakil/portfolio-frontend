@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {FaGraduationCap} from "react-icons/fa";
 import {BsBriefcaseFill} from "react-icons/bs";
 import * as propTypes from "prop-types";
@@ -18,7 +18,7 @@ const CareerCard = ({title, name, subject, result, year, index, experience}) => 
                         <FaGraduationCap size='30px' color='white'/>
                 }
             </div>
-            <h4 className={index % 2 === 0 ? 'yearYellow' : 'yearPink'}>{year}</h4>
+            <h4 className={index % 2 === 0 ? 'yearYellow' : 'yearPink'}>{(!experience) && 'Graduation Year:'}{year}</h4>
             <h2> {title}</h2>
             <h3><span>{!experience ? 'Institute:  ' : 'Designation:  '}</span> {name}</h3>
             <h3><span>{!experience ? 'Subject/Group:  ' : 'Language/Platform:  '} </span>{subject}</h3>

@@ -5,10 +5,12 @@ import filterPortfolioData from "@/dummyData/filterPortfolioData";
 import PortfolioData from "@/dummyData/portfolioData";
 import {motion} from "framer-motion"
 import variants from "@/helpers/animation";
+import {useStateValue} from "@/states/StateProvider";
 
-const Portfolio = ({isVisible}) => {
+const Portfolio = () => {
     const [filter, setFilter] = useState('All')
     const [data, setData] = useState(PortfolioData)
+    const [{theme}] = useStateValue()
 
     useEffect(() => {
         let updatedItems = PortfolioData.filter((curElem) => {
@@ -30,7 +32,7 @@ const Portfolio = ({isVisible}) => {
             <div className='portfolioContainer'>
                 <h1> MY PORTFOLIO</h1>
                 <br/>
-                <div className='filterPortfolio'>
+                <div className={(theme === 'dark') ? 'filterPortfolio' : (theme === 'light') && 'filterPortfolioLight'}>
                     <ul>
                         {
                             filterPortfolioData.map(item => (

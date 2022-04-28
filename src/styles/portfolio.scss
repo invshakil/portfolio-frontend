@@ -9,51 +9,15 @@
     }
 
     .filterPortfolio {
-        ul {
-            @include flexCenter();
-            //justify-content: space-evenly;
-            background-image: $gradient;
-            border-radius: 8px;
-            padding-left: 20%;
-            @media screen and (max-width: $bp-tablet) {
-                flex-direction: column;
-                padding-left: 0;
-            }
+        @include filterPortfolioNav($gradient, $themeDark);
+    }
 
-            hr {
-                @media screen and (max-width: $bp-tablet) {
-                    width: 68vw;
-                    color: $body-hr;
-                }
-            }
-
-            .inActiveHr:hover hr {
-                border-color: $pink
-            }
-
-            .activeHr hr {
-                border-color: $pink
-            }
-
-            .inActive {
-                cursor: pointer;
-                padding: 1.1rem;
-
-                &:hover {
-                    background-color: $themeDark;
-                }
-            }
-
-            .active {
-                cursor: pointer;
-                padding: 1.1rem;
-                background-color: $themeDark;
-            }
-        }
+    .filterPortfolioLight {
+        @include filterPortfolioNav($gradientLight, $white);
     }
 
     .portfolio {
-        padding:2rem;
+        padding: 2rem;
         display: grid;
         grid-template-columns: auto auto auto;
         grid-gap: 20px;
@@ -66,14 +30,28 @@
             padding: 2rem 0 0 0;
         }
 
-        h2 {
+        .activateModal {
+            cursor: pointer;
+
+            &:hover img {
+                opacity: .4;
+            }
+        }
+
+        .projectName {
             padding: 20px;
             text-align: center;
             font-weight: 800;
             background-color: $theme;
         }
-    }
 
+        .projectNameLight {
+            padding: 20px;
+            text-align: center;
+            font-weight: 800;
+            background-image: $gradientLightReverse;
+        }
+    }
 
     h3 {
         text-align: center;
@@ -81,5 +59,6 @@
         margin: 5rem;
         background-color: $pinkDark;
     }
+
 }
 
