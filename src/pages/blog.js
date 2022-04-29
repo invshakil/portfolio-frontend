@@ -4,7 +4,7 @@ import BlogData from "@/dummyData/blogData";
 import {useStateValue} from "@/states/StateProvider";
 
 const Blog = () => {
-    const [{theme}]=useStateValue()
+    const [{theme}] = useStateValue()
 
     return (
         <GuestLayout>
@@ -12,7 +12,7 @@ const Blog = () => {
                 <h1>BLOGS</h1>
 
                 <div className='flexBlogPage'>
-                    <div className={theme==='dark'?'blogs':theme==='light'&&'blogsLight'}>
+                    <div className={theme === 'dark' ? 'blogs' : theme === 'light' && 'blogsLight'}>
                         <input type='search' placeholder='search...'/>
                         <select>
                             <option value='type1'>type1</option>
@@ -21,11 +21,15 @@ const Blog = () => {
                         </select>
 
                         {
-                            BlogData.map(blog=>(
+                            BlogData.map(blog => (
                                 <div className='blog' key={blog.id}>
                                     <h2>{blog.title}</h2>
                                     <img src={blog.image} alt={blog.title}/>
-                                    <div style={{display:'flex', justifyContent:'space-between', padding:'0 5px 0 5px'}}>
+                                    <div style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        padding: '0 5px 0 5px'
+                                    }}>
                                         <button>{blog.category}</button>
                                         <button>read mode</button>
                                     </div>
@@ -36,6 +40,23 @@ const Blog = () => {
                     </div>
                     <div className='mostRead'>
                         <h2>MOST POPULAR BLOGS</h2>
+
+                        <div>
+                            {
+                                BlogData.map(blog => (
+                                    <div
+                                        className={theme === 'dark' ? 'popularBlogs' : theme === 'light' && 'popularBlogsLight'}
+                                        key={blog.id}
+                                    >
+                                        <img src={blog.image} alt={blog.title}/>
+                                        <div className='popularBlogInfo'>
+                                            <h3>{blog.title}</h3>
+                                            <p>{blog.title}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
 
