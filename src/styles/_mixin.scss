@@ -13,7 +13,7 @@
 }
 
 @mixin gradientText() {
-    background: -webkit-linear-gradient(40deg, #588fb7, #65d7aa, #eaeef3);
+    background: -webkit-linear-gradient(40deg, #86b7de, #65d7aa, #eaeef3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -30,6 +30,11 @@
 
 @mixin gradientText4() {
     background: -webkit-linear-gradient(40deg, #5a5d6b, #473d70, #000000);
+    @include gradientTextTemplate();
+}
+
+@mixin gradientText5() {
+    background: -webkit-linear-gradient(40deg, #de3616, #f85236, #e7b8af);
     @include gradientTextTemplate();
 }
 
@@ -181,7 +186,7 @@
     }
 }
 
-@mixin portfolioModal($color){
+@mixin portfolioModal($color) {
     background-image: $color;
     background-color: $color;
     width: 100%;
@@ -193,8 +198,8 @@
         border: 1px solid $body-hr;
     }
 
-    .description{
-        h2{
+    .description {
+        h2 {
             font-size: 1.4rem;
             color: tomato;
             text-transform: uppercase;
@@ -202,3 +207,106 @@
         }
     }
 }
+
+
+@mixin contactForm($inputBg,$inputColor) {
+    flex: .5;
+
+    p {
+        color: tomato;
+        font-size: .6rem;
+    }
+    input, textarea {
+        background-image: $inputBg;
+        display: flex;
+        flex-direction: column;
+        margin: 15px 15px 15px 0;
+        border-style: none;
+        box-shadow: 1px 1px 1px 1px #1f1f1f;
+        width: 100%;
+        color: $inputColor;
+        border-radius: 5px;
+    }
+    .enabled {
+        margin: 10px 10px 10px 0;
+        padding: 10px;
+        background-color: $green;
+        border-radius: 5px;
+    }
+    .disabled {
+        margin: 10px 10px 10px 0;
+        background-color: $green;
+        opacity: .8;
+        cursor: none;
+        padding: 10px;
+        border-radius: 5px;
+
+    }
+    .captchaHide {
+        display: none;
+    }
+    .clearButton {
+        background-color: tomato;
+        padding: 10px;
+        margin: 10px 10px 10px 0;
+        border-radius: 5px;
+    }
+}
+
+@mixin blogs($inputBg,$isGradientText,$bg) {
+    flex: .6;
+    margin-right: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+    @media screen and (max-width: $bp-tablet) {
+        grid-template-columns: auto;
+        margin-right: 0;
+    }
+
+    input, select {
+        background-color: $inputBg;
+        border-style: none;
+    }
+
+    .blog {
+        padding: 1rem 2px 1rem 2px;
+        background-image: $bg;
+        width: 25vw;
+        @media screen and (max-width: $bp-tablet) {
+            width: 100%;
+        }
+
+        h2 {
+            @if ($isGradientText) {
+                @include gradientText5;
+            } @else {
+                color: black;
+            }
+            font-size: 1.3rem;
+            height: 160px;
+            font-weight: 800;
+            padding: 20px;
+        }
+
+        img {
+            width: 400px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        button {
+            display: table;
+            padding: 10px;
+            margin-top: 5px;
+            text-transform: uppercase;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: #383c4d;
+                cursor: pointer;
+            }
+        }
+    }
+}
+

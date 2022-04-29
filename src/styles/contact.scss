@@ -1,0 +1,56 @@
+@import "variables";
+@import "mixin";
+
+.contactContainer {
+    @include container();
+
+    h1 {
+        @include centerHeader();
+    }
+
+    .flexContactPage {
+        display: flex;
+        justify-content: flex-start;
+        margin: 2rem;
+        @media screen and (max-width: $bp-tablet) {
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            color: tomato;
+            font-weight: 700;
+        }
+
+        .contactInfo {
+            flex: .5;
+            margin-right: 15px;
+
+            .address{
+                margin-top: 2rem;
+                @include flexCenter();
+               .icon{
+                   padding: 10px;
+                   background-color: $white;
+                   border-radius: 100%;
+               }
+                .addressText{
+                    margin-left: 2rem;
+                }
+            }
+        }
+
+        .contactForm {
+            @include contactForm($body-bg, $white)
+        }
+        .contactFormLight{
+            @include contactForm($gradientLight, black)
+        }
+
+    }
+    .map{
+        height: 70vh;
+        width: 100%;
+        padding: 5%;
+    }
+}
