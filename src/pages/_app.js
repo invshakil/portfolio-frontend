@@ -10,6 +10,7 @@ import '../styles/portfolio.scss'
 import '../styles/modal.scss'
 import '../styles/contact.scss'
 import '../styles/blog.scss'
+import '../styles/singleBlog.scss'
 import {ThemeProvider} from "next-themes"
 import NextNProgress from 'nextjs-progressbar';
 import React from 'react';
