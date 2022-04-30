@@ -4,6 +4,8 @@ import {FaGraduationCap} from "react-icons/fa";
 import React from "react";
 import PropTypes from "prop-types";
 import { BsBriefcaseFill} from "react-icons/bs";
+import variants from "@/helpers/animation";
+import {motion} from "framer-motion"
 
 const CareerInfo = ({header, data, experience}) => {
     return (
@@ -12,12 +14,15 @@ const CareerInfo = ({header, data, experience}) => {
                 <h1> {header} </h1>
                 <div className={(!experience) ? 'divider' : 'divider2'}/>
                 <div className='splitter'>
-
                     {
                         data.map(info => (
                             <div key={info.id} className={info.id % 2 !== 0 ? 'left' : 'right'}>
-
                                 <div>
+                                    <motion.div
+                                        initial="hidden"
+                                        animate="visible"
+                                        variants={info.id%2!==0?variants.crossFromRight:variants.crossFromLeft}
+                                    >
                                     <CareerCard
                                         index={info.id}
                                         title={info.title}
@@ -27,6 +32,7 @@ const CareerInfo = ({header, data, experience}) => {
                                         year={info.year}
                                         experience={experience}
                                     />
+                                    </motion.div>
                                 </div>
 
                                 <div className='centerIcon'>
@@ -41,13 +47,17 @@ const CareerInfo = ({header, data, experience}) => {
                                 </div>
 
                                 <div className='passingYear'>
+                                    <motion.div
+                                        initial="hidden"
+                                        animate="visible"
+                                        variants={info.id%2===0?variants.crossFromRight:variants.crossFromLeft}
+                                    >
                                     <h2>{(!experience) && 'Graduation Year:'} {info.year}</h2>
+                                    </motion.div>
                                 </div>
-
                             </div>
                         ))
                     }
-
                 </div>
             </div>
         </GuestLayout>

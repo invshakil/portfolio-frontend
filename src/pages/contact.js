@@ -7,6 +7,8 @@ import {useStateValue} from "@/states/StateProvider";
 import ReCAPTCHA from "react-google-recaptcha";
 import GoogleMapReact from 'google-map-react';
 import SimpleMap from "@/helpers/map";
+import variants from "@/helpers/animation";
+import {motion} from "framer-motion"
 
 const Contact = () => {
 
@@ -45,6 +47,11 @@ const Contact = () => {
                 <div className='flexContactPage'>
                     <div className='contactInfo'>
                         <h2>CONTACT INFO</h2>
+                        <motion.div
+                            initial="hidden"
+                            animate="visible"
+                            variants={variants.crossFromRight}
+                        >
                         <br/>
                         <p>
                             If you are interested to order my service. Don't hesitate to send an e-mail. I will get back
@@ -73,12 +80,18 @@ const Contact = () => {
                                 />
                             ))
                         }
+                    </motion.div>
                     </div>
 
                     <div className={theme === 'dark' ? 'contactForm' : 'contactFormLight'}>
                         <h2>SEND MESSAGE</h2>
                         <br/>
                         <form onSubmit={handleSubmit(onSubmit)}>
+                            <motion.div
+                                initial="hidden"
+                                animate="visible"
+                                variants={variants.crossFromLeft}
+                            >
                             <input
                                 style={errors.name && {border: '1px solid #b40f0f'}}
                                 type='text'
@@ -120,6 +133,7 @@ const Contact = () => {
                             >
                                 CLEAR
                             </button>
+                            </motion.div>
                         </form>
                     </div>
                 </div>

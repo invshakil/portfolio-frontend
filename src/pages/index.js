@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import GuestLayout from "@/components/Layouts/GuestLayout"
 import {useStateValue} from "@/states/StateProvider";
+import variants from "@/helpers/animation";
+import {motion} from "framer-motion"
 
 export default function Home() {
     const [{theme}] = useStateValue()
@@ -12,12 +14,23 @@ export default function Home() {
             </Head>
             <div className='homeContainer'>
                 <div className='profile'>
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={variants.crossFromRight}
+                    >
                     <img src={'../assets/propic.jpg'} width='100%' alt='profile photo'/>
                     <br/>
                     <br/>
                     <a>RESUME</a>
+                    </motion.div>
                 </div>
                 <div className={(theme === 'light') ? 'infoLight' : (theme === 'dark') && 'info'}>
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={variants.crossFromLeft}
+                    >
                     <h1>MD. SYFUL ISLAM SHAKIL</h1>
                     <hr/>
                     <h2>SOFTWARE ENGINEER</h2>
@@ -47,9 +60,9 @@ export default function Home() {
                             <h5>A+</h5>
                             <h5> syful.shakil.it@gmail.com </h5>
                             <h5>www.sshdevs.com </h5>
-
                         </div>
                     </div>
+                    </motion.div>
                 </div>
             </div>
         </GuestLayout>

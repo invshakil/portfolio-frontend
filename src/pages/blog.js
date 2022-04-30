@@ -4,6 +4,10 @@ import BlogData from "@/dummyData/blogData";
 import {useStateValue} from "@/states/StateProvider";
 import MostPopularBlogs from "@/components/mostPopularBlogs";
 import Link from 'next/link'
+import variants from "@/helpers/animation";
+import {motion} from "framer-motion"
+// import { Editor } from "react-draft-wysiwyg";
+// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const Blog = () => {
     const [{theme}] = useStateValue()
@@ -12,7 +16,11 @@ const Blog = () => {
         <GuestLayout>
             <div className='blogContainer'>
                 <h1>BLOGS</h1>
-
+                {/*<Editor*/}
+                {/*    toolbarClassName="toolbarClassName"*/}
+                {/*    wrapperClassName="wrapperClassName"*/}
+                {/*    editorClassName="editorClassName"*/}
+                {/*/>*/}
                 <div className='flexBlogPage'>
                     <div className={theme === 'dark' ? 'blogs' : theme === 'light' && 'blogsLight'}>
                         <input type='search' placeholder='search...'/>
@@ -26,7 +34,13 @@ const Blog = () => {
                             BlogData.map(blog => (
                                 <Link href={{pathname: `/blog/${blog.slug}`}}>
                                     <a>
-                                        <div className='blog' key={blog.id}>
+                                        <motion.div
+                                            key={blog.id}
+                                            initial="hidden"
+                                            animate="visible"
+                                            variants={variants.slideInLeft}
+                                        >
+                                        <div className='blog' >
                                             <h2>{blog.title}</h2>
                                             <p>by Saif Shakil </p>
                                             <img src={blog.image} alt={blog.title}/>
@@ -39,6 +53,7 @@ const Blog = () => {
                                                 <button>read mode</button>
                                             </div>
                                         </div>
+                                        </motion.div>
                                     </a>
                                 </Link>
                             ))
@@ -46,7 +61,6 @@ const Blog = () => {
 
                     </div>
                     <div className='mostRead'>
-                        <h2>MOST POPULAR BLOGS</h2>
                         <MostPopularBlogs/>
                     </div>
                 </div>
