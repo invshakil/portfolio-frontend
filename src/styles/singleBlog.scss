@@ -12,37 +12,10 @@
         }
 
         .blogEntry {
-            flex: .6;
-            margin-right: 20px;
-            min-height: 100vh;
-            background-image: $body-bg;
-            padding: 2rem;
-            @media screen and (max-width: $bp-tablet) {
-                padding: 0;
-                margin-right: 0;
-            }
-
-            .blogTitle {
-                border-radius: 5px;
-                padding: 20px;
-                background-color: $body-bg-non-gradient;
-                border-left: 20px solid $themeDark;
-            }
+            @include blogEntry($body-bg,$themeDark, $body-bg-non-gradient);
         }
-
-        .blogEntryLight {
-            flex: .6;
-            margin-right: 20px;
-            min-height: 100vh;
-            background-image: $gradientWhite;
-            padding: 1rem;
-
-            .blogTitle {
-                border-radius: 5px;
-                padding: 20px;
-                background-image: $gradientWhite;
-                border-left: 25px solid tomato;
-            }
+        .blogEntryLight{
+            @include blogEntry($gradientWhite,tomato, $gradientWhite);
         }
 
         h2 {

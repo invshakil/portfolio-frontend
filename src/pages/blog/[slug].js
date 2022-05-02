@@ -6,12 +6,21 @@ import {useStateValue} from "@/states/StateProvider";
 import Head from "next/head";
 import {motion} from "framer-motion"
 import variants from "@/helpers/animation";
+import {DiscussionEmbed} from "disqus-react"
 
 const BlogDetails = () => {
+
     const router = useRouter()
     const slug = router.query.slug
     //send an api request with the slug
     console.log(slug);
+
+    const disqusShortname = "portfolio-5auSOa4qCa"
+    const disqusConfig = {
+        url: `https:// portfolio-5auSOa4qCa.disqus.com/${slug}`,
+        identifier: slug, // Single post id
+        title: slug // Single post title
+    }
     const [{theme}] = useStateValue()
 
     return (
@@ -28,15 +37,26 @@ const BlogDetails = () => {
             </Head>
             <div className='singleBlogContainer'>
                 <div className='singleBlogFlex'>
-                    <div className={theme==='dark'?'blogEntry':theme==='light'&&'blogEntryLight'}>
+                    <div className={theme === 'dark' ? 'blogEntry' : theme === 'light' && 'blogEntryLight'}>
                         <motion.div
                             initial="hidden"
                             animate="visible"
                             variants={variants.slideInLeft}
                         >
-                        <div className='blogTitle'>
-                            <h2>{slug.replace(/\-/g, ' ')} </h2>
-                        </div>
+                            <div className='blogTitle'>
+                                <h2>{slug.replace(/\-/g, ' ')} </h2>
+                            </div>
+                            <div className='blogBody'>
+                                <p>
+                                    Marked Down Component
+                                </p>
+                                <div className='comments'>
+                                    <DiscussionEmbed
+                                        shortname={disqusShortname}
+                                        config={disqusConfig}
+                                    />
+                                </div>
+                            </div>
                         </motion.div>
                     </div>
                     <div className='mostRead'>

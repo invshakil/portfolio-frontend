@@ -5,7 +5,7 @@ import useModal from "@/hooks/useModal";
 import ProjectDescription from "@/components/cards/projectDescription";
 import propTypes from "prop-types";
 
-const PortfolioCard = ({tag, tech, title, demo, description, image, service}) => {
+const PortfolioCard = ({tag, tech, title, demo, description, image, service,list}) => {
     const [{theme}] = useStateValue()
     const {toggle, visible} = useModal();
 
@@ -27,6 +27,7 @@ const PortfolioCard = ({tag, tech, title, demo, description, image, service}) =>
                         image={image}
                         description={description}
                         service={service}
+                        list={list}
                     />
                 }/>
         </div>

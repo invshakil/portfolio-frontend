@@ -44,7 +44,7 @@
             @include contactForm($body-bg, $white)
         }
         .contactFormLight{
-            @include contactForm($gradientLight, black)
+            @include contactForm($gradientLightTheme, black)
         }
 
     }

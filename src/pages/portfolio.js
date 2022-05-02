@@ -72,6 +72,7 @@ const Portfolio = () => {
                                             tag={item.tag}
                                             tech={item.tech}
                                             demo={item.demo}
+                                            list={item.list}
                                         />
                                     </motion.div>
                                 ))

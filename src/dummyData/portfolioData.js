@@ -6,23 +6,25 @@ const PortfolioData = [
         Service:'Application Development',
         demo:'http://school.zenithgroupbd.net ',
         tag:'School Management System, ERP Software, School System ',
-        tech:'    Codeigniter Framework (PHP)\n' +
-            '    HTML, Bootstrap, CSS\n' +
-            '    Mysql \n' +
-            '    jQuery',
-        description:'School Management System (SMS) is an online solution system for educational institute. Key Features of this System - \n' +
-            '\n' +
-            '    Student Information System\n' +
-            '    Employee Information (teacher, staffs) System\n' +
-            '    Finance & Accounting\n' +
-            '    Attendance System for both student and employee\n' +
-            '    Class managment, Section Management\n' +
-            '    Examinatiom, Marks Management\n' +
-            '    Class routine, Subject Management\n' +
-            '    Hostel Management\n' +
-            '    All kind of Fee Management\n' +
-            '\n' +
-            'This system also includes front end website for the institute.'
+        tech:[
+            {title:'Codeigniter Framework (PHP)'},
+            {title:'HTML, Bootstrap, CSS'},
+            {title:'Mysql'},
+            {title:'jQuery'},
+        ],
+        description:'School Management System (SMS) is an online solution system for educational institute.\n' +
+            'This system also includes front end website for the institute.',
+        list:[
+            {title:'Student Information System' },
+            {title:' Employee Information (teacher, staffs) System' },
+            {title:'Finance & Accounting' },
+            {title:'Attendance System for both student and employee' },
+            {title:'Class managment, Section Management' },
+            {title:'Examinatiom, Marks Management' },
+            {title:' Class routine, Subject Management' },
+            {title:' Hostel Management' },
+            {title:' All kind of Fee Management' },
+        ]
     },
     {
         id: 1,
@@ -31,17 +33,20 @@ const PortfolioData = [
         Service:'CMS Development',
         demo:'http://www.uvlsports.com ',
         tag:'Universal Sports, Online Sports Website, Bangladeshi Sports Website',
-        tech:'    Codeigniter Framework (PHP)\n' +
-            '    HTML, Bootstrap, CSS\n' +
-            '    Mysql \n' +
-            '    jQuery',
-        description:'Demo descriptionThis is an online platform for "Football Fans Bangladesh" one of the largest football community in Bangladesh. Here User have their login space with social website. They can write, manage their articles. Key Features of this website - \n' +
-            '\n' +
-            '    Individual Login for different type of user. e.g. Super Admin, Admin, User. \n' +
-            '    Different access role for different type of user. \n' +
-            '    Article approval system.\n' +
-            '    Search and filter by different categories article.\n' +
-            '    User Profile'
+        tech:[
+            {title:'Codeigniter Framework (PHP)'},
+            {title:'HTML, Bootstrap, CSS'},
+            {title:'Mysql'},
+            {title:'jQuery'},
+        ],
+        description:'This is an online platform for "Football Fans Bangladesh" one of the largest football community in Bangladesh. Here User have their login space with social website. They can write, manage their articles.',
+        list:[
+            {title:'Individual Login for different type of user. e.g. Super Admin, Admin, User' },
+            {title:'Different access role for different type of user' },
+            {title:' Article approval system' },
+            {title:'Search and filter by different categories article' },
+            {title:'User Profile' },
+        ]
     },
     {
         id: 2,

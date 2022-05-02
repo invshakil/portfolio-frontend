@@ -112,7 +112,7 @@
         }
 
         .careerInfoCardLight {
-            @include careerInfoCard($gradientLight, false);
+            @include careerInfoCard($gradientLightTheme, false);
         }
     }
 }

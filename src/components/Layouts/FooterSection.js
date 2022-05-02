@@ -1,15 +1,31 @@
 import React from "react";
+import {FaFacebook, FaLinkedin, FaSkype, FaTwitter, FaYoutube} from "react-icons/fa";
+import {AiFillGithub, AiFillMail} from "react-icons/ai";
+import {useStateValue} from "@/states/StateProvider";
 
 const Footer = () => {
+    const [{theme}]=useStateValue()
+
     return (
-        <div className='footerContainer'>
-            <span className="font-bold text-lg mr-2"> Next.js Dev</span>   &copy;{new Date().getFullYear()}   All Rights Reserved
+        <div className={theme==='dark'?'footerContainer':theme==='light'&&'footerContainerLight'}>
+            <div className='footerIcons'>
+                <a><FaFacebook/></a>
+                <a><FaTwitter/></a>
+                <a><AiFillMail/></a>
+                <a><AiFillGithub/></a>
+                <a><FaLinkedin/></a>
+                <a><FaYoutube/></a>
+                <a><FaSkype/></a>
+            </div>
+
+            <div className='middleSection'>
+                <a href='#'>SITEMAP</a><span>|</span>
+                <a href='#'>PRIVACY POLICY</a><span>|</span>
+                <a href='#'>ROBOTS</a>
+            </div>
+
+            <span className="copyWrite"> Shakil's Blog &copy;2017-&copy;{new Date().getFullYear()}   All Rights Reserved</span>
         </div>
-        // <footer className="px-4 sm:px-6 py-6 mt-24">
-        //     <div className="text-center text-sm text-grey-500">
-        //         <span className="font-bold text-lg mr-2"> Next.js Dev</span>   &copy;{new Date().getFullYear()}   All Rights Reserved
-        //     </div>
-        // </footer>
     )
 }
 

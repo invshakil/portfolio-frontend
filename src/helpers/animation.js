@@ -8,7 +8,7 @@ const variants = {
             scale: 1,
             opacity: 1,
             transition: {
-                delay: .4,
+                delay: .1,
                 duration: 1,
                 type: "tween",
                 ease: "easeInOut"
@@ -26,7 +26,7 @@ const variants = {
             scale: 1,
             opacity: 1,
             transition: {
-                delay: .5,
+                delay: .3,
                 ease: "easeInOut"
             }
         },
@@ -42,7 +42,7 @@ const variants = {
             scale: 1,
             opacity: 1,
             transition: {
-                delay: .7,
+                delay: .5,
                 ease: "easeInOut"
             }
         },
@@ -56,7 +56,7 @@ const variants = {
             x: 0,
             opacity: 1,
             transition: {
-                delay: .6,
+                delay: .4,
                 ease: "easeInOut"
             }
         },
@@ -70,7 +70,7 @@ const variants = {
             x: 0,
             opacity: 1,
             transition: {
-                delay: .5,
+                delay: .3,
                 ease: "easeInOut"
             }
         },

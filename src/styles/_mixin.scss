@@ -199,11 +199,32 @@
     }
 
     .description {
+        p{
+            font-size: .9rem;
+        }
+        a{
+            font-size: .9rem;
+            color: $lightBlue;
+        }
         h2 {
             font-size: 1.4rem;
             color: tomato;
             text-transform: uppercase;
             margin-bottom: 1rem;
+        }
+
+        ul {
+            li {
+                @include flexCenter;
+                font-size: .8rem;
+
+                .margin {
+                    margin-left: 1rem;
+                }
+            }
+        }
+        .otherInfo{
+            padding: 20px 0 20px 0;
         }
     }
 }
@@ -288,7 +309,8 @@
             font-weight: 800;
             padding: 20px;
         }
-        p{
+
+        p {
             padding: 0 0 20px 20px;
             text-transform: uppercase;
         }
@@ -311,6 +333,84 @@
                 cursor: pointer;
             }
         }
+    }
+}
+
+@mixin blogEntry($bg,$borderColor,$titleBg){
+    height: fit-content;
+    flex: .6;
+    margin-right: 20px;
+    background-image: $bg;
+    padding: 2rem;
+    @media screen and (max-width: $bp-tablet) {
+        padding: 0;
+        margin-right: 0;
+    }
+
+    .blogTitle {
+        border-radius: 5px;
+        padding: 20px;
+        background-color: $titleBg;
+        border-left: 20px solid $borderColor;
+    }
+    .blogBody{
+        padding: 1rem;
+
+        p{
+            min-height: 50vh;
+        }
+        .comments{
+            position: relative;
+            bottom: 1rem;
+        }
+    }
+}
+
+@mixin footer($bg,$roundColor,$dark){
+    min-height: 15.2vh;
+    text-align: center;
+    padding: 20px;
+    background-image: $bg;
+    //background-image: url("../assets/footer.jpg");
+
+    .footerIcons {
+        @include flexCenter();
+        padding: 0 35% 0 35%;
+        justify-content: space-evenly;
+        @media screen and (max-width: $bp-tablet) {
+            padding: 0 10% 0 10%;
+        }
+
+        a {
+            padding: 12px;
+            background-color: $roundColor;
+            border-radius: 100%;
+            @media screen and (max-width: $bp-tablet) {
+                padding: 8px;
+            }
+        }
+    }
+
+    .middleSection {
+        @include flexCenter();
+        justify-content: space-around;
+        padding: 0 40% 0 40%;
+        margin: .6rem;
+
+        a, span {
+            @if ($dark){
+                @include gradientText();
+            }
+            @else{
+                @include gradientText4();
+            }
+            font-size: .6rem;
+        }
+    }
+
+    .copyWrite {
+        margin-top: 1rem;
+        font-size: .7rem;
     }
 }
 
