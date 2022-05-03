@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import axios from '@/lib/axios'
+import Api from '@/lib/axios'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -7,7 +7,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter()
 
     const { data: user, error, mutate } = useSWR('/api/user', () =>
-        axios
+        Api
             .get('/api/user')
             .then(res => res.data)
             .catch(error => {
@@ -17,14 +17,14 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             }),
     )
 
-    const csrf = () => axios.get('/sanctum/csrf-cookie')
+    const csrf = () => Api.get('/sanctum/csrf-cookie')
 
     const register = async ({ setErrors, ...props }) => {
         await csrf()
 
         setErrors([])
 
-        axios
+        Api
             .post('/register', props)
             .then(() => mutate())
             .catch(error => {
@@ -40,7 +40,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         setErrors([])
         setStatus(null)
 
-        axios
+        Api
             .post('/login', props)
             .then(() => mutate())
             .catch(error => {
@@ -56,7 +56,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         setErrors([])
         setStatus(null)
 
-        axios
+        Api
             .post('/forgot-password', { email })
             .then(response => setStatus(response.data.status))
             .catch(error => {
@@ -72,7 +72,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         setErrors([])
         setStatus(null)
 
-        axios
+        Api
             .post('/reset-password', { token: router.query.token, ...props })
             .then(response => router.push('/login?reset=' + btoa(response.data.status)))
             .catch(error => {
@@ -83,7 +83,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     }
 
     const resendEmailVerification = ({ setStatus }) => {
-        axios
+        Api
             .post('/email/verification-notification')
             .then(response => setStatus(response.data.status))
     }
@@ -95,7 +95,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 .then(() => mutate())
         }
 
-        window.location.pathname = '/login'
+        window.location.pathname = '/'
     }
 
     useEffect(() => {

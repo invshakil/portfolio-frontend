@@ -3,16 +3,33 @@ import Link from 'next/link'
 import NavLink from '@/components/NavLink'
 import ResponsiveNavLink from '@/components/ResponsiveNavLink'
 import {useRouter} from 'next/router'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Routes from "@/routes/routes"
 import ThemeChanger from "@/components/themeChanger";
 import {useStateValue} from "@/states/StateProvider";
+import {useAuth} from "@/hooks/auth"
+import {DropdownButton} from "@/components/DropdownLink"
+import Dropdown from "@/components/Dropdown"
+import AdminRoutes from "@/routes/adminRoutes"
 
 
-const Navigation = () => {
+const Navigation = ({user}) => {
     const router = useRouter()
+    const {logout } = useAuth()
     const [open, setOpen] = useState(false)
+    const [routes, setRoute] = useState([])
     const [{theme}] = useStateValue()
+    const adminPath=router.pathname.includes('admin')
+
+    useEffect(() => {
+        if(!adminPath){
+            setRoute(Routes)
+        }
+        else{
+            setRoute(AdminRoutes)
+        }
+    }, [adminPath])
+
 
     return (
         <nav className={(theme === 'light') ? 'navBar' :(theme === 'dark') && 'darkNavBar'}>
@@ -32,7 +49,7 @@ const Navigation = () => {
                         {/* Navigation Links */}
                         <div className="hidden space-x-8 xl:-my-px xl:ml-10 xl:flex">
                             {
-                                Routes.map(route => (
+                                routes.map(route => (
                                     <NavLink
                                         key={route.id}
                                         href={route.path}
@@ -48,7 +65,36 @@ const Navigation = () => {
                             <ThemeChanger/>
                         </div>
                     </div>
+                    {/* Settings Dropdown */}
+                    <div className={!adminPath?'hidden' :'sm:flex sm:items-center sm:ml-6'}>
+                        <Dropdown
+                            align="right"
+                            width="48"
+                            trigger={
+                                <button className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
+                                    <div>{user?.name}</div>
 
+                                    <div className="ml-1">
+                                        <svg
+                                            className="fill-current h-4 w-4"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                </button>
+                            }>
+
+                            {/* Authentication */}
+                            <DropdownButton  onClick={logout}>
+                                Logout
+                            </DropdownButton>
+                        </Dropdown>
+                    </div>
                     {/* Hamburger */}
                     <div className="-mr-2 flex items-center xl:hidden">
                         <button
