@@ -90,7 +90,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const logout = async () => {
         if (! error) {
-            await axios
+            await Api
                 .post('/logout')
                 .then(() => mutate())
         }

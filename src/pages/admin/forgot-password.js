@@ -7,12 +7,13 @@ import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
 import Label from '@/components/Label'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
+import {useAuth} from '@/hooks/auth'
+import {useState} from 'react'
+import {useStateValue} from "@/states/StateProvider"
 
 const ForgotPassword = () => {
-    const { forgotPassword } = useAuth({ middleware: 'guest' })
-
+    const {forgotPassword} = useAuth({middleware: 'guest'})
+    const [{theme}] = useStateValue()
     const [email, setEmail] = useState('')
     const [errors, setErrors] = useState([])
     const [status, setStatus] = useState(null)
@@ -20,7 +21,7 @@ const ForgotPassword = () => {
     const submitForm = event => {
         event.preventDefault()
 
-        forgotPassword({ email, setErrors, setStatus })
+        forgotPassword({email, setErrors, setStatus})
     }
 
     return (
@@ -29,7 +30,7 @@ const ForgotPassword = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500"/>
                         </a>
                     </Link>
                 }>
@@ -41,10 +42,22 @@ const ForgotPassword = () => {
                 </div>
 
                 {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status} />
+                <AuthSessionStatus className="mb-4 bg-bg-custom-l"
+                                   style={theme === 'light' ?
+                                       {color: '#0d6dcc'}
+                                       :
+                                       {color: '#6b8ad9', fontWeight:'800'}}
+                                   status={status}
+                />
 
                 {/* Validation Errors */}
-                <AuthValidationErrors className="mb-4" errors={errors} />
+                <AuthValidationErrors className="mb-4"
+                                      style={theme === 'light' ?
+                                          {color: '#cc0d2e'}
+                                          :
+                                          {color: '#d96b7b', fontWeight:'800'}}
+                                      errors={errors}
+                />
 
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
@@ -55,6 +68,11 @@ const ForgotPassword = () => {
                             type="email"
                             name="email"
                             value={email}
+                            style={theme === 'light' ?
+                                {
+                                backgroundColor: 'white', color: 'black'}
+                                :
+                                {backgroundColor: '#585b69', color: 'white'}}
                             className="block mt-1 w-full"
                             onChange={event => setEmail(event.target.value)}
                             required
@@ -63,7 +81,13 @@ const ForgotPassword = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Button>Email Password Reset Link</Button>
+                        <Button
+                            style={theme === 'light' ? {
+                                backgroundColor: 'white',
+                                color: 'black'
+                            } : {backgroundColor: '#585b69', color: 'white'}}
+                        >Email Password Reset Link
+                        </Button>
                     </div>
                 </form>
             </AuthCard>

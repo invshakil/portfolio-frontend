@@ -7,7 +7,5 @@ J
 src/styles/careerInfo.scss,b\3\b30e57966e3894c32a3a1eb2087e75b5ca44e915
 N
 src/components/DropdownLink.js,f\5\f5d93452baa187112866ea7acd486e0c981fed24
-T
-$src/components/Layouts/Navigation.js,4\a\4a22e09e1cb79c22008ea399a5d6d1be218e39c1
 t
 Dbackend/app/Http/Controllers/Auth/AuthenticatedSessionController.php,4\4\4422c364c253ea0aa418b1fefdcd690bbc3cb1bc
