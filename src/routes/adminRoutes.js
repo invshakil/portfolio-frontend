@@ -7,6 +7,12 @@ import {SiPolywork} from "react-icons/si";
 
 const AdminRoutes = [
     {
+        id:0,
+        name:'Dashboard',
+        path:'/admin/dashboard',
+        icon:<GiSkills/>
+    },
+    {
         id:1,
         name:'SKILL SET',
         path:'/skills',

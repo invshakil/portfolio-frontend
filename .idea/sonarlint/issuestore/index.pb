@@ -9,3 +9,5 @@ N
 src/components/DropdownLink.js,f\5\f5d93452baa187112866ea7acd486e0c981fed24
 t
 Dbackend/app/Http/Controllers/Auth/AuthenticatedSessionController.php,4\4\4422c364c253ea0aa418b1fefdcd690bbc3cb1bc
+P
+ src/components/cards/AuthCard.js,0\d\0ded493601ae79d0e212944c1bbca2990c9ba8af

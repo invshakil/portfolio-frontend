@@ -5,7 +5,7 @@ import ResponsiveNavLink from '@/components/ResponsiveNavLink'
 import {useRouter} from 'next/router'
 import React, {useEffect, useState} from 'react'
 import Routes from "@/routes/routes"
-import ThemeChanger from "@/components/themeChanger";
+import ThemeChanger from "@/helpers/themeChanger";
 import {useStateValue} from "@/states/StateProvider";
 import {useAuth} from "@/hooks/auth"
 import {DropdownButton} from "@/components/DropdownLink"
@@ -47,7 +47,7 @@ const Navigation = ({user}) => {
                         </div>
 
                         {/* Navigation Links */}
-                        <div className="hidden space-x-8 xl:-my-px xl:ml-10 xl:flex">
+                        <div className="hidden space-x-8 xl:-my-px xl:ml-10 xl:flex" style={{justifyContent:'space-evenly',minWidth:'80vw'}}>
                             {
                                 routes.map(route => (
                                     <NavLink
