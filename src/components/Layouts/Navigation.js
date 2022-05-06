@@ -13,7 +13,7 @@ import Dropdown from "@/components/Dropdown"
 import AdminRoutes from "@/routes/adminRoutes"
 
 
-const Navigation = ({user}) => {
+const Navigation = ({user,drawer}) => {
     const router = useRouter()
     const {logout } = useAuth()
     const [open, setOpen] = useState(false)
@@ -32,37 +32,47 @@ const Navigation = ({user}) => {
 
 
     return (
-        <nav className={(theme === 'light') ? 'navBar' :(theme === 'dark') && 'darkNavBar'}>
+        <nav className={drawer? 'drawerNav':(theme === 'light') ? 'navBar' :(theme === 'dark') && 'darkNavBar'}>
             {/* Primary Navigation Menu */}
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="flex justify-between h-16">
+                    {/* Logo */}
+                    <div className="flex-shrink-0 flex items-center">
+                        <Link href="/">
+                            <a>
+                                <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600"/>
+                            </a>
+                        </Link>
+                    </div>
                     <div className="flex">
-                        {/* Logo */}
-                        <div className="flex-shrink-0 flex items-center">
-                            <Link href="/">
-                                <a>
-                                    <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600"/>
-                                </a>
-                            </Link>
-                        </div>
-
                         {/* Navigation Links */}
-                        <div className="hidden space-x-8 xl:-my-px xl:ml-10 xl:flex" style={{justifyContent:'space-evenly',minWidth:'80vw'}}>
+                        <div className={drawer?'hidden space-x-15 xl:-my-px xl:ml-8 xl:flex flex-col drawer':'hidden space-x-5 xl:-my-px xl:ml-10 xl:flex'} style={!drawer?{minWidth:'95vw'}:null}>
+                             {/*Logo */}
+                            <div className="flex-shrink-0 flex items-center" style={drawer?{marginBottom:'.5rem'}:{display:'none'}}>
+                                <Link href="/">
+                                    <a>
+                                        <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600"/>
+                                    </a>
+                                </Link>
+                            </div>
+                            <hr/>
                             {
                                 routes.map(route => (
                                     <NavLink
                                         key={route.id}
                                         href={route.path}
                                         active={router.pathname === route.path}
+                                        drawer={drawer}
                                     >
                                         <h1 className='title'>
-                                            <span style={{paddingRight: '5px'}}>{route.icon}</span>
+                                            <span style={drawer?{paddingRight: '35px'}:{paddingRight: '5px'}}>{route.icon}</span>
                                             {route.name}
                                         </h1>
                                     </NavLink>
                                 ))
                             }
-                            <ThemeChanger/>
+                            <hr/>
+                            {!drawer && <ThemeChanger/>}
                         </div>
                     </div>
                     {/* Settings Dropdown */}
@@ -137,13 +147,14 @@ const Navigation = ({user}) => {
             {/* Responsive Navigation Menu */}
             {open && (
                 <div className="block xl:hidden">
-                    <div className="pt-2 pb-3 space-y-1">
+                    <div className={!drawer?'pt-2 pb-3 space-y-1' :'drawer'}>
                         {
                             Routes.map(route => (
                                 <ResponsiveNavLink
                                     key={route.id}
                                     href={route.path}
                                     active={router.pathname === route.path}
+                                    drawer={drawer}
                                 >
                                     <h1 className='title'>
                                         <span style={{paddingRight: '5px'}}>{route.icon}</span>
@@ -152,27 +163,6 @@ const Navigation = ({user}) => {
                                 </ResponsiveNavLink>
                             ))
                         }
-                    </div>
-
-                    {/* Responsive Settings Options */}
-                    <div className="pt-4 pb-1 border-t border-gray-200">
-                        <div className="flex items-center px-4">
-                            <div className="flex-shrink-0">
-                                <svg
-                                    className="h-10 w-10 fill-current text-gray-400"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                    />
-                                </svg>
-                            </div>
-                        </div>
                     </div>
                 </div>
             )}

@@ -11,7 +11,7 @@ const GuestLayout = ({children}) => {
             <Head>
                 <title>Laravel</title>
             </Head>
-            <Navigation user={user}/>
+            <Navigation user={user} drawer={false}/>
             <div className="font-sans text-gray-900 antialiased">
                 {children}
             </div>
