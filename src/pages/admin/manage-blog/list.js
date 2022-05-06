@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React from "react"
 import AppLayout from "@/components/Layouts/AppLayout"
 import GridContainer from "@/components/Grid/GridContainer"
 import GridItem from "@/components/Grid/GridItem"
@@ -7,12 +7,15 @@ import CardHeader from "@/components/Card/CardHeader"
 import CardBody from "@/components/Card/CardBody"
 import Table from "@/components/Table/Table"
 import {makeStyles} from "@material-ui/core/styles"
+import {Button} from "@mui/material"
 import styles from "@/assets/jss/nextjs-material-dashboard/views/dashboardStyle"
+import {useRouter} from "next/router"
 
 const BlogList = () => {
 
     const useStyles = makeStyles(styles)
     const classes = useStyles()
+    const router=useRouter()
 
     return (
         <AppLayout>
@@ -27,8 +30,15 @@ const BlogList = () => {
                                 </p>
                             </CardHeader>
                             <CardBody>
+                                <Button
+                                    color={'inherit'}
+                                    variant="contained"
+                                    onClick={()=>router.push({pathname:'create-new'})}
+                                >
+                                    Create New
+                                </Button>
                                 <Table
-                                    tableHeaderColor="success"
+                                    tableHeaderColor="gray"
                                     tableHead={["ID", "Name", "Salary", "Country"]}
                                     tableData={[
                                         ["1", "Dakota Rice", "$36,738", "Niger"],
