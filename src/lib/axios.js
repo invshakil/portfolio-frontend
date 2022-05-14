@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const Api = Axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1`,
+    baseURL: `${process.env.NEXT_PUBLIC_API}`,
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
     },

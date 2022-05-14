@@ -27,6 +27,7 @@ const Blog = (props) => {
             .then(response => {
                 setData(response.data.all.original.data.data)
             })
+        console.log('api',process.env.NEXT_PUBLIC_API)
     }, [filter])
 
     return (
