@@ -9,17 +9,16 @@ import Api from '@/lib/axios'
 import qs from "qs"
 
 const Blog = (props) => {
+
     const [{theme}] = useStateValue()
     const [data, setData] = useState([])
-    const [types, setType] = useState([])
     const [filter, setFilter] = useState(
         {
             search: null,
             category: null,
             is_published: null
         })
-
-
+    // if (typeof window === "undefined") { /* we're on the server */ }
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
 
     useEffect(() => {
@@ -85,7 +84,7 @@ const Blog = (props) => {
 
                     </div>
                     <div className="mostRead">
-                        <MostPopularBlogs/>
+                        <MostPopularBlogs data={props.popular}/>
                     </div>
                 </div>
 
@@ -99,15 +98,20 @@ export default Blog
 export const getServerSideProps = async () => {
 
     let articles = []
-    Api.get(`/articles`)
+    let popular = []
+    let types = []
+
+   await Api.get(`/articles`)
         .then(response => {
             articles = response.data.all.original.data.data
+            popular = response.data.popular.original.data
+        })
+   await Api.get(`/categories`)
+        .then(response => {
+            types = response.data
         })
 
-    const res2 = await fetch(`http://localhost:8000/api/v1/categories`)
-    const types = await res2.json()
-
     return {
-        props: {articles, types},
+        props: {articles, types, popular},
     }
 }

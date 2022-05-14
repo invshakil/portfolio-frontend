@@ -6,24 +6,16 @@ import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
 import Api from "@/lib/axios"
 
-const MostPopularBlogs = () => {
+const MostPopularBlogs = ({data}) => {
+
     const [{theme}] = useStateValue()
-    const [data, setData] = useState([])
 
-    useEffect(() => {
-        Api.get(`/articles`)
-            .then(response => {
-                setData(response.data.popular.original.data)
-                console.log('mp', response.data.popular.original.data)
-            })
-
-    }, [])
     return (
         <div>
             <h2>MOST POPULAR BLOGS</h2>
 
             {
-                data.map(blog => (
+                data?.map(blog => (
                     <Link key={blog.id}
                           href={{pathname: `/blog/${blog.title.replace(/\ /g, '-')}`}}
                     >
