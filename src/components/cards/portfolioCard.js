@@ -5,13 +5,16 @@ import useModal from "@/hooks/useModal";
 import ProjectDescription from "@/components/cards/projectDescription";
 import propTypes from "prop-types";
 
-const PortfolioCard = ({tag, tech, title, demo, description, image, service,list}) => {
+const PortfolioCard = ({tag, title, demo, description, image, service}) => {
     const [{theme}] = useStateValue()
     const {toggle, visible} = useModal();
 
     return (
         <div onClick={toggle} className='activateModal'>
-            <img src={image} alt={title}/>
+            <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${image}`}
+                 alt={title}
+            />
+            {/*<img src={image} alt={title}/>*/}
             <h2 className={(theme === 'dark') ? 'projectName' : (theme === 'light') && 'projectNameLight'}>{title}</h2>
 
             <Modal
@@ -21,13 +24,10 @@ const PortfolioCard = ({tag, tech, title, demo, description, image, service,list
                 component={
                     <ProjectDescription
                         tag={tag}
-                        tech={tech}
                         title={title}
                         demo={demo}
-                        image={image}
                         description={description}
                         service={service}
-                        list={list}
                     />
                 }/>
         </div>

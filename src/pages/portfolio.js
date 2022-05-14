@@ -6,21 +6,37 @@ import PortfolioData from "@/dummyData/portfolioData";
 import {motion} from "framer-motion"
 import variants from "@/helpers/animation";
 import {useStateValue} from "@/states/StateProvider";
+import Api from "@/lib/axios"
 
 const Portfolio = () => {
     const [filter, setFilter] = useState('All')
-    const [data, setData] = useState(PortfolioData)
+    const [data, setData] = useState([])
+    const [service, setService] = useState([])
     const [{theme}] = useStateValue()
 
     useEffect(() => {
-        let updatedItems = PortfolioData.filter((curElem) => {
-            return curElem.Service === filter;
-        });
-        if (filter === 'All') {
-            setData(PortfolioData);
-        } else {
-            setData(updatedItems);
-        }
+        Api.get(`/projects`)
+            .then(response =>{
+                console.log('projects',response.data.data.data)
+                setData(response.data.data.data)
+
+                let updatedItems = response.data.data.data.filter((curElem) => {
+                    return curElem.service.name === filter;
+                });
+
+                if (filter === 'All') {
+                    setData(response.data.data.data);
+                } else {
+                    setData(updatedItems);
+                }
+            })
+
+        Api.get(`/services`)
+            .then(response =>{
+                console.log('projects',response.data.data.data)
+                setService(response.data.data.data)
+            })
+
     }, [filter]);
 
     function filterSelect(e) {
@@ -34,17 +50,25 @@ const Portfolio = () => {
                 <br/>
                 <div className={(theme === 'dark') ? 'filterPortfolio' : (theme === 'light') && 'filterPortfolioLight'}>
                     <ul>
+                        <div className={filter === 'All' ? 'activeHr' : 'inActiveHr'}>
+                        <li className={filter === 'All' ? 'active' : 'inActive'}
+                            onClick={filterSelect}
+                        >
+                            All
+                        </li>
+                        <hr/>
+                        </div>
                         {
-                            filterPortfolioData.map(item => (
+                            service?.map(item => (
                                 <div
-                                    className={filter === item.title ? 'activeHr' : 'inActiveHr'}
+                                    className={filter === item.name ? 'activeHr' : 'inActiveHr'}
                                     key={item.id}
                                 >
                                     <li
-                                        className={filter === item.title ? 'active' : 'inActive'}
+                                        className={filter === item.name ? 'active' : 'inActive'}
                                         onClick={filterSelect}
                                     >
-                                        {item.title}
+                                        {item.name}
                                     </li>
                                     <hr/>
                                 </div>
@@ -57,7 +81,7 @@ const Portfolio = () => {
                     data.length ?
                         <div className='portfolio'>
                             {
-                                data.map(item => (
+                                data?.map(item => (
                                     <motion.div
                                         key={item.id}
                                         initial="hidden"
@@ -65,14 +89,12 @@ const Portfolio = () => {
                                         variants={variants.fadeIn}
                                     >
                                         <PortfolioCard
-                                            title={item.title}
+                                            title={item.name}
                                             image={item.image}
-                                            service={item.Service}
+                                            service={item.service_id}
                                             description={item.description}
-                                            tag={item.tag}
-                                            tech={item.tech}
-                                            demo={item.demo}
-                                            list={item.list}
+                                            tag={item.tags}
+                                            demo={item.demo_link}
                                         />
                                     </motion.div>
                                 ))

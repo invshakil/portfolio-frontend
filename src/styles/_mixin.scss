@@ -280,6 +280,7 @@
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 20px;
+    height: fit-content;
     @media screen and (max-width: $bp-tablet) {
         grid-template-columns: auto;
         margin-right: 0;
@@ -333,6 +334,9 @@
                 cursor: pointer;
             }
         }
+    }
+    .chooseFilter{
+        height: 40px;
     }
 }
 

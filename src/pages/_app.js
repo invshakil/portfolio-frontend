@@ -20,11 +20,10 @@ import {StateProvider} from "@/states/StateProvider";
 
 const App = ({Component, pageProps}) =>
     <ThemeProvider
-        enableSystem={false}
         attribute="class"
-        defaultTheme="dark"
+        forcedTheme={Component.theme || null}
     >
-        <NextNProgress color='#5e00ff'/>
+        <NextNProgress color='tomato'/>
         <React.StrictMode>
             <StateProvider initialState={initialState} reducer={reducer}>
                 <Component {...pageProps} />

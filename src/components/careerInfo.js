@@ -1,58 +1,99 @@
-import GuestLayout from "@/components/Layouts/GuestLayout";
-import CareerCard from "@/components/cards/careerCard";
-import {FaGraduationCap} from "react-icons/fa";
-import React from "react";
-import PropTypes from "prop-types";
-import { BsBriefcaseFill} from "react-icons/bs";
-import variants from "@/helpers/animation";
+import GuestLayout from "@/components/Layouts/GuestLayout"
+import CareerCard from "@/components/cards/careerCard"
+import {FaGraduationCap} from "react-icons/fa"
+import React from "react"
+import PropTypes from "prop-types"
+import {BsBriefcaseFill} from "react-icons/bs"
+import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
 
 const CareerInfo = ({header, data, experience}) => {
+    const options = {month: 'short'}
+
     return (
         <GuestLayout>
-            <div className='educationContainer'>
+            <div className="educationContainer">
                 <h1> {header} </h1>
                 <div className={(!experience) ? 'divider' : 'divider2'}/>
-                <div className='splitter'>
+                <div className="splitter">
                     {
-                        data.map(info => (
+                        data?.map(info => (
                             <div key={info.id} className={info.id % 2 !== 0 ? 'left' : 'right'}>
                                 <div>
                                     <motion.div
                                         initial="hidden"
                                         animate="visible"
-                                        variants={info.id%2!==0?variants.crossFromRight:variants.crossFromLeft}
+                                        variants={info.id % 2 !== 0 ? variants.crossFromRight : variants.crossFromLeft}
                                     >
-                                    <CareerCard
-                                        index={info.id}
-                                        title={info.title}
-                                        name={info.name}
-                                        subject={info.subject}
-                                        result={info.summery}
-                                        year={info.year}
-                                        experience={experience}
-                                    />
+                                        {
+                                            experience ?
+                                                <CareerCard
+                                                    index={info.id}
+                                                    title={info.company_name}
+                                                    name={info.designation}
+                                                    subject={info.language}
+                                                    result={info.description}
+                                                    from={info.from}
+                                                    to={info.to}
+                                                    current={info.current}
+                                                    experience={experience}
+                                                />
+                                                :
+                                                <CareerCard
+                                                    index={info.id}
+                                                    title={info.institute}
+                                                    name={info.degree}
+                                                    subject={info.subject}
+                                                    result={info.result}
+                                                    year={info.session}
+                                                    experience={experience}
+                                                />
+                                        }
                                     </motion.div>
                                 </div>
 
-                                <div className='centerIcon'>
-                                    <div className='icon'>
+                                <div className="centerIcon">
+                                    <div className="icon">
                                         {
                                             (experience) ?
-                                                <BsBriefcaseFill size='30px' color='white'/>
+                                                <BsBriefcaseFill size="30px" color="white"/>
                                                 :
-                                                <FaGraduationCap size='30px' color='white'/>
+                                                <FaGraduationCap size="30px" color="white"/>
                                         }
                                     </div>
                                 </div>
 
-                                <div className='passingYear'>
+                                <div className="passingYear">
                                     <motion.div
                                         initial="hidden"
                                         animate="visible"
-                                        variants={info.id%2===0?variants.crossFromRight:variants.crossFromLeft}
+                                        variants={info.id % 2 === 0 ? variants.crossFromRight : variants.crossFromLeft}
                                     >
-                                    <h2>{(!experience) && 'Graduation Year:'} {info.year}</h2>
+                                        <h2>{(!experience) && 'Graduation Year: '}
+                                            {
+                                                !experience ?
+                                                    info.session
+                                                    :
+                                                    <>
+                                                        {new Date(info.from).toLocaleDateString("en-US", options)}
+                                                        <span
+                                                            style={{margin: '0 3px 0 6px'}}>'{new Date(info.from).getFullYear().toString().substr(-2)}</span>
+                                                        -
+                                                        {
+                                                            info.current === 1 ?
+                                                                ' Current'
+                                                                :
+                                                                <>
+                                                        <span style={{margin: '0 6px 0 3px'}}>
+                                                            {new Date(info.to).toLocaleDateString("en-US", options)}
+                                                        </span>
+                                                                    '{new Date(info.to).getFullYear().toString().substr(-2)}
+                                                                </>
+                                                        }
+                                                    </>
+
+                                            }
+                                        </h2>
                                     </motion.div>
                                 </div>
                             </div>

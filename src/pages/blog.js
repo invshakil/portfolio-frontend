@@ -1,58 +1,79 @@
-import React from "react";
-import GuestLayout from "@/components/Layouts/GuestLayout";
-import BlogData from "@/dummyData/blogData";
-import {useStateValue} from "@/states/StateProvider";
-import MostPopularBlogs from "@/components/mostPopularBlogs";
+import React, {useEffect, useState} from "react"
+import GuestLayout from "@/components/Layouts/GuestLayout"
+import {useStateValue} from "@/states/StateProvider"
+import MostPopularBlogs from "@/components/mostPopularBlogs"
 import Link from 'next/link'
-import variants from "@/helpers/animation";
+import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
-// import { Editor } from "react-draft-wysiwyg";
-// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import Api from '@/lib/axios'
+import qs from "qs"
 
-const Blog = () => {
+const Blog = (props) => {
     const [{theme}] = useStateValue()
+    const [data, setData] = useState([])
+    const [types, setType] = useState([])
+    const [filter, setFilter] = useState(
+        {
+            search: null,
+            category: null,
+            is_published: null
+        })
+
+
+    const query = qs.stringify(filter, {encode: false, skipNulls: true})
+
+    useEffect(() => {
+        Api.get(`/articles?${query}`)
+            .then(response => {
+                setData(response.data.all.original.data.data)
+            })
+    }, [filter])
 
     return (
         <GuestLayout>
-            <div className='blogContainer'>
+            <div className="blogContainer">
                 <h1>BLOGS</h1>
-                {/*<Editor*/}
-                {/*    toolbarClassName="toolbarClassName"*/}
-                {/*    wrapperClassName="wrapperClassName"*/}
-                {/*    editorClassName="editorClassName"*/}
-                {/*/>*/}
-                <div className='flexBlogPage'>
+                <div className="flexBlogPage">
                     <div className={theme === 'dark' ? 'blogs' : theme === 'light' && 'blogsLight'}>
-                        <input type='search' placeholder='search...'/>
-                        <select>
-                            <option value='type1'>type1</option>
-                            <option value='type2'>type2</option>
-                            <option value='type3'>type3</option>
+                        <input
+                            type="search"
+                            placeholder="search..."
+                            onChange={(e) => setFilter({search:e.target.value})}
+                        />
+                        <select
+                            onChange={(e) =>e.target.value==='0'? setFilter({category:null}) : setFilter({category:e.target.value})}
+                        >
+                            <option value='0'>All</option>
+                            {
+                                props.types?.data.data.map(type => (
+                                    <option key={type.id} value={type.id}>{type.name}</option>
+                                ))
+                            }
                         </select>
-
                         {
-                            BlogData.map(blog => (
-                                <Link href={{pathname: `/blog/${blog.slug}`}}>
+                            props.articles?.map(blog => (
+                                <Link key={blog.id}
+                                      href={{pathname: `/blog/${blog.title.replace(/\ /g, '-')}`}}>
                                     <a>
                                         <motion.div
-                                            key={blog.id}
                                             initial="hidden"
                                             animate="visible"
                                             variants={variants.slideInLeft}
                                         >
-                                        <div className='blog' >
-                                            <h2>{blog.title}</h2>
-                                            <p>by Saif Shakil </p>
-                                            <img src={blog.image} alt={blog.title}/>
-                                            <div style={{
-                                                display: 'flex',
-                                                justifyContent: 'space-between',
-                                                padding: '0 5px 0 5px'
-                                            }}>
-                                                <button>{blog.category}</button>
-                                                <button>read mode</button>
+                                            <div className="blog">
+                                                <h2>{blog.title}</h2>
+                                                <p>by {blog.author.name} </p>
+                                                <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.image}`}
+                                                     alt={blog.title}/>
+                                                <div style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'space-between',
+                                                    padding: '0 5px 0 5px'
+                                                }}>
+                                                    <button>{blog.categories[0].name}</button>
+                                                    <button>read mode</button>
+                                                </div>
                                             </div>
-                                        </div>
                                         </motion.div>
                                     </a>
                                 </Link>
@@ -60,7 +81,7 @@ const Blog = () => {
                         }
 
                     </div>
-                    <div className='mostRead'>
+                    <div className="mostRead">
                         <MostPopularBlogs/>
                     </div>
                 </div>
@@ -71,3 +92,18 @@ const Blog = () => {
 }
 
 export default Blog
+
+export const getServerSideProps= async ()=>{
+
+    let articles=[]
+    Api.get(`/articles`)
+        .then(response => {
+            articles=response.data.all.original.data.data
+        })
+    const res2 = await fetch(`http://localhost:8000/api/v1/categories`)
+    const types = await res2.json()
+
+    return{
+        props: {articles,types},
+    }
+}

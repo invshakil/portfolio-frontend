@@ -16,8 +16,8 @@ class MyDocument extends Document {
                     />
                 </Head>
                 <body className="antialiased">
-                    <Main />
-                    <NextScript />
+                <Main />
+                <NextScript />
                 </body>
             </Html>
         )

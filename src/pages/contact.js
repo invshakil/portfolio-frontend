@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react"
 import GuestLayout from "@/components/Layouts/GuestLayout";
 import ContactInfoCard from "@/components/cards/contactInfoCard";
 import ContactInfoData from "@/dummyData/contactInfoData";
@@ -9,19 +9,26 @@ import GoogleMapReact from 'google-map-react';
 import SimpleMap from "@/helpers/map";
 import variants from "@/helpers/animation";
 import {motion} from "framer-motion"
+import Api from "@/lib/axios"
 
 const Contact = () => {
-
     const recaptchaRef = React.useRef();
     const [{theme}] = useStateValue()
     const [loading, setLoading] = useState(false)
     const [verify, setVerify] = useState('')
+    const [data, setData] = useState([])
     const {register, handleSubmit, formState, reset, formState: {errors, touchedFields}}
         = useForm({
         mode: "onChange"
     });
     const {isValid} = formState;
 
+    useEffect(() => {
+        Api.get(`/about-me`)
+            .then(response => {
+                setData(response.data.data)
+            })
+    }, [])
     const onSubmit = async (data) => {
         try {
             const token = await recaptchaRef.current.executeAsync();
@@ -53,30 +60,17 @@ const Contact = () => {
                             variants={variants.crossFromRight}
                         >
                         <br/>
-                        <p>
-                            If you are interested to order my service. Don't hesitate to send an e-mail. I will get back
-                            to you as soon as possible.
-                        </p>
-                        <br/>
-                        <p>My services right now:</p>
-                        <br/>
-                        <p>
-                            System (app, cms, erp etc) development.
-                            <br/>
-                            Addition of new features on existing system.
-                            <br/>
-                            Development of various management system.
-                            <br/>
-                            Bug fix on existing system.
-                        </p>
-
+                           <p className='contactMe'>
+                               {data?.map(d=>d.key==='contact_me'&& d.value)}
+                           </p>
                         {
-                            ContactInfoData.map(info => (
+                            ContactInfoData?.map(info => (
                                 <ContactInfoCard
                                     key={info.id}
                                     title={info.title}
                                     info={info.info}
                                     icon={info.icon}
+                                    data={data}
                                 />
                             ))
                         }

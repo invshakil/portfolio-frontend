@@ -1,10 +1,21 @@
-import React from "react";
+import React, {useEffect, useState} from "react"
 import GuestLayout from "@/components/Layouts/GuestLayout";
 import ServicesData from "@/dummyData/servicesData";
 import ServiceCard from "@/components/cards/serviceCard";
+import Api from "@/lib/axios"
 
 
 const Services = () => {
+
+    const [data,setData]=useState([])
+
+    useEffect(() => {
+        Api.get(`/services`)
+            .then(response =>{
+                setData(response.data.data.data)
+            })
+    }, []);
+
     return (
         <GuestLayout>
             <div className='servicesContainer'>
@@ -13,12 +24,12 @@ const Services = () => {
                 <br/>
                 <div className='services'>
                 {
-                    ServicesData.map(service=>(
+                    data?.map(service=>(
                         <ServiceCard
                             key={service.id}
-                            icon={service.icon}
-                            service={service.service}
-                            title={service.title}
+                            icon={service.icon_class}
+                            service={service.description}
+                            title={service.name}
                         />
                     ))
                 }

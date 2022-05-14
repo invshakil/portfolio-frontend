@@ -2,6 +2,7 @@
 @import "mixin";
 
 .homeContainer {
+    text-transform: uppercase;
     margin-top: -.1rem;
     background-color: $body-bg;
     min-height: 75vh;
@@ -17,6 +18,7 @@
 
     p {
         //color: $white;
+        text-transform:lowercase;
         margin-top: 2rem;
         font-size: .9rem;
         font-weight: lighter;
