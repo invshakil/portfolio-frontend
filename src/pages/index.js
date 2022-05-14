@@ -10,6 +10,7 @@ const Home = (props) => {
     const [{theme}] = useStateValue()
     const [data, setData] = useState([])
     const [resumeLink, setResumeLink] = useState('')
+    const [userImage, setUserImage] = useState('')
 
     useEffect(() => {
         setData(props.info)
@@ -18,6 +19,8 @@ const Home = (props) => {
                 setData(response.data.data)
                 let resume = response.data.data.filter(d => d.key === 'resume_link' && d.value)
                 setResumeLink(resume[0].value)
+                let img = response.data.data.filter(d => d.key === 'user_image' && d.value)
+                setUserImage(img[0].value)
             })
     }, [])
 

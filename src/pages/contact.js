@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from "react"
-import GuestLayout from "@/components/Layouts/GuestLayout";
-import ContactInfoCard from "@/components/cards/contactInfoCard";
-import ContactInfoData from "@/dummyData/contactInfoData";
-import {useForm} from 'react-hook-form';
-import {useStateValue} from "@/states/StateProvider";
-import ReCAPTCHA from "react-google-recaptcha";
-import GoogleMapReact from 'google-map-react';
-import SimpleMap from "@/helpers/map";
-import variants from "@/helpers/animation";
+import React, {useState} from "react"
+import GuestLayout from "@/components/Layouts/GuestLayout"
+import ContactInfoCard from "@/components/cards/contactInfoCard"
+import ContactInfoData from "@/dummyData/contactInfoData"
+import {useForm} from 'react-hook-form'
+import {useStateValue} from "@/states/StateProvider"
+import ReCAPTCHA from "react-google-recaptcha"
+import SimpleMap from "@/helpers/map"
+import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
 import Api from "@/lib/axios"
 
