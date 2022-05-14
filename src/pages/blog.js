@@ -23,11 +23,13 @@ const Blog = (props) => {
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
 
     useEffect(() => {
+        setData(props?.articles)
+
+        filter &&
         Api.get(`/articles?${query}`)
             .then(response => {
                 setData(response.data.all.original.data.data)
             })
-        console.log('api',process.env.NEXT_PUBLIC_API)
     }, [filter])
 
     return (
@@ -39,12 +41,12 @@ const Blog = (props) => {
                         <input
                             type="search"
                             placeholder="search..."
-                            onChange={(e) => setFilter({search:e.target.value})}
+                            onChange={(e) => setFilter({search: e.target.value})}
                         />
                         <select
-                            onChange={(e) =>e.target.value==='0'? setFilter({category:null}) : setFilter({category:e.target.value})}
+                            onChange={(e) => e.target.value === '0' ? setFilter({category: null}) : setFilter({category: e.target.value})}
                         >
-                            <option value='0'>All</option>
+                            <option value="0">All</option>
                             {
                                 props.types?.data.data.map(type => (
                                     <option key={type.id} value={type.id}>{type.name}</option>
@@ -52,7 +54,7 @@ const Blog = (props) => {
                             }
                         </select>
                         {
-                            props.articles?.map(blog => (
+                            data?.map(blog => (
                                 <Link key={blog.id}
                                       href={{pathname: `/blog/${blog.title.replace(/\ /g, '-')}`}}>
                                     <a>
@@ -94,17 +96,18 @@ const Blog = (props) => {
 
 export default Blog
 
-export const getServerSideProps= async ()=>{
+export const getServerSideProps = async () => {
 
-    let articles=[]
+    let articles = []
     Api.get(`/articles`)
         .then(response => {
-            articles=response.data.all.original.data.data
+            articles = response.data.all.original.data.data
         })
+
     const res2 = await fetch(`http://localhost:8000/api/v1/categories`)
     const types = await res2.json()
 
-    return{
-        props: {articles,types},
+    return {
+        props: {articles, types},
     }
 }
