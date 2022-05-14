@@ -3,25 +3,30 @@ import CareerInfo from "@/components/careerInfo";
 import ExperienceData from "@/dummyData/experienceData";
 import Api from "@/lib/axios"
 
-const Experience = () => {
-
-    const [data,setData]=useState([])
-
-    useEffect(() => {
-        Api.get(`/workplaces`)
-            .then(response =>{
-                console.log('wp',response.data.data.data)
-                setData(response.data.data.data)
-            })
-    }, []);
+const Experience = (props) => {
 
     return (
         <CareerInfo
             header={'JOB EXPERIENCE'}
-            data={data}
+            data={props?.workplaces}
             experience
         />
     )
 }
 
 export default Experience
+
+
+export const getServerSideProps = async () => {
+
+    let workplaces = []
+    await Api.get(`/workplaces`)
+        .then(response => {
+            workplaces = response.data.data.data
+        })
+
+    return {
+        props: {workplaces},
+    }
+}
+

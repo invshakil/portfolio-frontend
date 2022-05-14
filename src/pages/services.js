@@ -5,16 +5,7 @@ import ServiceCard from "@/components/cards/serviceCard";
 import Api from "@/lib/axios"
 
 
-const Services = () => {
-
-    const [data,setData]=useState([])
-
-    useEffect(() => {
-        Api.get(`/services`)
-            .then(response =>{
-                setData(response.data.data.data)
-            })
-    }, []);
+const Services = (props) => {
 
     return (
         <GuestLayout>
@@ -24,7 +15,7 @@ const Services = () => {
                 <br/>
                 <div className='services'>
                 {
-                    data?.map(service=>(
+                    props.services?.map(service=>(
                         <ServiceCard
                             key={service.id}
                             icon={service.icon_class}
@@ -40,3 +31,16 @@ const Services = () => {
 }
 
 export default Services
+
+export const getServerSideProps = async () => {
+
+    let services = []
+    await Api.get(`/services`)
+        .then(response => {
+            services = response.data.data.data
+        })
+
+    return {
+        props: {services},
+    }
+}

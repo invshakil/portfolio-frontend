@@ -3,22 +3,28 @@ import EducationData from "@/dummyData/educationData";
 import CareerInfo from "@/components/careerInfo";
 import Api from "@/lib/axios"
 
-const Education = () => {
+const Education = (props) => {
 
-    const [data,setData]=useState([])
-
-    useEffect(() => {
-        Api.get(`/educations`)
-            .then(response =>{
-                setData(response.data.data.data)
-            })
-    }, []);
     return (
         <CareerInfo
             header={'MY EDUCATION INFORMATION'}
-            data={data}
+            data={props?.educations}
         />
     )
 }
 
 export default Education
+
+export const getServerSideProps = async () => {
+
+    let educations = []
+    await Api.get(`/educations`)
+        .then(response => {
+            educations = response.data.data.data
+        })
+
+    return {
+        props: {educations},
+    }
+}
+

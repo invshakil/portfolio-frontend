@@ -11,24 +11,17 @@ import variants from "@/helpers/animation";
 import {motion} from "framer-motion"
 import Api from "@/lib/axios"
 
-const Contact = () => {
+const Contact = (props) => {
     const recaptchaRef = React.useRef();
     const [{theme}] = useStateValue()
     const [loading, setLoading] = useState(false)
     const [verify, setVerify] = useState('')
-    const [data, setData] = useState([])
     const {register, handleSubmit, formState, reset, formState: {errors, touchedFields}}
         = useForm({
         mode: "onChange"
     });
     const {isValid} = formState;
 
-    useEffect(() => {
-        Api.get(`/about-me`)
-            .then(response => {
-                setData(response.data.data)
-            })
-    }, [])
     const onSubmit = async (data) => {
         try {
             const token = await recaptchaRef.current.executeAsync();
@@ -61,7 +54,7 @@ const Contact = () => {
                         >
                         <br/>
                            <p className='contactMe'>
-                               {data?.map(d=>d.key==='contact_me'&& d.value)}
+                               {props.info?.map(d=>d.key==='contact_me'&& d.value)}
                            </p>
                         {
                             ContactInfoData?.map(info => (
@@ -70,7 +63,7 @@ const Contact = () => {
                                     title={info.title}
                                     info={info.info}
                                     icon={info.icon}
-                                    data={data}
+                                    data={props.info}
                                 />
                             ))
                         }
@@ -141,3 +134,17 @@ const Contact = () => {
 }
 
 export default Contact
+
+export const getServerSideProps = async () => {
+
+    let info = []
+    await Api.get(`/about-me`)
+        .then(response => {
+            info = response.data.data
+        })
+
+    return {
+        props: {info},
+    }
+}
+

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import NavLink from '@/components/NavLink'
 import ResponsiveNavLink from '@/components/ResponsiveNavLink'
 import {useRouter} from 'next/router'
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Routes from "@/routes/routes"
 import ThemeChanger from "@/helpers/themeChanger"
 import {useStateValue} from "@/states/StateProvider"
@@ -15,7 +15,7 @@ const Navigation = () => {
     const [{theme}] = useStateValue()
 
     return (
-        <nav className={(theme === 'light') ? 'navBar' :(theme === 'dark') && 'darkNavBar'}>
+        <nav className={(theme === 'light') ? 'navBar' : (theme === 'dark') && 'darkNavBar'}>
             {/* Primary Navigation Menu */}
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="flex justify-evenly h-16">
@@ -29,7 +29,7 @@ const Navigation = () => {
                     </div>
                     <div className="flex">
                         {/* Navigation Links */}
-                        <div className='hidden space-x-6 xl:-my-px xl:ml-10 xl:flex'>
+                        <div className="hidden space-x-6 xl:-my-px xl:ml-10 xl:flex">
                             <hr/>
                             {
                                 Routes.map(route => (
@@ -38,14 +38,14 @@ const Navigation = () => {
                                         href={route.path}
                                         active={router.pathname === route.path}
                                     >
-                                        <h1 className='title'>
+                                        <h1 className="title">
                                             <span style={{paddingRight: '5px'}}>{route.icon}</span>
                                             {route.name}
                                         </h1>
                                     </NavLink>
                                 ))
                             }
-                             <ThemeChanger/>
+                            <ThemeChanger/>
                         </div>
                     </div>
                     {/* Hamburger */}
@@ -85,7 +85,7 @@ const Navigation = () => {
             {/* Responsive Navigation Menu */}
             {open && (
                 <div className="block xl:hidden">
-                    <div className='pt-2 pb-3 space-y-1'>
+                    <div className="pt-2 pb-3 space-y-1">
                         {
                             Routes.map(route => (
                                 <ResponsiveNavLink
@@ -93,7 +93,7 @@ const Navigation = () => {
                                     href={route.path}
                                     active={router.pathname === route.path}
                                 >
-                                    <h1 className='title'>
+                                    <h1 className="title">
                                         <span style={{paddingRight: '5px'}}>{route.icon}</span>
                                         {route.name}
                                     </h1>
