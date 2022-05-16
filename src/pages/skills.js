@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from "react";
-import GuestLayout from "@/components/Layouts/GuestLayout";
-import Data from "@/dummyData/skillsData";
-import ReviewsData from "@/dummyData/reviewsData";
-import variants from "@/helpers/animation";
+import React from "react"
+import GuestLayout from "@/components/Layouts/GuestLayout"
+import ReviewsData from "@/dummyData/reviewsData"
+import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
 import Api from "@/lib/axios"
 

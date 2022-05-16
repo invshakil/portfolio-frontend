@@ -254,12 +254,14 @@
     .enabled {
         margin: 10px 10px 10px 0;
         padding: 10px;
+        width: 80px;
         background-color: $green;
         border-radius: 5px;
     }
     .disabled {
+        width: 80px;
         margin: 10px 10px 10px 0;
-        background-color: $green;
+        background-color: #8d8a8a;
         opacity: .8;
         cursor: none;
         padding: 10px;

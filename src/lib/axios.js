@@ -5,7 +5,7 @@ const Api = Axios.create({
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
     },
-    withCredentials: true,
+    withCredentials: false,
 })
 
 export default Api

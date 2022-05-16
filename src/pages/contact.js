@@ -9,9 +9,11 @@ import SimpleMap from "@/helpers/map"
 import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
 import Api from "@/lib/axios"
+import {toast} from 'react-toastify';
+import Head from "next/head"
+import {ClipLoader} from "react-spinners"
 
 const Contact = (props) => {
-    const recaptchaRef = React.useRef();
     const [{theme}] = useStateValue()
     const [loading, setLoading] = useState(false)
     const [verify, setVerify] = useState('')
@@ -23,15 +25,17 @@ const Contact = (props) => {
 
     const onSubmit = async (data) => {
         try {
-            const token = await recaptchaRef.current.executeAsync();
-            console.log('token',token)
-            // Add your API call code here also pass token to API
+            setLoading(true)
+            await Api.post(`/sendEmail`,data)
+                .then(response => {
+                    toast.success(`Thank You For Your Message ${data.name}`)
+                    setLoading(false)
+                    reset()
+                })
         } catch(error) {
-            // alert(error)
+            alert(error)
         }
-        setLoading(false)
-        reset()
-        console.log('data', data)
+
     };
 
     function onChange(e){
@@ -40,6 +44,10 @@ const Contact = (props) => {
 
     return (
         <GuestLayout>
+            <Head>
+                <title>Introduction- Shakil's Blog</title>
+                <meta name="csrf-token" content="{{ csrf_token() }}"/>
+            </Head>
             <div className='contactContainer'>
                 <h1>CONTACT ME</h1>
 
@@ -111,7 +119,7 @@ const Contact = (props) => {
                                 className={(isValid && verify) ? 'enabled' : 'disabled'}
                                 disabled={!isValid && !verify} type="submit"
                             >
-                                {(!loading) ? 'SAVE' : 'saving...'}
+                                {(!loading) ? 'SEND' :  <ClipLoader color={'white'} size={15} />}
                             </button>
                             <button
                                 className='clearButton'

@@ -17,6 +17,8 @@ import NextNProgress from 'nextjs-progressbar';
 import React from 'react';
 import reducer, {initialState} from "@/states/reducer";
 import {StateProvider} from "@/states/StateProvider";
+import {ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
 
 const App = ({Component, pageProps}) =>
     <ThemeProvider
@@ -27,6 +29,7 @@ const App = ({Component, pageProps}) =>
         <React.StrictMode>
             <StateProvider initialState={initialState} reducer={reducer}>
                 <Component {...pageProps} />
+                <ToastContainer/>
             </StateProvider>
         </React.StrictMode>
     </ThemeProvider>
