@@ -1,0 +1,31 @@
+@import "variables";
+@import "mixin";
+
+.singleBlogContainer {
+    @include container();
+
+    .singleBlogFlex {
+        display: flex;
+        justify-content: flex-start;
+        @media screen and (max-width: $bp-tablet) {
+            flex-direction: column;
+        }
+
+        .blogEntry {
+            @include blogEntry($body-bg,$themeDark, $body-bg-non-gradient);
+            width: 60%;
+        }
+        .blogEntryLight{
+            @include blogEntry($gradientWhite,tomato, $gradientWhite);
+        }
+
+        h2 {
+            font-weight: 700;
+            font-size: 1.7rem;
+        }
+
+        .mostReadBlogs {
+            flex: .4;
+        }
+    }
+}

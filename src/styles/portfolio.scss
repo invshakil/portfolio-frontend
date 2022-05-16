@@ -1,0 +1,70 @@
+@import "variables";
+@import "mixin";
+
+.portfolioContainer {
+    @include container();
+
+    h1 {
+        @include centerHeader();
+    }
+
+    .filterPortfolio {
+        @include filterPortfolioNav($gradient, $themeDark);
+    }
+
+    .filterPortfolioLight {
+        @include filterPortfolioNav($gradientLight, $white);
+    }
+
+    .portfolio {
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 20px;
+        @media screen and (max-width: $bp-tablet) {
+            grid-template-columns: auto auto;
+            padding: 2rem 0 0 0;
+        }
+        @media screen and (max-width: $bp-mobile) {
+            grid-template-columns: auto;
+            padding: 2rem 0 0 0;
+        }
+
+        .activateModal {
+            cursor: pointer;
+
+            img{
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            &:hover img {
+                opacity: .4;
+            }
+        }
+
+        .projectName {
+            padding: 20px;
+            text-align: center;
+            font-weight: 800;
+            background-color: $theme;
+        }
+
+        .projectNameLight {
+            padding: 20px;
+            text-align: center;
+            font-weight: 800;
+            background-image: $gradientLightReverse;
+        }
+    }
+
+    h3 {
+        text-align: center;
+        padding: 1rem;
+        margin: 5rem;
+        background-color: $pinkDark;
+    }
+
+}
+

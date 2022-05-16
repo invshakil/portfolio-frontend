@@ -1,0 +1,30 @@
+@import "mixin";
+@import "variables";
+
+.skillsContainer {
+    @include container();
+
+    h1 {
+        @include centerHeader();
+    }
+
+    p {
+        //color: $white;
+        padding-top: 5px;
+        font-size: .9rem;
+        text-align: left;
+
+    }
+
+    .reviews {
+        padding: 100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 35px;
+
+        img {
+            border-radius: 15px;
+        }
+    }
+}

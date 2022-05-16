@@ -1,0 +1,9 @@
+@import "variables";
+@import "mixin";
+
+.footerContainer {
+    @include footer($gradientFooter,$greenLight,true);
+}
+.footerContainerLight{
+    @include footer($gradientWhite,$white,false);
+}
