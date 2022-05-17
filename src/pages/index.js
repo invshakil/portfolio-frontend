@@ -11,6 +11,7 @@ const Home = (props) => {
     const [data, setData] = useState([])
     const [resumeLink, setResumeLink] = useState('')
     const [userImage, setUserImage] = useState('')
+    const [dob, setDob] = useState('')
 
     useEffect(() => {
         setData(props.info)
@@ -21,8 +22,24 @@ const Home = (props) => {
                 setResumeLink(resume[0].value)
                 let img = response.data.data.filter(d => d.key === 'user_image' && d.value)
                 setUserImage(img[0].value)
+                let bd = response.data.data.filter(d => d.key === 'd_o_b' && d.value)
+                let bDay=getAge(bd[0].value)
+                setDob(bDay)
             })
     }, [])
+
+    const getAge=(bd)=>
+    {
+        let today = new Date();
+        let birthDate = new Date(bd);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+        {
+            age--;
+        }
+        return age;
+    }
 
     return (
         <GuestLayout>
@@ -36,7 +53,7 @@ const Home = (props) => {
                         animate="visible"
                         variants={variants.crossFromRight}
                     >
-                        <img src={'../assets/propic.jpg'} width="100%" alt="profile photo"/>
+                        <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${userImage}`} width="100%" alt="profile photo"/>
                         <br/>
                         <br/>
                         <a href={resumeLink} target="_blank">RESUME</a>
@@ -68,7 +85,7 @@ const Home = (props) => {
                             </div>
 
                             <div>
-                                <h5>{data?.map(d => d.key === 'd_o_b' && d.value)}</h5>
+                                <h5>{dob}</h5>
                                 <h5>{data?.map(d => d.key === 'nationality' && d.value)}</h5>
                                 <h5> {data?.map(d => d.key === 'address' && d.value)} </h5>
                                 <h5> {data?.map(d => d.key === 'phone' && d.value)} </h5>

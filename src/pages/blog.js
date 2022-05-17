@@ -7,17 +7,18 @@ import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
 import Api from '@/lib/axios'
 import qs from "qs"
-import ReactPaginate from "react-paginate";
-import {FcPrevious} from "react-icons/fc";
-import {FcNext} from "react-icons/fc";
+import ReactPaginate from "react-paginate"
+// import {GrCaretNext} from "react-icons/gr";
+
+import {GrCaretPrevious, GrCaretNext} from "react-icons/gr"
 
 const Blog = (props) => {
 
     const [{theme}] = useStateValue()
     const [data, setData] = useState([])
-    const [currentItems, setCurrentItems] = useState(null);
-    const [pageCount, setPageCount] = useState(0);
-    const [itemOffset, setItemOffset] = useState(0);
+    const [currentItems, setCurrentItems] = useState(null)
+    const [pageCount, setPageCount] = useState(0)
+    const [itemOffset, setItemOffset] = useState(0)
     const perPage = 6
     const [filter, setFilter] = useState(
         {
@@ -40,15 +41,15 @@ const Blog = (props) => {
     }, [filter])
 
     useEffect(() => {
-        const endOffset = itemOffset + perPage;
-        setCurrentItems(data?.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(data?.length / perPage));
-    }, [itemOffset, perPage, data]);
+        const endOffset = itemOffset + perPage
+        setCurrentItems(data?.slice(itemOffset, endOffset))
+        setPageCount(Math.ceil(data?.length / perPage))
+    }, [itemOffset, perPage, data])
 
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * perPage) % data?.length;
-        setItemOffset(newOffset);
-    };
+        const newOffset = (event.selected * perPage) % data?.length
+        setItemOffset(newOffset)
+    }
 
     return (
         <GuestLayout>
@@ -72,7 +73,7 @@ const Blog = (props) => {
                             }
                         </select>
                         {
-                            currentItems.map(blog => (
+                            currentItems?.map(blog => (
                                 <Link key={blog.id}
                                       href={{pathname: `/blog/${blog.title.replace(/\ /g, '-')}`}}>
                                     <a>
@@ -105,20 +106,17 @@ const Blog = (props) => {
                         <MostPopularBlogs data={props.popular}/>
                     </div>
                 </div>
-                <ReactPaginate
-                    //  containerClassName='paginate'
-                    // pageClassName='pageNumber'
-                    activeClassName='activeCLass'
-                    previousClassName='prevClass'
-                    nextClassName='prevClass'
-                    className='paginate'
-                    breakLabel="..."
-                    nextLabel=<FcNext size='25px' color={'red'}/>
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel=<FcPrevious size='25px'/>
-                renderOnZeroPageCount={null}
+                <ReactPaginate activeClassName="activeCLass"
+                               previousClassName="prevClass"
+                               nextClassName="prevClass"
+                               className="paginate"
+                               breakLabel="..."
+                               onPageChange={handlePageClick}
+                               pageRangeDisplayed={10}
+                               pageCount={pageCount}
+                               renderOnZeroPageCount={null}
+                               nextLabel=<GrCaretNext size="22px"/>
+                               previousLabel=<GrCaretPrevious size="22px"/>
                 />
             </div>
         </GuestLayout>

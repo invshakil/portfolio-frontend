@@ -55,6 +55,10 @@
             font-weight: 800;
             background: -webkit-linear-gradient(0deg, $green, #436bc0);
             border-radius: 3px;
+
+            &:hover{
+                background: -webkit-linear-gradient(0deg, grey, grey);
+            }
         }
     }
 

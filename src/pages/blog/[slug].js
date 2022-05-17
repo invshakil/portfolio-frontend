@@ -8,11 +8,18 @@ import {motion} from "framer-motion"
 import variants from "@/helpers/animation"
 import {DiscussionEmbed} from "disqus-react"
 import Api from "@/lib/axios"
+import {FaUserAlt} from "react-icons/fa"
+import {MdDateRange} from "react-icons/md"
+import {GiBottomRight3DArrow} from "react-icons/gi"
+import {BsEyeFill} from "react-icons/bs"
+import {AiFillTags} from "react-icons/ai"
 
 const BlogDetails = (props) => {
 
+    const [{theme}] = useStateValue()
+
     useEffect(() => {
-        console.log('slug', props.slug)
+        console.log('slug', props)
     }, [props.slug])
 
     const disqusShortname = "portfolio-5auSOa4qCa"
@@ -21,7 +28,8 @@ const BlogDetails = (props) => {
         identifier: props.article?.id, // Single post id
         title: props.slug // Single post title
     }
-    const [{theme}] = useStateValue()
+    const color = theme==='dark'?'#b8c1d2':'#172042'
+    const size='18px'
 
     return (
         <GuestLayout>
@@ -47,11 +55,44 @@ const BlogDetails = (props) => {
                                 <h2>{props.article?.title} </h2>
                             </div>
                             <div className="blogBody">
-                                {/*{props.article?.description}*/}
+                                <h2 className="spanIcon">
+                                    <GiBottomRight3DArrow color={color} size={size}/>
+                                    {
+                                        props.article.categories.map(category  => (
+                                            <div key={category.id}>
+                                                <span className='border px-4 text-xs'> {category.name}</span>
+                                            </div>
+                                        ))
+                                    }
+                                </h2>
+
+                                <h2 className="spanIcon"><MdDateRange color={color} size={size}/>
+                                    <span className='date'> {new Date(props.article.author.created_at).toDateString()}</span>
+                                </h2>
+
+                                <h2 className="spanIcon"><FaUserAlt color={color} size={size}/>
+                                    <span> {props.article.author.name}</span>
+                                </h2>
+                                <br/>
                                 <section
                                     className="blogDescription"
-                                    dangerouslySetInnerHTML={{ __html: props.article?.description }}
+                                    dangerouslySetInnerHTML={{__html: props.article?.description}}
                                 />
+                                <br/>
+                                <h2 className="spanIcon"><BsEyeFill color={color} size={size}/>
+                                    <span> {props.article.hit_count} Views</span>
+                                </h2>
+                                <h2 className="spanIcon">
+                                    <AiFillTags color={color} size={size}/>
+                                    {
+                                        props.article.tags.map(tag => (
+                                            <div key={tag.id}>
+                                                <span className='border px-3'> {tag.name}</span>
+                                            </div>
+                                        ))
+                                    }
+                                </h2>
+
                                 <div className="comments">
                                     <DiscussionEmbed
                                         shortname={disqusShortname}
