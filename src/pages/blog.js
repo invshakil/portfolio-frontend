@@ -8,8 +8,6 @@ import {motion} from "framer-motion"
 import Api from '@/lib/axios'
 import qs from "qs"
 import ReactPaginate from "react-paginate"
-// import {GrCaretNext} from "react-icons/gr";
-
 import {GrCaretPrevious, GrCaretNext} from "react-icons/gr"
 
 const Blog = (props) => {
@@ -101,23 +99,23 @@ const Blog = (props) => {
                                 </Link>
                             ))
                         }
+                        <ReactPaginate activeClassName="activeCLass"
+                                       previousClassName="prevClass"
+                                       nextClassName="prevClass"
+                                       className="paginate"
+                                       breakLabel="..."
+                                       onPageChange={handlePageClick}
+                                       pageRangeDisplayed={10}
+                                       pageCount={pageCount}
+                                       renderOnZeroPageCount={null}
+                                       nextLabel=<GrCaretNext size="22px"/>
+                        previousLabel=<GrCaretPrevious size="22px"/>
+                        />
                     </div>
                     <div className="mostRead">
                         <MostPopularBlogs data={props.popular}/>
                     </div>
                 </div>
-                <ReactPaginate activeClassName="activeCLass"
-                               previousClassName="prevClass"
-                               nextClassName="prevClass"
-                               className="paginate"
-                               breakLabel="..."
-                               onPageChange={handlePageClick}
-                               pageRangeDisplayed={10}
-                               pageCount={pageCount}
-                               renderOnZeroPageCount={null}
-                               nextLabel=<GrCaretNext size="22px"/>
-                               previousLabel=<GrCaretPrevious size="22px"/>
-                />
             </div>
         </GuestLayout>
     )

@@ -2,106 +2,135 @@
 @import "mixin";
 
 .homeContainer {
-    text-transform: uppercase;
-    margin-top: -.1rem;
-    background-color: $body-bg;
-    min-height: 75vh;
-    padding: 10% 10% 0 10%;
-    display: flex;
+  text-transform: uppercase;
+  margin-top: -.1rem;
+  background-color: $body-bg;
+  min-height: 75vh;
+  padding: 10% 10% 0 10%;
+  display: flex;
+  @media screen and (max-width: $bp-mobile) {
+    flex-direction: column;
+  }
+
+  hr {
+    border: .5px solid $body-hr;
+  }
+
+  p {
+    //color: $white;
+    text-transform: lowercase;
+    margin-top: 2rem;
+    font-size: .9rem;
+    font-weight: lighter;
+  }
+
+  h1 {
+    text-align: center;
+    color: $green;
+    font-size: 2rem;
+    font-weight: 800;
     @media screen and (max-width: $bp-mobile) {
-        flex-direction: column;
+      font-size: 1.2rem;
+    }
+  }
+
+  h2 {
+    text-align: center;
+    color: tomato;
+    font-size: 1.1rem;
+    font-weight: lighter;
+    @media screen and (max-width: $bp-mobile) {
+      font-size: .9rem;
+    }
+  }
+
+  h3 {
+    color: $pink;
+    padding-bottom: 5px;
+  }
+
+  .profile {
+    padding: 0 4rem 4rem 0;
+    @media screen and (max-width: $bp-mobile) {
+      padding-right: 0;
+    }
+    flex: .3;
+    text-align: center;
+
+    a {
+      //color: $white;
+      font-size: 1rem;
+      padding: 8px;
+      font-weight: 800;
+      background: -webkit-linear-gradient(0deg, $green, #436bc0);
+      border-radius: 3px;
+
+      &:hover {
+        background: -webkit-linear-gradient(0deg, grey, grey);
+      }
+    }
+  }
+
+  .info {
+    background-image: url("../assets/canvas.png");
+    background-size: cover;
+    object-fit: contain;
+    background-repeat: no-repeat;
+    height: fit-content;
+    flex: .7;
+    text-align: left;
+  }
+
+  .infoLight {
+    height: fit-content;
+    flex: .7;
+    text-align: left;
+  }
+
+  .summery {
+    display: flex;
+    @media screen and (max-width: $bp-tablet) {
+      margin-bottom: 2rem;
     }
 
-    hr {
-        border: .5px solid $body-hr;
+    h4 {
+      font-size: .8rem;
+      color: $lightBlue;
+      @include gradientText();
+      @media screen and (max-width: $bp-tablet) {
+        font-size: .7rem;
+      }
     }
 
-    p {
-        //color: $white;
-        text-transform:lowercase;
-        margin-top: 2rem;
-        font-size: .9rem;
-        font-weight: lighter;
+    h5 {
+      margin-left: 4rem;
+      font-size: .8rem;
+      @media screen and (max-width: $bp-tablet) {
+        font-size: .7rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .summeryLight {
+    display: flex;
+
+    h4 {
+      font-size: .8rem;
+      color: $lightBlue;
+      @include gradientText4();
+      @media screen and (max-width: $bp-tablet) {
+        font-size: .7rem;
+      }
     }
 
-    h1 {
-        text-align: center;
-        color: $green;
-        font-size: 2rem;
-        font-weight: 800;
+    h5 {
+      margin-left: 4rem;
+      font-size: .8rem;
+      @media screen and (max-width: $bp-tablet) {
+        font-size: .7rem;
+        margin-left: 1rem;
+      }
     }
-
-    h2 {
-        text-align: center;
-        color: tomato;
-        font-size: 1.1rem;
-        font-weight: lighter;
-    }
-    h3{
-        color: $pink;
-        padding-bottom: 5px;
-    }
-    .profile {
-        padding: 0 4rem 4rem 0;
-        @media screen and (max-width: $bp-mobile) {
-            padding-right: 0;
-        }
-        flex: .3;
-        text-align: center;
-        a{
-            //color: $white;
-            font-size: 1rem;
-            padding: 8px;
-            font-weight: 800;
-            background: -webkit-linear-gradient(0deg, $green, #436bc0);
-            border-radius: 3px;
-
-            &:hover{
-                background: -webkit-linear-gradient(0deg, grey, grey);
-            }
-        }
-    }
-
-    .info {
-        background-image: url("../assets/canvas.png");
-        background-size: cover;
-        object-fit: contain;
-        background-repeat: no-repeat;
-        height: fit-content;
-        flex: .7;
-        text-align: left;
-    }
-
-    .infoLight{
-        height: fit-content;
-        flex: .7;
-        text-align: left;
-    }
-
-        .summery {
-            display: flex;
-            h4{
-                font-size: .9rem;
-                color: $lightBlue;
-                @include gradientText();
-            }
-            h5{
-                margin-left: 4rem;
-                font-size: .9rem;
-                //color: $white;
-            }
-        }
-    .summeryLight{
-        display: flex;
-        h4{
-            font-size: .9rem;
-            color: $lightBlue;
-            @include gradientText4();
-        }
-        h5{
-            margin-left: 4rem;
-            font-size: .9rem;
-            //color: $white;
-        }
-    }
+  }
 }

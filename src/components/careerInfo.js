@@ -91,7 +91,6 @@ const CareerInfo = ({header, data, experience}) => {
                                                                 </>
                                                         }
                                                     </>
-
                                             }
                                         </h2>
                                     </motion.div>

@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react"
-import CareerInfo from "@/components/careerInfo";
-import ExperienceData from "@/dummyData/experienceData";
+import React from "react"
+import CareerInfo from "@/components/careerInfo"
 import Api from "@/lib/axios"
 
 const Experience = (props) => {

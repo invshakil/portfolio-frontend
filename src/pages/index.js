@@ -96,6 +96,7 @@ const Home = (props) => {
                         </div>
                     </motion.div>
                 </div>
+                <br/>
             </div>
         </GuestLayout>
     )

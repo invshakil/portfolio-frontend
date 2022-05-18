@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react"
-import EducationData from "@/dummyData/educationData";
-import CareerInfo from "@/components/careerInfo";
+import React from "react"
+import CareerInfo from "@/components/careerInfo"
 import Api from "@/lib/axios"
 
 const Education = (props) => {

@@ -22,9 +22,13 @@
         display: grid;
         grid-template-columns: auto auto;
         grid-gap: 35px;
-
+        @media screen and (max-width: $bp-tablet) {
+            padding: 10px;
+            grid-template-columns: auto;
+        }
         img {
             border-radius: 15px;
+            width: 100%;
         }
     }
 }

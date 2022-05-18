@@ -21,24 +21,26 @@ const CareerCard = ({title, name, subject, result, year, index, experience, from
             </div>
             <h4 className={index % 2 === 0 ? 'yearYellow' : 'yearPink'}>{(!experience) && 'Graduation Year:'}{year}</h4>
             <h4 className={index % 2 === 0 ? 'yearYellow' : 'yearPink'}>
-                <>
-                    {new Date(from).toLocaleDateString("en-US", options)}
-                    <span
-                        style={{margin: '0 3px 0 6px'}}>'{new Date(from).getFullYear().toString().substr(-2)}</span>
-                    -
-                    {
-                        current === 1 ?
-                            ' Current'
-                            :
-                            <>
+                {
+                    experience &&
+                    <>
+                        {new Date(from).toLocaleDateString("en-US", options)}
+                        <span
+                            style={{margin: '0 3px 0 6px'}}>'{new Date(from).getFullYear().toString().substr(-2)}</span>
+                        -
+                        {
+                            current === 1 ?
+                                ' Current'
+                                :
+                                <>
                              <span style={{margin: '0 6px 0 3px'}}>
                                 {new Date(to).toLocaleDateString("en-US", options)}
                               </span>
-                                '{new Date(to).getFullYear().toString().substr(-2)}
-                            </>
-                    }
-                </>
-
+                                    '{new Date(to).getFullYear().toString().substr(-2)}
+                                </>
+                        }
+                    </>
+                }
             </h4>
             <h2> {title}</h2>
             <h3><span>{!experience ? 'Institute:  ' : 'Designation:  '}</span> {name}</h3>

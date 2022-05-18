@@ -36,6 +36,7 @@
         @media screen and (max-width: $bp-tablet) {
             margin-top: 2rem;
             padding: 10px;
+            font-size: .9rem;
             background-color: $body-hr;
         }
     }
@@ -68,10 +69,7 @@
         width: 150px;
         height: 20vh;
         object-fit: cover;
-        @media screen and (max-width: $bp-tablet) {
-            height: 50%;
-            width: 90%;
-        }
+
     }
 
     .popularBlogInfo {

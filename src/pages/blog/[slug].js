@@ -18,10 +18,6 @@ const BlogDetails = (props) => {
 
     const [{theme}] = useStateValue()
 
-    useEffect(() => {
-        console.log('slug', props)
-    }, [props.slug])
-
     const disqusShortname = "portfolio-5auSOa4qCa"
     const disqusConfig = {
         url: `https:// portfolio-5auSOa4qCa.disqus.com/${props.slug}`,
@@ -82,16 +78,16 @@ const BlogDetails = (props) => {
                                 <h2 className="spanIcon"><BsEyeFill color={color} size={size}/>
                                     <span> {props.article.hit_count} Views</span>
                                 </h2>
-                                <h2 className="spanIcon">
+                                <div className="spanIcon">
                                     <AiFillTags color={color} size={size}/>
                                     {
                                         props.article.tags.map(tag => (
-                                            <div key={tag.id}>
-                                                <span className='border px-3'> {tag.name}</span>
-                                            </div>
+                                            <ul key={tag.id}>
+                                                <li className='border px-3'> {tag.name}</li>
+                                            </ul>
                                         ))
                                     }
-                                </h2>
+                                </div>
 
                                 <div className="comments">
                                     <DiscussionEmbed
