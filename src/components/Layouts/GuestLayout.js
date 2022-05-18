@@ -10,7 +10,7 @@ const GuestLayout = ({children,info}) => {
 
     useEffect(() => {
         Api.get('/hit').then(res=>{
-            console.log('hit',res)
+            res.status
         })
     }, [])
 

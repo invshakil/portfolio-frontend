@@ -25,5 +25,5 @@ export default ServiceCard
 ServiceCard.propTypes = {
     title: PropTypes.string,
     service: PropTypes.string,
-    icon:PropTypes.element
+    icon:PropTypes.string
 }

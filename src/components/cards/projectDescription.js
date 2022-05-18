@@ -29,5 +29,5 @@ ProjectDescription.propTypes = {
     demo: propTypes.string,
     image: propTypes.string,
     description: propTypes.string,
-    service: propTypes.string,
+    service: propTypes.number,
 }
