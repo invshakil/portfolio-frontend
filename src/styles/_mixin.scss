@@ -392,7 +392,6 @@
     line-height: 2.1;
 
     .spanIcon {
-      font-size: 1rem;
       @include flexCenter;
       justify-content: flex-start;
       grid-gap: 10px;
@@ -407,16 +406,19 @@
         color: inherit;
       }
 
-      span, li {
-        display: grid;
-        grid-template-columns: auto auto auto;
+      span{
+        font-weight: 400;
+        font-size: 1rem;
+        color: #e32500;
+        text-transform: uppercase;
+      }
+      li {
         font-weight: 100;
-        margin-left: 8px;
-        font-size: .9rem;
+        font-size: .7rem;
         color: #f32d05;
         text-transform: uppercase;
         @media screen and (max-width: $bp-tablet) {
-          font-size: .7rem;
+          font-size: .6rem;
         }
       }
     }
