@@ -15,7 +15,7 @@ class SimpleMap extends Component {
     render() {
 
         const handleApiLoaded = (map, maps) => {
-           console.log('map',map,maps)
+
         };
 
         return (
