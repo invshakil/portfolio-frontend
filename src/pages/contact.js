@@ -34,7 +34,6 @@ const Contact = (props) => {
         } catch (error) {
             alert(error)
         }
-
     }
 
     function onChange(e) {

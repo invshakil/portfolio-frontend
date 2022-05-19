@@ -12,6 +12,7 @@ import {GiBottomRight3DArrow} from "react-icons/gi"
 import {BsEyeFill} from "react-icons/bs"
 import {AiFillTags} from "react-icons/ai"
 import MetaSection from "@/components/metaTags"
+import Link from "next/link"
 
 const BlogDetails = (props) => {
 
@@ -54,9 +55,15 @@ const BlogDetails = (props) => {
                                     {
                                         props.article.categories.map(category => (
                                             <div key={category.id}>
+                                                <Link
+                                                    href={{pathname: `/blog`,query:{category:category.name}}}
+                                                >
+                                                    <a>
                                                 <span className="border px-4 text-xs">
                                                     {category.name}
                                                 </span>
+                                                    </a>
+                                                </Link>
                                             </div>
                                         ))
                                     }
@@ -72,8 +79,8 @@ const BlogDetails = (props) => {
                                 </h2>
 
                                 <h2 className="spanIcon">
-                                    <FaUserAlt  style={{marginRight:'10px'}} color={color}
-                                                size={size}
+                                    <FaUserAlt style={{marginRight: '10px'}} color={color}
+                                               size={size}
                                     />
                                     <span> {props.article.author.name}</span>
                                 </h2>
@@ -84,8 +91,8 @@ const BlogDetails = (props) => {
                                 />
                                 <br/>
                                 <h2 className="spanIcon">
-                                    <BsEyeFill  style={{marginRight:'10px'}} color={color}
-                                                size={size}
+                                    <BsEyeFill style={{marginRight: '10px'}} color={color}
+                                               size={size}
                                     />
                                     <span> {props.article.hit_count} Views</span>
                                 </h2>

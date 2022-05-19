@@ -10,9 +10,11 @@ import qs from "qs"
 import ReactPaginate from "react-paginate"
 import {GrCaretPrevious, GrCaretNext} from "react-icons/gr"
 import MetaSection from "@/components/metaTags"
+import {useRouter} from "next/router"
 
 const Blog = (props) => {
 
+    const router = useRouter()
     const [{theme}] = useStateValue()
     const [data, setData] = useState([])
     const [currentItems, setCurrentItems] = useState(null)
@@ -25,12 +27,11 @@ const Blog = (props) => {
             category: null,
             is_published: null
         })
-    // if (typeof window === "undefined") { /* we're on the server */ }
+
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
 
     useEffect(() => {
-        setData(props?.articles)
-
+        setData(props.articles)
         filter &&
         setItemOffset(0)
         Api.get(`/articles?${query}`)
@@ -38,6 +39,11 @@ const Blog = (props) => {
                 setData(response.data.all.original.data.data)
             })
     }, [filter])
+
+    useEffect(() => {
+        router.query && setFilter({category: router.query.category})
+    }, [])
+
 
     useEffect(() => {
         const endOffset = itemOffset + perPage
@@ -69,10 +75,23 @@ const Blog = (props) => {
                         <select
                             onChange={(e) => e.target.value === '0' ? setFilter({category: null}) : setFilter({category: e.target.value})}
                         >
-                            <option value="0">All</option>
+                            {
+                                router.query.category ?
+                                    <>
+                                        <option value={router.query.category}>
+                                            {router.query.category}
+                                        </option>
+                                        <option value="0">All</option>
+                                    </>
+                                    :
+                                    <option value="0">All</option>
+                            }
                             {
                                 props.types?.data.data.map(type => (
-                                    <option key={type.id} value={type.id}>{type.name}</option>
+                                    type.name !== router.query.category &&
+                                    <option key={type.id} value={type.name}>
+                                        {type.name}
+                                    </option>
                                 ))
                             }
                         </select>
@@ -91,6 +110,7 @@ const Blog = (props) => {
                                                 <p>by {blog.author.name} </p>
                                                 <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.image}`}
                                                      alt={blog.title}/>
+
                                                 <div style={{
                                                     display: 'flex',
                                                     justifyContent: 'space-between',
@@ -99,24 +119,30 @@ const Blog = (props) => {
                                                     <button>{blog.categories[0].name}</button>
                                                     <button>read mode</button>
                                                 </div>
+
                                             </div>
                                         </motion.div>
                                     </a>
                                 </Link>
                             ))
                         }
-                        <ReactPaginate activeClassName="activeCLass"
-                                       previousClassName="prevClass"
-                                       nextClassName="prevClass"
-                                       className="paginate"
-                                       breakLabel="..."
-                                       onPageChange={handlePageClick}
-                                       pageRangeDisplayed={10}
-                                       pageCount={pageCount}
-                                       renderOnZeroPageCount={null}
-                                       nextLabel=<GrCaretNext size="22px"/>
-                        previousLabel=<GrCaretPrevious size="22px"/>
-                        />
+                        {
+                            data.length > perPage &&
+                            <>
+                                <ReactPaginate activeClassName="activeCLass"
+                                               previousClassName="prevClass"
+                                               nextClassName="prevClass"
+                                               className="paginate"
+                                               breakLabel="..."
+                                               onPageChange={handlePageClick}
+                                               pageRangeDisplayed={10}
+                                               pageCount={pageCount}
+                                               renderOnZeroPageCount={null}
+                                               nextLabel=<GrCaretNext size="22px"/>
+                                previousLabel=<GrCaretPrevious size="22px"/>
+                                />
+                            </>
+                        }
                     </div>
                     <div className="mostRead">
                         <MostPopularBlogs data={props.popular}/>
@@ -129,13 +155,15 @@ const Blog = (props) => {
 
 export default Blog
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
 
     let articles = []
     let popular = []
     let types = []
+    let slug = context.query
+    const query = qs.stringify(slug, {encode: false, skipNulls: true})
 
-    await Api.get(`/articles`)
+    await Api.get(`/articles?${query}`)
         .then(response => {
             articles = response.data.all.original.data.data
             popular = response.data.popular.original.data
@@ -146,6 +174,6 @@ export const getServerSideProps = async () => {
         })
 
     return {
-        props: {articles, types, popular},
+        props: {articles, types, popular, slug},
     }
 }
