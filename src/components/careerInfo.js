@@ -6,12 +6,18 @@ import PropTypes from "prop-types"
 import {BsBriefcaseFill} from "react-icons/bs"
 import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
+import MetaSection from "@/components/metaTags"
 
-const CareerInfo = ({header, data, experience}) => {
+const CareerInfo = ({header, data, experience, tags}) => {
     const options = {month: 'short'}
 
     return (
         <GuestLayout>
+            <MetaSection
+                title={`${!experience?'Education' :'Experience'} - ${process.env.NEXT_PUBLIC_APP_NAME}`}
+                description={'My Background - Md. Syful Islam Shakil'}
+                keywords={tags.map(t=>t.name)}
+            />
             <div className="educationContainer">
                 <h1> {header} </h1>
                 <div className={(!experience) ? 'divider' : 'divider2'}/>

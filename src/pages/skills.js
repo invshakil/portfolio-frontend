@@ -4,11 +4,17 @@ import ReviewsData from "@/dummyData/reviewsData"
 import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
 import Api from "@/lib/axios"
+import MetaSection from "@/components/metaTags"
 
 const Skills = (props) => {
 
     return (
         <GuestLayout>
+            <MetaSection
+                title={`My Skills - ${process.env.NEXT_PUBLIC_APP_NAME}`}
+                description={props.skills[0]?.description}
+                keywords={props.tags.map(t => t.name)}
+            />
             <div className='skillsContainer'>
                 <h1>SKILL SET</h1>
                 <br/>
@@ -39,12 +45,18 @@ export default Skills
 export const getServerSideProps = async () => {
 
     let skills = []
+    let tags = []
     await Api.get(`/skills`)
         .then(response => {
             skills = response.data.data.data
         })
 
+    await Api.get(`/allTags`)
+        .then(response => {
+            tags = response.data.data
+        })
+
     return {
-        props: {skills},
+        props: {skills,tags},
     }
 }

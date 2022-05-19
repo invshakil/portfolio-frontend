@@ -13,6 +13,7 @@ import {MdDateRange} from "react-icons/md"
 import {GiBottomRight3DArrow} from "react-icons/gi"
 import {BsEyeFill} from "react-icons/bs"
 import {AiFillTags} from "react-icons/ai"
+import MetaSection from "@/components/metaTags"
 
 const BlogDetails = (props) => {
 
@@ -29,16 +30,11 @@ const BlogDetails = (props) => {
 
     return (
         <GuestLayout>
-            <Head>
-                <title>{props.article?.title}</title>
-                <meta name="description"
-                      content={props.article?.meta_description}/>
-                <meta property="og:title" content={props.slug?.replace(/\-/g, ' ')}/>
-                <meta property="og:description"
-                      content={props.article?.meta_description}/>
-                <meta property="og:url" content={process.env.NEXT_PUBLIC_URL}/>
-                <meta property="og:type" content="website"/>
-            </Head>
+            <MetaSection
+                title={props.article?.title}
+                description={props.article?.meta_description}
+                keywords={props.article.tags.map(t=>t.name)}
+            />
             <div className="singleBlogContainer">
                 <div className="singleBlogFlex">
                     <div className={theme === 'dark' ? 'blogEntry' : theme === 'light' && 'blogEntryLight'}>

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react"
 import GuestLayout from "@/components/Layouts/GuestLayout"
-import PortfolioCard from "@/components/cards/portfolioCard";
+import PortfolioCard from "@/components/cards/portfolioCard"
 import {motion} from "framer-motion"
-import variants from "@/helpers/animation";
-import {useStateValue} from "@/states/StateProvider";
+import variants from "@/helpers/animation"
+import {useStateValue} from "@/states/StateProvider"
 import Api from "@/lib/axios"
+import MetaSection from "@/components/metaTags"
 
 const Portfolio = (props) => {
     const [filter, setFilter] = useState('All')
@@ -15,22 +16,22 @@ const Portfolio = (props) => {
 
         setData(props?.projects)
 
-        filter&&
+        filter &&
         Api.get(`/projects`)
-            .then(response =>{
+            .then(response => {
                 setData(response.data.data.data)
                 let updatedItems = response.data.data.data.filter((curElem) => {
-                    return curElem.service.name === filter;
-                });
+                    return curElem.service.name === filter
+                })
 
                 if (filter === 'All') {
-                    setData(response.data.data.data);
+                    setData(response.data.data.data)
                 } else {
-                    setData(updatedItems);
+                    setData(updatedItems)
                 }
             })
 
-    }, [filter]);
+    }, [filter])
 
     function filterSelect(e) {
         setFilter(e.target.textContent)
@@ -38,19 +39,24 @@ const Portfolio = (props) => {
 
     return (
         <GuestLayout>
-            <div className='portfolioContainer'>
+            <MetaSection
+                title={`My Projects - ${process.env.NEXT_PUBLIC_APP_NAME}`}
+                keywords={props.projects.map(p => p.tags)}
+                description={props.aboutMe[0].value}
+            />
+            <div className="portfolioContainer">
                 <h1> MY PORTFOLIO</h1>
                 <br/>
 
                 <div className={(theme === 'dark') ? 'filterPortfolio' : (theme === 'light') && 'filterPortfolioLight'}>
                     <ul>
                         <div className={filter === 'All' ? 'activeHr' : 'inActiveHr'}>
-                        <li className={filter === 'All' ? 'active' : 'inActive'}
-                            onClick={filterSelect}
-                        >
-                            All
-                        </li>
-                        <hr/>
+                            <li className={filter === 'All' ? 'active' : 'inActive'}
+                                onClick={filterSelect}
+                            >
+                                All
+                            </li>
+                            <hr/>
                         </div>
                         {
                             props.services?.map(item => (
@@ -72,8 +78,8 @@ const Portfolio = (props) => {
                 </div>
 
                 {
-                    data?
-                        <div className='portfolio'>
+                    data ?
+                        <div className="portfolio">
                             {
                                 data?.map(item => (
                                     <motion.div
@@ -111,6 +117,7 @@ export const getServerSideProps = async () => {
 
     let projects = []
     let services = []
+    let aboutMe = ''
 
     await Api.get(`/projects`)
         .then(response => {
@@ -122,7 +129,12 @@ export const getServerSideProps = async () => {
             services = response.data.data.data
         })
 
+    await Api.get(`/about-me`)
+        .then(response => {
+            aboutMe = response.data.data.filter(d => d.key === 'about_me' && d.value)
+        })
+
     return {
-        props: {projects,services},
+        props: {projects, services, aboutMe},
     }
 }

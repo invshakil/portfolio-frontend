@@ -3,14 +3,14 @@ import GuestLayout from "@/components/Layouts/GuestLayout"
 import {useStateValue} from "@/states/StateProvider"
 import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
-import {useEffect, useState} from "react"
+import React, {useEffect, useState} from "react"
 import Api from "@/lib/axios"
+import MetaSection from "@/components/metaTags"
 
 const Home = (props) => {
     const [{theme}] = useStateValue()
     const [data, setData] = useState([])
     const [resumeLink, setResumeLink] = useState('')
-    const [userImage, setUserImage] = useState('')
     const [dob, setDob] = useState('')
 
     useEffect(() => {
@@ -20,32 +20,30 @@ const Home = (props) => {
                 setData(response.data.data)
                 let resume = response.data.data.filter(d => d.key === 'resume_link' && d.value)
                 setResumeLink(resume[0].value)
-                let img = response.data.data.filter(d => d.key === 'user_image' && d.value)
-                setUserImage(img[0].value)
                 let bd = response.data.data.filter(d => d.key === 'd_o_b' && d.value)
-                let bDay=getAge(bd[0].value)
+                let bDay = getAge(bd[0].value)
                 setDob(bDay)
             })
     }, [])
 
-    const getAge=(bd)=>
-    {
-        let today = new Date();
-        let birthDate = new Date(bd);
-        let age = today.getFullYear() - birthDate.getFullYear();
-        let m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
-        {
-            age--;
+    const getAge = (bd) => {
+        let today = new Date()
+        let birthDate = new Date(bd)
+        let age = today.getFullYear() - birthDate.getFullYear()
+        let m = today.getMonth() - birthDate.getMonth()
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--
         }
-        return age;
+        return age
     }
 
     return (
         <GuestLayout>
-            <Head>
-                <title>Introduction- Shakil's Blog</title>
-            </Head>
+            <MetaSection
+                title={`Introduction- ${process.env.NEXT_PUBLIC_APP_NAME}`}
+                description={props.aboutMe[0].value}
+                keywords={props.tags.map(t => t.name)}
+            />
             <div className="homeContainer">
                 <div className="profile">
                     <motion.div
@@ -53,7 +51,8 @@ const Home = (props) => {
                         animate="visible"
                         variants={variants.crossFromRight}
                     >
-                        <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${userImage}`} width="100%" alt="profile photo"/>
+                        <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${props.img[0].value}`} width="100%"
+                             alt="profile photo"/>
                         <br/>
                         <br/>
                         <a href={resumeLink} target="_blank">RESUME</a>
@@ -106,13 +105,24 @@ export default Home
 export const getServerSideProps = async () => {
 
     let info = []
+    let tags = []
+    let img = ''
+    let aboutMe = ''
+
     await Api.get(`/about-me`)
         .then(response => {
             info = response.data.data
+            img = response.data.data.filter(d => d.key === 'user_image' && d.value)
+            aboutMe = response.data.data.filter(d => d.key === 'about_me' && d.value)
+        })
+
+    await Api.get(`/allTags`)
+        .then(response => {
+            tags = response.data.data
         })
 
     return {
-        props: {info},
+        props: {info, img, aboutMe, tags},
     }
 }
 

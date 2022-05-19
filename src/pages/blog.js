@@ -9,6 +9,7 @@ import Api from '@/lib/axios'
 import qs from "qs"
 import ReactPaginate from "react-paginate"
 import {GrCaretPrevious, GrCaretNext} from "react-icons/gr"
+import MetaSection from "@/components/metaTags"
 
 const Blog = (props) => {
 
@@ -51,6 +52,11 @@ const Blog = (props) => {
 
     return (
         <GuestLayout>
+            <MetaSection
+                title={`My Blogs- ${process.env.NEXT_PUBLIC_APP_NAME}`}
+                description={props.types.data.data.map(t => t.description)}
+                keywords={props.types.data.data.map(t => t.name)}
+            />
             <div className="blogContainer">
                 <h1>BLOGS</h1>
                 <div className="flexBlogPage">
