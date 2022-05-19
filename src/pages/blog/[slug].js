@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from "react"
-import {useRouter} from 'next/router'
+import React from "react"
 import GuestLayout from "@/components/Layouts/GuestLayout"
 import MostPopularBlogs from "@/components/mostPopularBlogs"
 import {useStateValue} from "@/states/StateProvider"
-import Head from "next/head"
 import {motion} from "framer-motion"
 import variants from "@/helpers/animation"
 import {DiscussionEmbed} from "disqus-react"
@@ -25,19 +23,21 @@ const BlogDetails = (props) => {
         identifier: props.article?.id, // Single post id
         title: props.slug // Single post title
     }
-    const color = theme==='dark'?'#b8c1d2':'#172042'
-    const size='18px'
+    const color = theme === 'dark' ? '#b8c1d2' : '#172042'
+    const size = '18px'
 
     return (
         <GuestLayout>
             <MetaSection
                 title={props.article?.title}
                 description={props.article?.meta_description}
-                keywords={props.article.tags.map(t=>t.name)}
+                keywords={props.article.tags.map(t => t.name)}
             />
             <div className="singleBlogContainer">
                 <div className="singleBlogFlex">
-                    <div className={theme === 'dark' ? 'blogEntry' : theme === 'light' && 'blogEntryLight'}>
+                    <div className={theme === 'dark' ? 'blogEntry'
+                        : theme === 'light' && 'blogEntryLight'}
+                    >
                         <motion.div
                             initial="hidden"
                             animate="visible"
@@ -48,21 +48,33 @@ const BlogDetails = (props) => {
                             </div>
                             <div className="blogBody">
                                 <h2 className="spanIcon">
-                                    <GiBottomRight3DArrow color={color} size={size}/>
+                                    <GiBottomRight3DArrow style={{marginRight: '10px'}}
+                                                          color={color} size={size}
+                                    />
                                     {
-                                        props.article.categories.map(category  => (
+                                        props.article.categories.map(category => (
                                             <div key={category.id}>
-                                                <span className='border px-4 text-xs'> {category.name}</span>
+                                                <span className="border px-4 text-xs">
+                                                    {category.name}
+                                                </span>
                                             </div>
                                         ))
                                     }
                                 </h2>
 
-                                <h2 className="spanIcon"><MdDateRange color={color} size={size}/>
-                                    <span className='date'> {new Date(props.article.author.created_at).toDateString()}</span>
+                                <h2 className="spanIcon">
+                                    <MdDateRange style={{marginRight: '10px'}}
+                                                 color={color} size={size}
+                                    />
+                                    <span className="date">
+                                        {new Date(props.article.author.created_at).toDateString()}
+                                    </span>
                                 </h2>
 
-                                <h2 className="spanIcon"><FaUserAlt color={color} size={size}/>
+                                <h2 className="spanIcon">
+                                    <FaUserAlt  style={{marginRight:'10px'}} color={color}
+                                                size={size}
+                                    />
                                     <span> {props.article.author.name}</span>
                                 </h2>
                                 <br/>
@@ -71,7 +83,10 @@ const BlogDetails = (props) => {
                                     dangerouslySetInnerHTML={{__html: props.article?.description}}
                                 />
                                 <br/>
-                                <h2 className="spanIcon"><BsEyeFill color={color} size={size}/>
+                                <h2 className="spanIcon">
+                                    <BsEyeFill  style={{marginRight:'10px'}} color={color}
+                                                size={size}
+                                    />
                                     <span> {props.article.hit_count} Views</span>
                                 </h2>
                                 <div className="spanIcon">
@@ -79,7 +94,7 @@ const BlogDetails = (props) => {
                                     {
                                         props.article.tags.map(tag => (
                                             <ul key={tag.id}>
-                                                <li className='border px-3'> {tag.name}</li>
+                                                <li className="border px-3"> {tag.name}</li>
                                             </ul>
                                         ))
                                     }
@@ -122,18 +137,3 @@ export const getServerSideProps = async (context) => {
         props: {article, slug, popular},
     }
 }
-//
-// export const getStaticPaths = async () => {
-//
-//     let articles = []
-//     await Api.get(`/articles`)
-//         .then(response => {
-//             articles = response.data
-//         })
-//     const ids = articles.map((article) => article.title.replace(/\ /g, ''))
-//     const paths = ids.map((id) => ({ params: { id: id.toString() } }))
-//     return {
-//         paths,
-//         fallback: false,
-//     }
-// }

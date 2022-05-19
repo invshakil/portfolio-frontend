@@ -20,7 +20,7 @@
         position: absolute;
         left: 50.4%;
         margin-top: 20px;
-        min-height: 180%;
+        min-height: 150%;
         border-left: 2px solid $body-hr;
         @media screen and (max-width: $bp-tablet) {
             display: none;
@@ -116,3 +116,4 @@
         }
     }
 }
+

@@ -21,7 +21,7 @@ const Skills = (props) => {
                 <motion.div
                     initial="hidden"
                     animate="visible"
-                    variants={variants.slideInLeft}
+                    variants={variants.crossFromLeft}
                 >
                     <section
                         dangerouslySetInnerHTML={{ __html: props.skills[0]?.description }}

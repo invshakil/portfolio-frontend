@@ -10,7 +10,6 @@ import variants from "@/helpers/animation"
 import {motion} from "framer-motion"
 import Api from "@/lib/axios"
 import {toast} from 'react-toastify'
-import Head from "next/head"
 import {ClipLoader} from "react-spinners"
 import MetaSection from "@/components/metaTags"
 
@@ -23,7 +22,6 @@ const Contact = (props) => {
         mode: "onChange"
     })
     const {isValid} = formState
-
     const onSubmit = async (data) => {
         try {
             setLoading(true)
@@ -135,7 +133,10 @@ const Contact = (props) => {
                 </div>
 
                 <div className="map">
-                    <SimpleMap/>
+                    <SimpleMap
+                        longitude={props.location.longitude[0].value}
+                        latitude={props.location.latitude[0].value}
+                    />
                 </div>
             </div>
         </GuestLayout>
@@ -149,10 +150,13 @@ export const getServerSideProps = async () => {
     let info = []
     let tags = []
     let aboutMe = ''
+    let location = {longitude: '', latitude: ''}
     await Api.get(`/about-me`)
         .then(response => {
             info = response.data.data
             aboutMe = response.data.data.filter(d => d.key === 'about_me' && d.value)
+            location.latitude = response.data.data.filter(d => d.key === 'lattitude' && d.value)
+            location.longitude = response.data.data.filter(d => d.key === 'longitude' && d.value)
         })
 
     await Api.get(`/allTags`)
@@ -161,7 +165,7 @@ export const getServerSideProps = async () => {
         })
 
     return {
-        props: {info, aboutMe, tags},
+        props: {info, aboutMe, tags, location},
     }
 }
 
