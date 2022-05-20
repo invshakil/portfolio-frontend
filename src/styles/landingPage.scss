@@ -17,7 +17,6 @@
   }
 
   p {
-    //color: $white;
     text-transform: lowercase;
     margin-top: 2rem;
     font-size: .9rem;
@@ -58,11 +57,10 @@
     text-align: center;
 
     a {
-      //color: $white;
       font-size: 1rem;
       padding: 8px;
       font-weight: 800;
-      background: -webkit-linear-gradient(0deg, $green, #436bc0);
+      background: -webkit-linear-gradient(0deg, $green, $lightTheme);
       border-radius: 3px;
 
       &:hover {
@@ -88,49 +86,10 @@
   }
 
   .summery {
-    display: flex;
-    @media screen and (max-width: $bp-tablet) {
-      margin-bottom: 2rem;
-    }
-
-    h4 {
-      font-size: .8rem;
-      color: $lightBlue;
-      @include gradientText();
-      @media screen and (max-width: $bp-tablet) {
-        font-size: .7rem;
-      }
-    }
-
-    h5 {
-      margin-left: 4rem;
-      font-size: .8rem;
-      @media screen and (max-width: $bp-tablet) {
-        font-size: .7rem;
-        margin-left: 1rem;
-      }
-    }
+    @include userSummery(true)
   }
 
   .summeryLight {
-    display: flex;
-
-    h4 {
-      font-size: .8rem;
-      color: $lightBlue;
-      @include gradientText4();
-      @media screen and (max-width: $bp-tablet) {
-        font-size: .7rem;
-      }
-    }
-
-    h5 {
-      margin-left: 4rem;
-      font-size: .8rem;
-      @media screen and (max-width: $bp-tablet) {
-        font-size: .7rem;
-        margin-left: 1rem;
-      }
-    }
+    @include userSummery(false)
   }
 }

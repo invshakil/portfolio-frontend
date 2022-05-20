@@ -60,7 +60,7 @@
   padding: 20px;
   width: fit-content;
   font-weight: 900;
-  border: 2px solid $green;
+  border: 2px solid $theme;
   font-size: 1.1rem;
   letter-spacing: 1px;
   @media screen and (max-width: $bp-tablet) {
@@ -155,6 +155,7 @@
 @mixin filterPortfolioNav($bg,$hoverColor) {
   ul {
     @include flexCenter();
+    flex-wrap: wrap;
     //justify-content: space-evenly;
     background-image: $bg;
     border-radius: 8px;
@@ -404,17 +405,19 @@
         color: inherit;
       }
 
-      span{
+      span {
         font-weight: 400;
         font-size: .8rem;
-        color: $themeBright;
+        margin: 5px;
+        color: $tomatoBright;
         text-transform: uppercase;
       }
+
       li {
         font-weight: 100;
         font-size: .7rem;
         margin: 5px;
-        color: $themeBright;
+        color: $tomatoBright;
         text-transform: uppercase;
         @media screen and (max-width: $bp-tablet) {
           font-size: .6rem;
@@ -473,7 +476,7 @@
       }
 
       &:hover {
-        background-color: #464646;
+        background-color: #949494;
       }
     }
   }
@@ -502,4 +505,34 @@
     font-size: .7rem;
   }
 }
+
+@mixin userSummery($dark) {
+  display: flex;
+  @media screen and (max-width: $bp-tablet) {
+    margin-bottom: 2rem;
+  }
+
+  h4 {
+    font-size: .8rem;
+    color: $lightBlue;
+    @if ($dark) {
+      @include gradientText();
+    } @else {
+      @include gradientText4();
+    }
+    @media screen and (max-width: $bp-tablet) {
+      font-size: .7rem;
+    }
+  }
+
+  h5 {
+    margin-left: 4rem;
+    font-size: .8rem;
+    @media screen and (max-width: $bp-tablet) {
+      font-size: .7rem;
+      margin-left: 1rem;
+    }
+  }
+}
+
 

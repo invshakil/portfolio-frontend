@@ -19,11 +19,9 @@ const variants = {
         hidden: {
             x: -300,
             opacity: 0,
-            scale: .7,
         },
         visible: {
             x: 0,
-            scale: 1,
             opacity: 1,
             transition: {
                 delay: .3,

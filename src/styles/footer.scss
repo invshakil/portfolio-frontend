@@ -5,5 +5,5 @@
     @include footer($gradientFooter,$greenLight,true);
 }
 .footerContainerLight{
-    @include footer($gradientWhite,$white,false);
+    @include footer($gradientFooterLight,$grey,false);
 }

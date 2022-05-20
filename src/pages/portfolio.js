@@ -6,35 +6,40 @@ import variants from "@/helpers/animation"
 import {useStateValue} from "@/states/StateProvider"
 import Api from "@/lib/axios"
 import MetaSection from "@/components/metaTags"
+import qs from "qs"
 
 const Portfolio = (props) => {
-    const [filter, setFilter] = useState('All')
     const [data, setData] = useState([])
+    const [Filter, setFilterData] = useState('All')
     const [{theme}] = useStateValue()
+    const [filter, setFilter] = useState(
+        {
+            search: null,
+            service: null,
+        })
+    const query = qs.stringify(filter, {encode: false, skipNulls: true})
 
     useEffect(() => {
-
-        setData(props?.projects)
-
-        filter &&
-        Api.get(`/projects`)
-            .then(response => {
-                setData(response.data.data.data)
-                let updatedItems = response.data.data.data.filter((curElem) => {
-                    return curElem.service.name === filter
-                })
-
-                if (filter === 'All') {
+        if(filter.service){
+            Api.get(`/projects?${query}`)
+                .then(response => {
                     setData(response.data.data.data)
-                } else {
-                    setData(updatedItems)
-                }
-            })
-
+                })
+        }
+        else{
+            setData(props.projects)
+        }
     }, [filter])
 
     function filterSelect(e) {
-        setFilter(e.target.textContent)
+        if (e.target.textContent === 'All'){
+            setFilter({service: null})
+            setFilterData('All')
+        }
+        else{
+            setFilter({service: e.target.textContent})
+            setFilterData('')
+        }
     }
 
     return (
@@ -50,8 +55,8 @@ const Portfolio = (props) => {
 
                 <div className={(theme === 'dark') ? 'filterPortfolio' : (theme === 'light') && 'filterPortfolioLight'}>
                     <ul>
-                        <div className={filter === 'All' ? 'activeHr' : 'inActiveHr'}>
-                            <li className={filter === 'All' ? 'active' : 'inActive'}
+                        <div className={Filter === 'All' ? 'activeHr' : 'inActiveHr'}>
+                            <li className={Filter === 'All' ? 'active' : 'inActive'}
                                 onClick={filterSelect}
                             >
                                 All
@@ -61,11 +66,11 @@ const Portfolio = (props) => {
                         {
                             props.services?.map(item => (
                                 <div
-                                    className={filter === item.name ? 'activeHr' : 'inActiveHr'}
+                                    className={filter.service === item.name ? 'activeHr' : 'inActiveHr'}
                                     key={item.id}
                                 >
                                     <li
-                                        className={filter === item.name ? 'active' : 'inActive'}
+                                        className={filter.service === item.name ? 'active' : 'inActive'}
                                         onClick={filterSelect}
                                     >
                                         {item.name}
@@ -78,7 +83,7 @@ const Portfolio = (props) => {
                 </div>
 
                 {
-                    data ?
+                    data?.length>0?
                         <div className="portfolio">
                             {
                                 data?.map(item => (

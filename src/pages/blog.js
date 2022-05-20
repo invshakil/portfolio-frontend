@@ -32,7 +32,7 @@ const Blog = (props) => {
 
     useEffect(() => {
         setData(props.articles)
-        filter &&
+        filter.category &&
         setItemOffset(0)
         Api.get(`/articles?${query}`)
             .then(response => {
