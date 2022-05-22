@@ -15,7 +15,7 @@
             @include blogEntry($body-bg,$themeDark, $body-bg-non-gradient, black, $white, false);
         }
         .blogEntryLight{
-            @include blogEntry($gradientLight,tomato, $gradientWhite, #ffffff, black, true);
+            @include blogEntry($gradientLight, #6161c4, white, #ffffff, black, true);
         }
 
         h2 {

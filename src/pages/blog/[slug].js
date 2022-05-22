@@ -22,7 +22,7 @@ const BlogDetails = (props) => {
     const disqusConfig = {
         url: `https:// portfolio-5auSOa4qCa.disqus.com/${props.slug}`,
         identifier: props.article?.id, // Single post id
-        title: props.slug // Single post title
+        title: props.slug, // Single post title
     }
     const color = theme === 'dark' ? '#b8c1d2' : '#172042'
     const size = '18px'

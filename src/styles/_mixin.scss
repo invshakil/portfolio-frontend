@@ -418,10 +418,16 @@
       }
 
       span {
-        font-weight: 400;
-        font-size: .8rem;
+        font-size: .85rem;
+        font-weight: 600;
         margin: 5px;
-        color: $tomatoBright;
+        @if($dark){
+          color: #3939ab;
+        }
+        @else {
+          color: #8a8fff;
+        }
+
         text-transform: uppercase;
       }
 
@@ -438,7 +444,13 @@
     }
 
     pre {
-      border: 10px solid grey;
+      @if($dark){
+        border: 8px solid #acacbd;
+      }
+      @else {
+        border: 8px solid #1e1f46;
+      }
+
       padding: 0 0 0 20px;
       background-color: $codeBg;
       color: $codeColor;

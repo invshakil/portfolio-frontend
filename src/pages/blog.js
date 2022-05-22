@@ -119,7 +119,6 @@ const Blog = (props) => {
                                                     <button>{blog.categories[0].name}</button>
                                                     <button>read mode</button>
                                                 </div>
-
                                             </div>
                                         </motion.div>
                                     </a>
