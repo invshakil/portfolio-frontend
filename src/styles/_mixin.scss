@@ -60,7 +60,7 @@
   padding: 20px;
   width: fit-content;
   font-weight: 900;
-  border: 2px solid $theme;
+  border: 1.6px solid $theme;
   font-size: 1.1rem;
   letter-spacing: 1px;
   @media screen and (max-width: $bp-tablet) {
@@ -68,7 +68,10 @@
   }
 }
 
-@mixin careerInfoCard($bg, $textColor) {
+@mixin careerInfoCard($bg, $dark) {
+  @if($dark==false){
+    border: 1px solid $grey;
+  }
   width: 37vw;
   padding: 30px;
   background-image: $bg;
@@ -97,7 +100,7 @@
 
     span {
       font-weight: 800;
-      @if ($textColor) {
+      @if ($dark) {
         @include gradientText();
       } @else {
         @include gradientText4();
@@ -146,9 +149,8 @@
     width: 100%;
     margin-left: 0;
   }
-  //height: 35vh;
   background-image: $color;
-  box-shadow: 2px 2px 5px 2px #181818;
+  border: 1px solid $grey;
   border-radius: 5px;
 }
 
@@ -156,7 +158,6 @@
   ul {
     @include flexCenter();
     flex-wrap: wrap;
-    //justify-content: space-evenly;
     background-image: $bg;
     border-radius: 8px;
     padding-left: 20%;
@@ -293,7 +294,7 @@
   }
 }
 
-@mixin blogs($inputBg,$isGradientText,$bg) {
+@mixin blogs($inputBg,$isGradientText,$bg, $dark) {
   flex: .6;
   margin-right: 20px;
   display: grid;
@@ -308,7 +309,12 @@
 
   input, select {
     background-color: $inputBg;
-    border-style: none;
+    @if($dark){
+      border: 1px solid $grey;
+    }
+    @else{
+      border-style: none;
+    }
     width: 25vw;
     @media screen and (max-width: $bp-tablet) {
       width: 100%;
@@ -319,6 +325,9 @@
     padding: 1rem 2px 1rem 2px;
     background-image: $bg;
     width: 25vw;
+    @if($dark){
+      border:1px solid #d9d9d9;
+    }
     height: fit-content;
     @media screen and (max-width: $bp-tablet) {
       width: 100%;
@@ -365,12 +374,15 @@
   }
 }
 
-@mixin blogEntry($bg,$borderColor,$titleBg, $codeBg, $codeColor) {
+@mixin blogEntry($bg,$borderColor,$titleBg, $codeBg, $codeColor, $dark) {
   height: fit-content;
   flex: .6;
   margin-right: 20px;
   background-image: $bg;
   padding: 2rem;
+  @if($dark){
+    border: 1px solid $grey;
+  }
   @media screen and (max-width: $bp-tablet) {
     padding: 0;
     margin: 0;

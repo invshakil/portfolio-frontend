@@ -12,10 +12,10 @@
         }
 
         .blogEntry {
-            @include blogEntry($body-bg,$themeDark, $body-bg-non-gradient, black, white);
+            @include blogEntry($body-bg,$themeDark, $body-bg-non-gradient, black, $white, false);
         }
         .blogEntryLight{
-            @include blogEntry($gradientWhite,tomato, $gradientWhite, #e1ddc4, black);
+            @include blogEntry($gradientLight,tomato, $gradientWhite, #ffffff, black, true);
         }
 
         h2 {

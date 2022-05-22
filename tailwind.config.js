@@ -9,7 +9,7 @@ module.exports = {
             current: 'currentColor',
             'bg-custom-l': '#31374d',
             'bg-custom-r': '#17214b',
-            'white':'#e3e3e3',
+            'white':'#ffffff',
             'dark':'#111111'
         },
         extend: {
