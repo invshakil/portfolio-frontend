@@ -1,8 +1,8 @@
-  ---
-  deployment:
-    tasks:
-      - export DEPLOYPATH=/home/witbal5/sshakil.com/
-      - /bin/cp /src/public/* $DEPLOYPATH 
-      - /bin/cp /src/_app.js $DEPLOYPATH
-      - /bin cp /src/* $DEPLOYPATH
-      - /bin/cp * $DEPLOYPATH
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH =/home/witbal5/sshakil.com/
+    - /bin/cp /public/* $DEPLOYPATH
+    - /bin/cp /src/_app.js $DEPLOYPATH
+    - /bin cp /src/* $DEPLOYPATH
+    - /bin/cp * $DEPLOYPATH
