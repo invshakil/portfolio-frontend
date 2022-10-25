@@ -1,0 +1,113 @@
+@import "variables";
+@import "mixin";
+
+.blogContainer {
+    @include container();
+    h1 {
+        @include centerHeader();
+    }
+
+    .flexBlogPage {
+        padding: 2rem;
+        display: flex;
+        justify-content: flex-start;
+        @media screen and (max-width: $bp-tablet) {
+            flex-direction: column;
+            padding: 20px 0 0 0;
+        }
+
+        .blogs {
+            @include blogs($body-bg-non-gradient, true, $body-bg, false)
+        }
+
+        .blogsLight {
+            @include blogs($white, false, $gradientWhite, true)
+        }
+    }
+}
+
+
+.mostRead {
+    flex: .4;
+
+    h2 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        @media screen and (max-width: $bp-tablet) {
+            margin-top: 2rem;
+            padding: 10px;
+            font-size: .9rem;
+        }
+    }
+
+    .popularBlogs {
+        min-height: 20vh;
+        max-height: 35vh;
+        border-bottom: 1px solid #464646;
+        margin-top: .3rem;
+        border-radius: 8px;
+        @include flexCenter();
+        @media screen and (max-width: $bp-tablet) {
+            flex-direction: column;
+        }
+    }
+
+    .popularBlogsLight {
+        min-height: 20vh;
+        max-height: 35vh;
+        background-image: $gradientSweet;
+        margin-top: .3rem;
+        border-radius: 8px;
+        border:1px solid #d9d9d9;
+        @include flexCenter();
+        @media screen and (max-width: $bp-tablet) {
+            flex-direction: column;
+        }
+    }
+
+    img {
+        width: 150px;
+        height: 20vh;
+        object-fit: cover;
+
+    }
+
+    .popularBlogInfo {
+        padding: 20px;
+
+        h3 {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: .8rem;
+        }
+    }
+}
+
+.paginate{
+    position: relative;
+    background-color: inherit;
+    @include flexCenter;
+    justify-content: flex-start;
+    width: 25%;
+    margin-left: 25%;
+}
+
+.activeCLass {
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    background-color: $greenLight;
+}
+
+.prevClass {
+    color: (rgb(255,255,255,.8));
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #aeb6c9;
+}

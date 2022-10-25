@@ -1,0 +1,56 @@
+//$body-bg: #282e49;
+$body-bg: linear-gradient(to right, #282e49, #1b202f);
+$body-hr: #4c5369;
+$body-bg-non-gradient: #232323;
+$theme: #6150a9;
+$themeBright: #a591cb;
+$tomatoBright: #ef3131;
+$themeDark: #5e00ff;
+$lightTheme: #596dbb;
+$lightBlue: #283C65;
+$white: #f4f4f4;
+$grey: #cccccc;
+$green: #19b275;
+$greenDark: #2b6b51;
+$greenLight: #327c7a;
+$pink: #a65dad;
+$pinkDark: #811b8c;
+$mainBlue: #17214b;
+$gradient:linear-gradient(to right, $lightTheme, $theme);
+$gradientLight:linear-gradient(to right, $white, $white,);
+$gradientSweet:linear-gradient(to right, $white, $white);
+$gradientLightReverse:linear-gradient(to left, $white, $white);
+$gradientFooter:linear-gradient(to bottom, $body-bg-non-gradient, #000000);
+$gradientFooterLight:linear-gradient(to bottom, $white, $grey);
+$gradientWhite:linear-gradient(to bottom, $white, $white, white);
+$gradientLightTheme:linear-gradient(to right, $white, $white);
+$gradientDarkTheme:linear-gradient(to right,#4b689d, #4d5b88, #574486);
+
+
+
+$bp-tablet: 768px;
+$bp-mobile: 426px;
+$bp-laptop: 1281px;
+$bp-mediumDesktop: 1921px;
+$bp-largeDesktop: 3841px;
+
+.headerText{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.featuredDescription{
+  max-height: 12vh;
+  overflow-y: scroll;
+}
+.featuredDescription {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.featuredDescription::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
