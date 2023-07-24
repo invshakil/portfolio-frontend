@@ -16,10 +16,10 @@ const GuestLayout = ({children,info}) => {
 
     return (
         <div>
-            <div className='hidden'>
+            <div>
                 <Navigation/>
             </div>
-            <div className="font-sans text-gray-900 antialiased">
+            <div className="font-sans text-gray-900 antialiased mt-20">
                 {children}
                 <ParticlesComponent/>
             </div>

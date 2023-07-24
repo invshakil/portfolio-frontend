@@ -12,10 +12,13 @@ module.exports = {
       'bg-custom-dark': '#2a2a2a',
       'white':'#ffffff',
       'grey':'#6c6c6c',
+      'whiteDark':'#4b4b4b',
+      'whiteLight':'#b4b4b4',
       'tomato':'#e04242',
+      'tomatoDark':'#b05a5a',
       'lightBlue':'#4e71af',
       'offWhite':'#e8e8e8',
-      'dark':'#111111'
+      'dark':'#181818'
     },
     extend: {
       fontFamily: {

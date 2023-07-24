@@ -1,109 +1,76 @@
-import ApplicationLogo from '../../components/ApplicationLogo'
-import Link from 'next/link'
-import NavLink from '../../components/NavLink'
-import ResponsiveNavLink from '../../components/ResponsiveNavLink'
-import {useRouter} from 'next/router'
 import React, {useState} from 'react'
-import Routes from "../../routes/routes"
-import ThemeChanger from "../../helpers/themeChanger"
-import {useStateValue} from "../../states/StateProvider"
+import Link from "next/link";
 
 
 const Navigation = () => {
-    const router = useRouter()
-    const [open, setOpen] = useState(false)
-    const [{theme}] = useStateValue()
+    const [navbar, setNavbar] = useState(false);
 
     return (
-        <nav className={(theme === 'light') ? 'navBar' : (theme === 'dark') && 'darkNavBar'}>
-            {/* Primary Navigation Menu */}
-            <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-12">
-                <div className="flex justify-evenly h-16">
-                    {/* Logo */}
-                    <div className="flex-shrink-0 flex items-center">
-                        <Link href="/">
-                            <a>
-                                <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600"/>
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="flex">
-                        {/* Navigation Links */}
-                        <div className="hidden space-x-6 xl:-my-px xl:ml-10 xl:flex">
-                            <hr/>
-                            {
-                                Routes.map(route => (
-                                    <NavLink
-                                        key={route.id}
-                                        href={route.path}
-                                        active={router.pathname === route.path}
+        <nav className="w-full bg-white dark:bg-dark shadow fixed top-0 z-10">
+            <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+                <div>
+                    <div className="flex items-center justify-between py-3 md:py-5 md:block">
+                        <a href="javascript:void(0)">
+                            <h2 className="text-2xl font-bold">LOGO</h2>
+                        </a>
+                        <div className="md:hidden">
+                            <button
+                                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                                onClick={() => setNavbar(!navbar)}
+                            >
+                                {navbar ? (
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-6 h-6"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
                                     >
-                                        <h1 className="title">
-                                            <span style={{paddingRight: '5px'}}>{route.icon}</span>
-                                            {route.name}
-                                        </h1>
-                                    </NavLink>
-                                ))
-                            }
-                            <ThemeChanger/>
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                ) : (
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth={2}
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M4 6h16M4 12h16M4 18h16"
+                                        />
+                                    </svg>
+                                )}
+                            </button>
                         </div>
                     </div>
-                    {/* Hamburger */}
-                    <div className="-mr-2 flex items-center xl:hidden">
-                        <button
-                            onClick={() => setOpen(open => !open)}
-                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                        >
-                            <svg
-                                className="h-6 w-6"
-                                stroke="currentColor"
-                                fill="none"
-                                viewBox="0 0 24 24">
-                                {open ? (
-                                    <path
-                                        className="inline-flex"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                ) : (
-                                    <path
-                                        className="inline-flex"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                )}
-                            </svg>
-                        </button>
+                </div>
+                <div>
+                    <div
+                        className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+                            navbar ? "block" : "hidden"
+                        }`}
+                    >
+                        <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+                            <li className="text-gray-600 hover:text-blue-600">
+                                <Link href="/">Blog</Link>
+                            </li>
+                            <li className="text-gray-600 hover:text-blue-600">
+                                <Link href="/about-me">About Me</Link>
+                            </li>
+                            <li className="text-gray-600 hover:text-blue-600">
+                                <Link href={'/#skills'}>Skills</Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-
-            {/* Responsive Navigation Menu */}
-            {open && (
-                <div className="block xl:hidden">
-                    <div className="pt-2 pb-3 space-y-1">
-                        {
-                            Routes.map(route => (
-                                <ResponsiveNavLink
-                                    key={route.id}
-                                    href={route.path}
-                                    active={router.pathname === route.path}
-                                >
-                                    <h1 className="title">
-                                        <span style={{paddingRight: '5px'}}>{route.icon}</span>
-                                        {route.name}
-                                    </h1>
-                                </ResponsiveNavLink>
-                            ))
-                        }
-                        <ThemeChanger/>
-                    </div>
-                </div>
-            )}
         </nav>
     )
 }

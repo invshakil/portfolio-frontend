@@ -1,21 +1,13 @@
-import Head from 'next/head'
 import GuestLayout from "../components/Layouts/GuestLayout"
 import {useStateValue} from "../states/StateProvider"
-import variants from "../helpers/animation"
-import {motion} from "framer-motion"
 import React, {useEffect, useState} from "react"
 import Api from "../lib/axios"
 import MetaSection from "../components/metaTags"
-import Introduction from "../components/introduction";
-import Featured from "../components/featured";
-import About from "../components/about";
-import Experience from "../components/experience";
-import Sidebar from "../components/sidebar";
-import Blog from "../components/blog";
-import qs from "qs";
 import LinkedInCard from "../components/cards/linkedInCard";
-import Skills from "../components/skills";
-import Educations from "../components/educations";
+import Link from "next/link";
+import {FaLongArrowAltRight} from 'react-icons/fa';
+import Introduction from "../components/introduction";
+import IntroductionCard from "../components/introductionCard";
 
 const Home = (props) => {
     const [{theme}] = useStateValue()
@@ -23,6 +15,13 @@ const Home = (props) => {
     const [resumeLink, setResumeLink] = useState('')
     const [dob, setDob] = useState('')
     const [email, setEmail] = useState('')
+    const backgroundImageUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${props.featured[0]?.image}`;
+    const styles = {
+        backgroundImage: `url('${backgroundImageUrl}')`,
+        backgroundPosition: 'center center',
+        backgroundBlendMode: 'multiply',
+        backgroundSize: 'cover',
+    };
 
     useEffect(() => {
         setData(props.info)
@@ -39,6 +38,16 @@ const Home = (props) => {
             })
     }, [])
 
+    useEffect(() => {
+        Api.get(`/about-me/etc`)
+            .then(response => {
+                // setETC(response.data)
+                // setSkills(response.data.skills)
+                // setWorkplace(response.data.workplace)
+                console.log(response.data)
+            })
+    }, []);
+
     const getAge = (bd) => {
         let today = new Date()
         let birthDate = new Date(bd)
@@ -52,35 +61,131 @@ const Home = (props) => {
 
     return (
         <GuestLayout>
-            {/*SEO*/}
             <MetaSection
                 title={`Introduction - ${process.env.NEXT_PUBLIC_APP_NAME}`}
-                description={props.aboutMe[0].value}
+                description={'Articles'}
                 keywords={props.tags.map(t => t.name)}
             />
-            {/*SEO*/}
             <div
-                className={`mx-10 mb-5 min-h-screen lg:flex lg:justify-between sm:grid sm:grid-cols-1 ${theme === 'dark' ? ' opacity-80' : 'opacity-90'}`}>
-                {/*Feed*/}
-                <div className='rounded-xl mr-2 pb-8 lg:w-8/12 sm:w-screen'>
-                    <Introduction theme={theme} data={data} img={props.img[0].value} email={email}/>
-                    <About theme={theme} data={data}/>
-                    <Featured
-                        theme={theme}
-                        featured={props.featured.slice(0, Number(props.featuredCount[0].value))}
-                    />
-                    <Experience theme={theme} workplaces={props.workplaces.slice(0, 3)}/>
-                    <Educations theme={theme}/>
-                    {/*<Skills theme={theme} skills={props.skills[0]?.description}/>*/}
+                className={`lg:hidden md:block lg:ml-2 rounded-xl pb-8 pt-3 px-8 lg:w-4/12 md:w-screen ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
+                <IntroductionCard theme={theme} data={data} img={props.img[0]?.value} email={email}/>
+            </div>
+            <div
+                className={`mx-1 lg:mx-8 mb-5 lg:flex lg:justify-between md:grid md:grid-cols-1 ${theme === 'dark' ? ' opacity-80' : 'opacity-90'}`}>
+                <div className='rounded-xl lg:mr-2 pb-8 lg:w-8/12 md:w-screen'>
+                    {/*<h2 className='text-center text-2xl mt-10 mb-4'>Read Latest Articles</h2>*/}
+                    {/*<hr/>*/}
+                    <div className="dark:bg-gray-800 dark:text-gray-50">
+                        <div className="grid grid-cols-12 mx-auto">
+                            <div
+                                className="flex lg:my-12 mt-3 space-y-2 lg:h-11/12 flex-col justify-center col-span-12 align-middle bg-no-repeat bg-cover dark:bg-gray-700 lg:col-span-6 shadow shadow-xl shadow-whiteLight dark:shadow-dark relative"
+                                style={styles}
+                            >
+                                <div
+                                    className="flex flex-col items-center justify-center text-center relative z-10 backdrop-filter backdrop-brightness-75 h-full">
+                                    <span>{new Date(props.featured[0]?.created_at).toLocaleDateString('en-US', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric',
+                                    })}</span>
+                                    <Link href={`/${props.featured[0]?.slug}`}>
+                                        <h1 className="py-4 text-5xl font-bold hover:underline cursor-pointer">{props.featured[0]?.title}</h1>
+                                    </Link>
+                                    {/*<p className="pb-6">{props.featured[0]?.description}</p>*/}
+                                    <Link href={`/${props.featured[0]?.slug}`} className={'cursor-pointer'}>
+                                        <FaLongArrowAltRight size={'20px'}/>
+                                    </Link>
+                                </div>
+                            </div>
+
+                            <div
+                                className={`bg-white dark:bg-dark flex flex-col col-span-12 p-3 divide-y lg:col-span-6 lg:p-10 dark:divide-grey divide-bg-custom-dark lg:ml-2 shadow shadow-xl shadow-whiteLight dark:shadow-dark `}>
+                                {
+                                    props.featured?.slice(1).map(a => (
+                                        <div className="pt-7 text-xs pb-7 space-y-2">
+                                            <span>{new Date(a?.created_at).toLocaleDateString('en-US', {
+                                                day: 'numeric',
+                                                month: 'long',
+                                                year: 'numeric',
+                                            })}</span>
+                                            <div className={'flex justify-between'}>
+                                                {/*<img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${a.image}`}*/}
+                                                {/*     className={'w-28 h-32 object-cover mr-3'}*/}
+                                                {/*     alt={a.title}/>*/}
+                                                <Link href={`/${a?.slug}`}>
+                                                    <h1 className="dark:text-whiteLight text-2xl font-bold hover:underline cursor-pointer">{a.title}</h1>
+                                                </Link>
+                                            </div>
+
+
+                                            {/*<p>{a.description}</p>*/}
+                                            <a rel="noopener noreferrer" href="#"
+                                               className="inline-flex items-center py-2 space-x-6 text-sm dark:text-violet-400">
+                                                <span>
+                                                    <Link href={`/${a.slug}`} className={'cursor-pointer'}>
+                                                        <FaLongArrowAltRight size={'20px'} color={'#e04242'}/>
+                                                    </Link>
+                                                </span>
+
+                                            </a>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        <section className="lg:py-1 sm:py-12 dark:bg-gray-800 dark:text-gray-100">
+
+                            {
+                                props.categories?.map(cat => (
+                                    <div className="py-6 mx-auto space-y-5">
+                                        <div className="space-y-2 text-left">
+                                            <h2 className="text-3xl font-bold text-tomato hover:underline cursor-pointer">{cat.articles?.length > 0 ? cat.name : ''}</h2>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
+                                            {
+                                                cat.articles?.map((ar, index) => (
+                                                    index < 3 &&
+                                                    <article
+                                                        className="flex flex-col dark:bg-gray-900 shadow shadow-xl dark:shadow-dark shadow-whiteLight">
+                                                        <a rel="noopener noreferrer" href="#"
+                                                           aria-label="Te nulla oportere reprimique his dolorum">
+                                                            <img alt={ar.title}
+                                                                 className="object-cover w-full h-52 dark:bg-gray-500"
+                                                                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${ar.image}`}
+                                                            />
+                                                        </a>
+                                                        <div className="flex flex-col flex-1 p-6 bg-white dark:bg-dark">
+                                                            <a rel="noopener noreferrer" href="#"
+                                                               aria-label="Te nulla oportere reprimique his dolorum"></a>
+                                                            <a rel="noopener noreferrer" href="#"
+                                                               className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400">{cat.name}</a>
+                                                            <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{ar.title}</h3>
+                                                            <div
+                                                                className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
+                                                                <span>June 1, 2020</span>
+                                                                <span>{ar.hit_count} views</span>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </section>
+
+                    </div>
+
                 </div>
-                {/*Feed*/}
-                {/*Sidebar*/}
                 <div
-                    className={`ml-2 rounded-xl pb-8 pt-3 px-8 lg:w-4/12 sm:w-screen ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
-                    <Blog articles={props.articles} types={props.types} popular={props.popular}/>
-                    {/*<LinkedInCard/>*/}
+                    className={`hidden lg:block lg:ml-2 rounded-xl pb-8 pt-3 lg:w-4/12 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
+                    {/*<Blog articles={props.articles} types={props.types} popular={props.popular}/>*/}
+                    <IntroductionCard etc={props.etc}  theme={theme} data={data}
+                                      img={props.img[0]?.value} email={email}/>
                 </div>
-                {/*Sidebar*/}
             </div>
         </GuestLayout>
     )
@@ -89,17 +194,16 @@ export default Home
 
 export const getServerSideProps = async () => {
 
-    let info = []
+    let featuredCount = ''
+    let categories = []
+    let featured = []
+    let types = []
     let tags = []
     let img = ''
     let aboutMe = ''
-    let featuredCount = ''
-    let articles = []
-    let popular = []
-    let types = []
-    let skills = []
-    let featured = []
-    let workplaces = []
+    let info = []
+    let workplace = ''
+    let etc = []
 
     await Api.get(`/about-me`)
         .then(response => {
@@ -108,36 +212,26 @@ export const getServerSideProps = async () => {
             aboutMe = response.data.data.filter(d => d.key === 'about_me' && d.value)
             featuredCount = response.data.data.filter(d => d.key === 'featuredCount' && d.value)
         })
-
+    await Api.get(`/about-me/etc`)
+        .then(response => {
+            etc = response.data
+        })
+    await Api.get(`/allTags`)
+        .then(response => {
+            tags = response.data.data
+        })
     await Api.get(`/articles`)
         .then(response => {
-            articles = response.data.all.original.data.data
-            popular = response.data.popular.original.data
+            featured = response.data.featured
+            categories = response.data.categoryArticles
         })
     await Api.get(`/categories`)
         .then(response => {
             types = response.data
         })
 
-    await Api.get(`/allTags`)
-        .then(response => {
-            tags = response.data.data
-        })
-    await Api.get(`/skills`)
-        .then(response => {
-            skills = response.data.data.data
-        })
-    await Api.get(`/workplaces`)
-        .then(response => {
-            workplaces = response.data.data.data
-        })
-    await Api.get(`/fetch-all-published-news`)
-        .then(response => {
-            featured = response.data.data.news
-        })
-
     return {
-        props: {info, img, aboutMe, tags, articles, types, popular, skills, workplaces, featured, featuredCount},
+        props: {categories, types, tags, featuredCount, featured, aboutMe, info, img, etc, workplace},
     }
 }
 

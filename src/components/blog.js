@@ -3,7 +3,6 @@ import {useStateValue} from "../states/StateProvider"
 import MostPopularBlogs from "./mostPopularBlogs"
 import Link from 'next/link'
 import variants from "../helpers/animation"
-import {motion} from "framer-motion"
 import Api from '../lib/axios'
 import qs from "qs"
 import ReactPaginate from "react-paginate"
@@ -103,20 +102,14 @@ const Blog = (props) => {
                         <Link key={blog.id}
                               href={{pathname: `/blog/${blog.title.replace(/\ /g, '-')}`}}>
                             <a>
-                                <motion.div
-                                    initial="hidden"
-                                    animate="visible"
-                                    variants={variants.crossFromLeft}
-                                >
-                                    <div
-                                        className={`my-3 p-5 rounded-sm border ${theme === 'light' ? 'border-offWhite' : 'border-bg-custom-dark'}`}>
-                                        <h2 className='text-lightGreen text-xl font-bold'>{blog.title}</h2>
-                                        <p className='text-tomato font-extralight  py-1'>by {blog.author.name} </p>
-                                        <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.image}`}
-                                             alt={blog.title}/>
-                                        <button className='text-tomato'>{blog.categories[0].name}</button>
-                                    </div>
-                                </motion.div>
+                                <div
+                                    className={`my-3 p-5 rounded-sm border ${theme === 'light' ? 'border-offWhite' : 'border-bg-custom-dark'}`}>
+                                    <h2 className='text-lightGreen text-xl font-bold'>{blog.title}</h2>
+                                    <p className='text-tomato font-extralight  py-1'>by {blog.author.name} </p>
+                                    <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.image}`}
+                                         alt={blog.title}/>
+                                    <button className='text-tomato'>{blog.categories[0]?.name}</button>
+                                </div>
                             </a>
                         </Link>
                     ))
