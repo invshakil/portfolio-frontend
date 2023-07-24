@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {AiOutlineMail} from "react-icons/ai";
 import {RiComputerLine} from "react-icons/ri";
 import {MdOutlineSchool} from "react-icons/md";
@@ -6,6 +6,16 @@ import ThemeChanger from "../helpers/themeChanger"
 import ButtonMailto from "../helpers/mailToButton";
 
 const Introduction = ({theme, data, img, email}) => {
+
+    const [showFullContent, setShowFullContent] = useState(false);
+    const aboutMeObject = data.find((d) => d.key === 'about_me');
+    const slicedContent = aboutMeObject ? aboutMeObject.value.slice(0, 250) : '';
+    const handleReadMoreClick = () => {
+        setShowFullContent(true);
+    };
+    const handleReadLessClick = () => {
+        setShowFullContent(false);
+    };
 
     return (
         <div className={`px-8 py-3 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
@@ -21,7 +31,20 @@ const Introduction = ({theme, data, img, email}) => {
                     <hr className={`border ${theme!=='dark'?'border-offWhite':'border-bg-custom-dark'}`}/>
                     <div className='pt-2 flex justify-between'>
                         <p className='font-extralight  w-2/4 text-justify'>
-                            {data?.map(d => d.key === 'about_me' && d.value)}
+                            {/*{data?.map(d => d.key === 'about_me' && d.value)}*/}
+                            <div>
+                                {showFullContent ? (
+                                    <>
+                                        {aboutMeObject && aboutMeObject.value}
+                                        <span onClick={handleReadLessClick} className='text-lightGreen dark:text-tomato text-xs cursor-pointer'>...Read Less</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        {slicedContent}
+                                        <span onClick={handleReadMoreClick} className='text-lightGreen dark:text-tomato text-xs cursor-pointer'>...Read More</span>
+                                    </>
+                                )}
+                            </div>
                             {/*Comilla,Chittagong, Bangladesh*/}
                         </p>
                         <div className='px-9 pt-2'>
