@@ -4,6 +4,7 @@ import ParticlesComponent from "../../helpers/particles"
 import {useEffect} from "react"
 import Api from "../../lib/axios"
 import Navigation from "./Navigation";
+import ThemeChanger from "../../helpers/themeChanger";
 
 
 const GuestLayout = ({children,info}) => {
@@ -16,6 +17,9 @@ const GuestLayout = ({children,info}) => {
 
     return (
         <div>
+            {/*<div className="fixed bottom-32 right-7 " style={{zIndex:'999'}}>*/}
+            {/*    <ThemeChanger/>*/}
+            {/*</div>*/}
             <div>
                 <Navigation/>
             </div>

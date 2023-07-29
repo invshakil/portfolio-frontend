@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Link from "next/link";
+import ThemeChanger from "../../helpers/themeChanger";
 
 
 const Navigation = () => {
@@ -66,6 +67,9 @@ const Navigation = () => {
                             </li>
                             <li className="text-gray-600 hover:text-blue-600">
                                 <Link href={'/#skills'}>Skills</Link>
+                            </li>
+                            <li className="text-gray-600 hover:text-blue-600">
+                                <ThemeChanger/>
                             </li>
                         </ul>
                     </div>

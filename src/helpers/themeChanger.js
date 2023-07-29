@@ -23,19 +23,19 @@ const ThemeChanger = () => {
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === "dark") {
             return (
-                <SunIcon className="w-10 h-10 text-yellow-500 " role="button" onClick={() => setTheme('light')}/>
+                <SunIcon className="w-8 h-8 text-whiteLight " role="button" onClick={() => setTheme('light')}/>
             )
         } else {
             return (
-                <MoonIcon className="w-10 h-10 text-gray-900 " role="button" onClick={() => setTheme('dark')}/>
+                <MoonIcon className="w-8 h-8 text-gray-900 " role="button" onClick={() => setTheme('dark')}/>
             )
         }
     };
 
     return (
         <div>
-            <header className="h-10 dark:border-gray-700">
-                <div className="container  px-4 sm:px-6 py-4 flex justify-between items-center">
+            <header className="dark:border-gray-700">
+                <div className="container  lg:px-0 sm:px-6 flex justify-between items-center">
                     {renderThemeChanger()}
                 </div>
             </header>
