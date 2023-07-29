@@ -9,12 +9,15 @@ import About from "../components/about";
 import Experience from "../components/experience";
 import Blog from "../components/blog";
 import Educations from "../components/educations";
+import Skills from "../components/skills";
+import Link from "next/link";
 
 const AboutMe = (props) => {
     const [{theme}] = useStateValue()
     const [data, setData] = useState([])
     const [resumeLink, setResumeLink] = useState('')
     const [dob, setDob] = useState('')
+    const [showAllExp, setShowAllExp] = useState(false)
     const [email, setEmail] = useState('')
 
     useEffect(() => {
@@ -53,18 +56,25 @@ const AboutMe = (props) => {
             />
             {/*SEO*/}
             <div
-                className={`mx-10 mb-5 min-h-screen lg:flex lg:justify-between sm:grid sm:grid-cols-1 ${theme === 'dark' ? ' opacity-80' : 'opacity-90'}`}>
+                className={`mx-1 lg:mx-10 mb-5 min-h-screen lg:flex lg:justify-between sm:grid sm:grid-cols-1 ${theme === 'dark' ? ' opacity-80' : 'opacity-90'}`}>
                 {/*Feed*/}
                 <div className='rounded-xl mr-2 pb-8 lg:w-8/12 sm:w-screen'>
-                    <Introduction theme={theme} data={data} img={props.img[0].value} email={email}/>
+                    <Introduction etc={props.etc} theme={theme} data={data} img={props.img[0].value} email={email}/>
                     <About theme={theme} data={data}/>
                     <Featured
                         theme={theme}
                         featured={props.featured.slice(0, Number(props.featuredCount[0].value))}
                     />
-                    <Experience theme={theme} workplaces={props.workplaces.slice(0, 3)}/>
-                    <Educations theme={theme}/>
-                    {/*<Skills theme={theme} skills={props.skills[0]?.description}/>*/}
+                    <Experience theme={theme}
+                                workplaces={!showAllExp ? props.workplaces.slice(0, 3) : props.workplaces}/>
+                    <div className={`bg-white dark:bg-dark px-10 pb-5 ${props.workplaces?.length < 3 && 'hidden'}`}>
+                        <button onClick={() => setShowAllExp(!showAllExp)}
+                                className='flex m-auto bg-lightGreen px-3 py-1 rounded-sm text-offWhite text-sm'>
+                            {!showAllExp ? 'Show All' : 'Show less'}
+                        </button>
+                    </div>
+                    <Skills theme={theme} skills={props.skills}/>
+                    <Educations theme={theme} educations={props.educations}/>
                 </div>
                 {/*Feed*/}
                 {/*Sidebar*/}
@@ -92,6 +102,8 @@ export const getServerSideProps = async () => {
     let skills = []
     let featured = []
     let workplaces = []
+    let educations = []
+    let etc = []
 
     await Api.get(`/about-me`)
         .then(response => {
@@ -123,13 +135,35 @@ export const getServerSideProps = async () => {
         .then(response => {
             workplaces = response.data.data.data
         })
+    await Api.get(`/educations`)
+        .then(response => {
+            educations = response.data.data.data
+        })
     await Api.get(`/fetch-all-published-news`)
         .then(response => {
             featured = response.data.data.news
         })
+    await Api.get(`/about-me/etc`)
+        .then(response => {
+            etc = response.data
+        })
 
     return {
-        props: {info, img, aboutMe, tags, articles, types, popular, skills, workplaces, featured, featuredCount},
+        props: {
+            info,
+            img,
+            aboutMe,
+            tags,
+            articles,
+            types,
+            popular,
+            skills,
+            etc,
+            workplaces,
+            educations,
+            featured,
+            featuredCount
+        },
     }
 }
 

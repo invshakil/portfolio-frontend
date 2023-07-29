@@ -28,13 +28,6 @@ const Experience = ({theme, workplaces}) => {
                     />
                 ))
             }
-            <div className={`${workplaces.length > 3 && 'hidden'}`}>
-                <Link href={{pathname: `/experience`}}>
-                    <button className='flex m-auto bg-lightGreen px-3 py-1 rounded-sm text-offWhite text-sm'>
-                        Show All
-                    </button>
-                </Link>
-            </div>
         </div>
     )
 }

@@ -2,17 +2,17 @@ import React, {useState, useEffect} from "react";
 import EducationsCard from "./cards/educationsCard";
 import Api from "../lib/axios";
 
-const Educations = ({theme}) => {
+const Educations = ({theme, educations}) => {
 
-    let [educations, setEducations]=useState([])
-
-    useEffect( () => {
-         Api.get('educations')
-            .then(response => {
-                setEducations(response.data.data.data)
-                console.log('ed',response.data.data.data)
-            })
-    }, []);
+    // let [educations, setEducations]=useState([])
+    //
+    // useEffect( () => {
+    //      Api.get('educations')
+    //         .then(response => {
+    //             setEducations(response.data.data.data)
+    //             console.log('ed',response.data.data.data)
+    //         })
+    // }, []);
 
     return (
         <div className={`px-8 py-3 mt-3 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
