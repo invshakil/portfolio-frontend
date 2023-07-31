@@ -47,18 +47,13 @@ const Blog = (props) => {
         const endOffset = itemOffset + perPage
         setCurrentItems(data?.slice(itemOffset, endOffset))
         setPageCount(Math.ceil(data?.length / perPage))
-        window.scrollTo({top: 0, behavior: 'smooth'})
+        // window.scrollTo({top: 0, behavior: 'smooth'})
     }, [itemOffset, perPage, data])
 
     const handlePageClick = (event) => {
         const newOffset = (event.selected * perPage) % data?.length
         setItemOffset(newOffset)
     }
-
-    useEffect(() => {
-        window.scrollTo({top: 0, behavior: 'smooth'})
-    }, [pageCount]);
-
 
     return (
         <div>
@@ -100,7 +95,7 @@ const Blog = (props) => {
                 {
                     currentItems?.map(blog => (
                         <Link key={blog.id}
-                              href={{pathname: `/blog/${blog.title.replace(/\ /g, '-')}`}}>
+                              href={{pathname: `/${blog.title.replace(/\ /g, '-')}`}}>
                             <a>
                                 <div
                                     className={`my-3 p-5 rounded-sm border ${theme === 'light' ? 'border-offWhite' : 'border-bg-custom-dark'}`}>
@@ -116,7 +111,7 @@ const Blog = (props) => {
                 }
                 {
                     data?.length > perPage &&
-                    <div>
+                    <div onClick={()=>window.scrollTo({top: 0, behavior: 'smooth'})}>
                         <ReactPaginate activeClassName="activeCLass"
                                        previousClassName="prevClass"
                                        nextClassName="prevClass"

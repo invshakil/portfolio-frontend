@@ -35,8 +35,8 @@ const Footer = () => {
 
 
     return (
-        <div className={theme==='dark'?'footerContainer':theme==='light'&&'footerContainerLight'}>
-            <div className='footerIcons'>
+        <div className={`${theme === 'dark' ? 'footerContainer' : theme === 'light' && 'footerContainerLight'}`}>
+            <div className='footerIcons mt-5'>
                 <a href={fbLink} target='_blank'><FaFacebook/></a>
                 <a href={twitterLink} target='_blank'><FaTwitter/></a>
                 <a href={fbLink} target='_blank'><AiFillMail/></a>

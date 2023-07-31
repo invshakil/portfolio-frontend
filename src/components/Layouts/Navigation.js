@@ -66,7 +66,7 @@ const Navigation = () => {
                                 <Link href="/about-me">About Me</Link>
                             </li>
                             <li className="text-gray-600 hover:text-blue-600">
-                                <Link href={'/#skills'}>Skills</Link>
+                                <Link href={'/about-me/#skills'}>Skills</Link>
                             </li>
                             <li className="text-gray-600 hover:text-blue-600">
                                 <ThemeChanger/>

@@ -186,7 +186,7 @@ const PortfolioData = [
         tech:'    Laravel Framework (PHP)\n' +
             '    VueJS (for SPA)\n' +
             '    Mysql ',
-        description:'Portfolio and Blog for myself. In this application portfolio have my complete biodata and blog system will have tutorials regarding different topics. Key Features - \n' +
+        description:'Portfolio and Blog for myself. In this application portfolio have my complete biodata and category system will have tutorials regarding different topics. Key Features - \n' +
             '\n' +
             '\n' +
             '    Portfolio\n' +

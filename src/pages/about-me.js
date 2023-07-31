@@ -67,6 +67,7 @@ const AboutMe = (props) => {
                     />
                     <Experience theme={theme}
                                 workplaces={!showAllExp ? props.workplaces.slice(0, 3) : props.workplaces}/>
+                    <div id='skills'/>
                     <div className={`bg-white dark:bg-dark px-10 pb-5 ${props.workplaces?.length < 3 && 'hidden'}`}>
                         <button onClick={() => setShowAllExp(!showAllExp)}
                                 className='flex m-auto bg-lightGreen px-3 py-1 rounded-sm text-offWhite text-sm'>

@@ -9,9 +9,9 @@ const BlogData = [
     },
     {
         id: 1,
-        title: 'How you can generate blog archive links in laravel ',
+        title: 'How you can generate category archive links in laravel ',
         image: '../assets/lv.png',
-        slug:'How you can generate blog archive links in laravel'.replace(/\s/g, '-'),
+        slug:'How you can generate category archive links in laravel'.replace(/\s/g, '-'),
         author: '',
         category: 'laravel'
     },

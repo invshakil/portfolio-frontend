@@ -44,75 +44,78 @@ const BlogDetails = (props) => {
                     <div className={theme === 'dark' ? 'blogEntry'
                         : theme === 'light' && 'blogEntryLight'}
                     >
-                        <motion.div
-                            initial="hidden"
-                            animate="visible"
-                            variants={variants.slideInLeft}
-                        >
-                            <div className="blogTitle">
-                                <h2>{props.article?.title} </h2>
-                            </div>
-                            <div className="blogBody">
-                                <h2 className="spanIcon">
-                                    <GiBottomRight3DArrow style={{marginRight: '10px'}}
-                                                          color={color} size={size}
-                                    />
-                                    {
-                                        props.article.categories.map(category => (
-                                            <div key={category.id}>
-                                                <Link
-                                                    href={{pathname: `/blog`, query: {category: category.name}}}
-                                                >
-                                                    <a>
+                        {/*<motion.div*/}
+                        {/*    initial="hidden"*/}
+                        {/*    animate="visible"*/}
+                        {/*    variants={variants.slideInLeft}*/}
+                        {/*>*/}
+                        <div className="blogTitle">
+                            <h2>{props.article?.title} </h2>
+                        </div>
+                        <div className="blogBody">
+                            <h2 className="spanIcon">
+                                <GiBottomRight3DArrow style={{marginRight: '10px'}}
+                                                      color={color} size={size}
+                                />
+                                {
+                                    props.article.categories.map(category => (
+                                        <div key={category.id}>
+                                            {/*<Link*/}
+                                            {/*    href={{pathname: `/blog`, query: {category: category.name}}}*/}
+                                            {/*>*/}
+                                                <a>
                                                 <span className="border px-4 text-xs">
-                                                    {category.name}
+                                                    <Link key={category.id}
+                                                          href={{pathname: `category/${category.slug}`}}>
+                                                        {category.name}
+                                                    </Link>
                                                 </span>
-                                                    </a>
-                                                </Link>
-                                            </div>
-                                        ))
-                                    }
-                                </h2>
+                                                </a>
+                                            {/*</Link>*/}
+                                        </div>
+                                    ))
+                                }
+                            </h2>
 
-                                <h2 className="spanIcon">
-                                    <MdDateRange style={{marginRight: '10px'}}
-                                                 color={color} size={size}
-                                    />
-                                    <span className="date">
+                            <h2 className="spanIcon">
+                                <MdDateRange style={{marginRight: '10px'}}
+                                             color={color} size={size}
+                                />
+                                <span className="date">
                                         {new Date(props.article.author.created_at).toDateString()}
                                     </span>
-                                </h2>
+                            </h2>
 
-                                <h2 className="spanIcon">
-                                    <FaUserAlt style={{marginRight: '10px'}} color={color}
-                                               size={size}
-                                    />
-                                    <span> {props.article.author.name}</span>
-                                </h2>
-                                <br/>
-                                <section
-                                    className="blogDescription"
-                                    dangerouslySetInnerHTML={{__html: props.article?.description}}
+                            <h2 className="spanIcon">
+                                <FaUserAlt style={{marginRight: '10px'}} color={color}
+                                           size={size}
                                 />
-                                <br/>
-                                <h2 className="spanIcon">
-                                    <BsEyeFill style={{marginRight: '10px'}} color={color}
-                                               size={size}
-                                    />
-                                    <span> {props.article.hit_count} Views</span>
-                                </h2>
-                                <div className="spanIcon">
-                                    <AiFillTags color={color} size={size}/>
-                                    {
-                                        props.article.tags.map(tag => (
-                                            <ul key={tag.id}>
-                                                <li className="border px-3"> {tag.name}</li>
-                                            </ul>
-                                        ))
-                                    }
-                                </div>
+                                <span> {props.article.author.name}</span>
+                            </h2>
+                            <br/>
+                            <section
+                                className="blogDescription"
+                                dangerouslySetInnerHTML={{__html: props.article?.description}}
+                            />
+                            <br/>
+                            <h2 className="spanIcon">
+                                <BsEyeFill style={{marginRight: '10px'}} color={color}
+                                           size={size}
+                                />
+                                <span> {props.article.hit_count} Views</span>
+                            </h2>
+                            <div className="spanIcon">
+                                <AiFillTags color={color} size={size}/>
+                                {
+                                    props.article.tags.map(tag => (
+                                        <ul key={tag.id}>
+                                            <li className="border px-3"> {tag.name}</li>
+                                        </ul>
+                                    ))
+                                }
                             </div>
-                        </motion.div>
+                        </div>
+                        {/*</motion.div>*/}
                     </div>
                     <div className="mostRead">
                         <MostPopularBlogs data={props.popular}/>

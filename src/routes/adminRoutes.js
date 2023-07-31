@@ -39,7 +39,7 @@ const AdminRoutes = [
     {
         id:6,
         name:'BLOG',
-        path:'/admin/manage-blog/list',
+        path:'/admin/manage-category/list',
         icon:<ImBlogger2/>
     },
 ]

@@ -19,7 +19,7 @@ const Introduction = ({theme, data, img, email, etc}) => {
     };
 
     return (
-        <div className={`py-3 fixed overflow-y-scroll max-h-screen pb-44 pl-6 mr-8 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
+        <div className={`rounded-md -mt-1 lg:fixed overflow-y-scroll max-h-full ${showFullContent?'lg:pb-44':'lg:pb-5'} lg:pl-6 lg:mr-8 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
             <img className='w-screen max-h-48 object-cover' src={'assets/cover.jpg'} alt='cover'/>
             <img className='w-screen h-44 w-44 rounded-full object-cover relative -mt-36 m-auto'
                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${img}`}
@@ -48,11 +48,11 @@ const Introduction = ({theme, data, img, email, etc}) => {
                             <hr className={`border my-3 ${theme !== 'dark' ? 'border-offWhite' : 'border-bg-custom-dark'}`}/>
                             <div className='flex justify-start items-center'>
                                 {/*<span className='mr-1'><SiWorkplace size='20px' color={'#858585'}/></span>*/}
-                                <h2>
+                                <h2 className='w-fit text-sm'>
                                     <span className='text-grey dark:text-whiteLight mr-2'>{etc?.data?.workplace?.designation}</span>
                                     @
                                     <a href={`${etc?.data?.workplace?.company_link}`} target={'_blank'} title={'See Company'}
-                                       className=' text-tomatoDark font-bold text-lg'>
+                                       className=' text-tomatoDark font-bold text-sm'>
                                         {etc?.data?.workplace?.company_name}
                                     </a>
                                 </h2>
@@ -67,10 +67,10 @@ const Introduction = ({theme, data, img, email, etc}) => {
                             </div>
                         </div>
                     </div>
-                    <div className='flex justify-center mt-5'>
+                    <div className='flex justify-center mt-4'>
                         <Link href={'/about-me'}>
                             <button
-                                className='hover:underline hover:text-tomato text-xs rounded-sm px-3 py-2 mt-2 border border-whiteLight dark:border-bg-custom-dark'>
+                                className='hover:underline hover:text-tomato text-xs rounded-sm px-3 py-1 mt-0 border border-whiteLight dark:border-bg-custom-dark'>
                                 View Details
                             </button>
                         </Link>

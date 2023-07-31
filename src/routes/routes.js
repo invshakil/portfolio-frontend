@@ -45,7 +45,7 @@ const Routes = [
     {
         id:6,
         name:'BLOG',
-        path:'/blog',
+        path:'/category',
         icon:<ImBlogger2/>
     },
     {

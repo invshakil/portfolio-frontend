@@ -68,7 +68,7 @@ const Home = (props) => {
             />
             <div
                 className={`lg:hidden md:block lg:ml-2 rounded-xl pb-8 pt-3 px-8 lg:w-4/12 md:w-screen ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
-                <IntroductionCard theme={theme} data={data} img={props.img[0]?.value} email={email}/>
+                <IntroductionCard etc={props.etc} theme={theme} data={data} img={props.img[0]?.value} email={email}/>
             </div>
             <div
                 className={`mx-1 lg:mx-8 mb-5 lg:flex lg:justify-between md:grid md:grid-cols-1 ${theme === 'dark' ? ' opacity-80' : 'opacity-90'}`}>
@@ -157,14 +157,17 @@ const Home = (props) => {
                                                             />
                                                         </a>
                                                         <div className="flex flex-col flex-1 p-6 bg-white dark:bg-dark">
-                                                            <a rel="noopener noreferrer" href="#"
-                                                               aria-label="Te nulla oportere reprimique his dolorum"></a>
-                                                            <a rel="noopener noreferrer" href="#"
-                                                               className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400">{cat.name}</a>
+                                                            {/*<a rel="noopener noreferrer" href="#"*/}
+                                                            {/*   aria-label="Te nulla oportere reprimique his dolorum"></a>*/}
+                                                            <Link key={ar.id}
+                                                                  className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400"
+                                                                  href={{pathname: `category/${cat.slug}`}}>
+                                                                {cat.name}
+                                                            </Link>
                                                             <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{ar.title}</h3>
                                                             <div
                                                                 className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
-                                                                <span>June 1, 2020</span>
+                                                                <span>{new Date(ar.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                                                                 <span>{ar.hit_count} views</span>
                                                             </div>
                                                         </div>

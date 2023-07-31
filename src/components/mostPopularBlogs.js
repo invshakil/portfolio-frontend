@@ -9,30 +9,30 @@ const MostPopularBlogs = ({data}) => {
     const [{theme}] = useStateValue()
 
     return (
-        <div>
-            <h2>MOST POPULAR BLOGS</h2>
+        <section>
+            <h1 className='text-2xl'>MOST POPULAR BLOGS</h1>
 
             {
                 data?.map(blog => (
                     <Link key={blog.id}
-                          href={{pathname: `/blog/${blog.title.replace(/\ /g, '-')}`}}
+                          href={{pathname: `/${blog.title.replace(/\ /g, '-')}`}}
                     >
                         <a>
-                            <div
+                            <article
                                 className={theme === 'dark' ? 'popularBlogs' : theme === 'light' && 'popularBlogsLight'}
                             >
                                 <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.image}`}
                                      alt={blog.title}/>
                                 <div className="popularBlogInfo">
-                                    <h3>{blog.title}</h3>
-                                    <p>{blog.title}</p>
+                                    <h2 style={{fontSize:'21px'}} className='mb-2'>{blog.title}</h2>
+                                    <p className='text-xs'>{blog.meta_description.slice(0, 90)}...</p>
                                 </div>
-                            </div>
+                            </article>
                         </a>
                     </Link>
                 ))
             }
-        </div>
+        </section>
     )
 }
 
