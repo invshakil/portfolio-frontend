@@ -19,9 +19,9 @@ const Introduction = ({theme, data, img, email, etc}) => {
     };
 
     return (
-        <div className={`rounded-md -mt-1 lg:fixed overflow-y-scroll max-h-full ${showFullContent?'lg:pb-44':'lg:pb-5'} lg:pl-6 lg:mr-8 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
+        <div className={`rounded-md -mt-1 lg:fixed ${showFullContent?'lg:pb-44':'lg:pb-5'} lg:p-6 lg:mr-8 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
             <img className='w-screen max-h-48 object-cover' src={'assets/cover.jpg'} alt='cover'/>
-            <img className='w-screen h-44 w-44 rounded-full object-cover relative -mt-36 m-auto'
+            <img className='w-screen h-28 w-28 rounded-full object-cover relative -mt-20 m-auto'
                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${img}`}
                  alt='propic'
             />
@@ -32,20 +32,20 @@ const Introduction = ({theme, data, img, email, etc}) => {
                     <hr className={`border ${theme !== 'dark' ? 'border-offWhite' : 'border-bg-custom-dark'}`}/>
                     <div className='pt-2 flex justify-between'>
                         <div className='font-extralight w-full dark:text-whiteLight text-left'>
-                            <div>
-                                {showFullContent ? (
-                                    <>
-                                        {aboutMeObject && aboutMeObject.value}
-                                        <span onClick={handleReadLessClick} className='text-lightGreen dark:text-tomato text-xs cursor-pointer'>...Read Less</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        {slicedContent}
-                                        <span onClick={handleReadMoreClick} className='text-lightGreen dark:text-tomato text-xs cursor-pointer'>...Read More</span>
-                                    </>
-                                )}
-                            </div>
-                            <hr className={`border my-3 ${theme !== 'dark' ? 'border-offWhite' : 'border-bg-custom-dark'}`}/>
+                            {/*<div>*/}
+                            {/*    {showFullContent ? (*/}
+                            {/*        <>*/}
+                            {/*            {aboutMeObject && aboutMeObject.value}*/}
+                            {/*            <span onClick={handleReadLessClick} className='text-lightGreen dark:text-tomato text-xs cursor-pointer'>...Read Less</span>*/}
+                            {/*        </>*/}
+                            {/*    ) : (*/}
+                            {/*        <>*/}
+                            {/*            {slicedContent}*/}
+                            {/*            <span onClick={handleReadMoreClick} className='text-lightGreen dark:text-tomato text-xs cursor-pointer'>...Read More</span>*/}
+                            {/*        </>*/}
+                            {/*    )}*/}
+                            {/*</div>*/}
+                            {/*<hr className={`border my-3 ${theme !== 'dark' ? 'border-offWhite' : 'border-bg-custom-dark'}`}/>*/}
                             <div className='flex justify-start items-center'>
                                 {/*<span className='mr-1'><SiWorkplace size='20px' color={'#858585'}/></span>*/}
                                 <h2 className='w-fit text-sm'>
@@ -60,7 +60,7 @@ const Introduction = ({theme, data, img, email, etc}) => {
                             <div className='flex justify-start items-center'>
                                 {/*<span className='mr-2'><GiSkills size='20px' color={'#808080'}/></span>*/}
                                 <div className='flex flex-wrap justify-start gap-2'>
-                                    {etc?.data?.skills?.map(s => (
+                                    {etc?.data?.skills.slice(0,3)?.map(s => (
                                         <p className='w-fit px-5 my-2 bg-lightGreen dark:bg-tomatoDark rounded-lg text-offWhite'>{s.title}</p>
                                     ))}
                                 </div>

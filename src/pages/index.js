@@ -72,7 +72,7 @@ const Home = (props) => {
             </div>
             <div
                 className={`mx-1 lg:mx-8 mb-5 lg:flex lg:justify-between md:grid md:grid-cols-1 ${theme === 'dark' ? ' opacity-80' : 'opacity-90'}`}>
-                <div className='rounded-xl lg:mr-2 pb-8 lg:w-8/12 md:w-screen'>
+                <div className='rounded-xl lg:mr-2 pb-8 lg:w-9/12 md:w-screen'>
                     {/*<h2 className='text-center text-2xl mt-10 mb-4'>Read Latest Articles</h2>*/}
                     {/*<hr/>*/}
                     <div className="dark:bg-gray-800 dark:text-gray-50">
@@ -184,7 +184,7 @@ const Home = (props) => {
 
                 </div>
                 <div
-                    className={`hidden lg:block lg:ml-2 rounded-xl pb-8 pt-3 lg:w-4/12 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
+                    className={`hidden lg:block lg:ml-2 h-fit rounded-xl pb-8 pt-3 lg:w-3/12 ${theme === 'light' ? 'bg-white' : 'bg-dark'}`}>
                     {/*<Blog articles={props.articles} types={props.types} popular={props.popular}/>*/}
                     <IntroductionCard etc={props.etc}  theme={theme} data={data}
                                       img={props.img[0]?.value} email={email}/>

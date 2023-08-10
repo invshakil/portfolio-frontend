@@ -7,16 +7,6 @@ import ButtonMailto from "../helpers/mailToButton";
 
 const Introduction = ({theme, data, img, email, etc}) => {
 
-    const [showFullContent, setShowFullContent] = useState(false);
-    const aboutMeObject = data.find((d) => d.key === 'about_me');
-    const slicedContent = aboutMeObject ? aboutMeObject.value.slice(0, 250) : '';
-    const handleReadMoreClick = () => {
-        setShowFullContent(true);
-    };
-    const handleReadLessClick = () => {
-        setShowFullContent(false);
-    };
-
     return (
         <div className={`px-8 py-3 ${theme === 'light' ? 'bg-white' : 'bg-dark'} w-full bg-white`}>
             <img className='w-screen max-h-48 object-cover' src={'assets/cover.jpg'} alt='cover'/>

@@ -4,7 +4,7 @@ const About = ({theme,data}) => {
 
     const [showFullContent, setShowFullContent] = useState(false);
     const aboutMeObject = data.find((d) => d.key === 'about_me');
-    const slicedContent = aboutMeObject ? aboutMeObject.value.slice(0, 250) : '';
+    const slicedContent = aboutMeObject ? aboutMeObject.value.slice(0, 200) : '';
     const handleReadMoreClick = () => {
         setShowFullContent(true);
     };
