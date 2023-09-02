@@ -2,7 +2,6 @@ import React, {useEffect} from "react"
 import GuestLayout from "../components/Layouts/GuestLayout"
 import MostPopularBlogs from "../components/mostPopularBlogs"
 import {useStateValue} from "../states/StateProvider"
-import {DiscussionEmbed} from "disqus-react"
 import Api from "../lib/axios"
 import {FaUserAlt} from "react-icons/fa"
 import {MdDateRange} from "react-icons/md"
@@ -14,6 +13,7 @@ import MetaSection from "../components/metaTags";
 import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from 'next/router';
 import hljs from 'highlight.js';
+import DisqusComments from "../lib/disqusComment";
 
 const BlogDetails = (props) => {
 
@@ -25,7 +25,7 @@ const BlogDetails = (props) => {
         document.querySelectorAll('pre code').forEach((block) => {
             hljs.highlightBlock(block);
         });
-    }, []);
+    }, [props.article]);
 
     useEffect(() => {
         if (!props.article) {
@@ -33,13 +33,6 @@ const BlogDetails = (props) => {
         }
     }, []);
 
-    const disqusShortname = "portfolio-5auSOa4qCa"
-    const disqusConfig = {
-        url: `https://portfolio-5auSOa4qCa.disqus.com/${props.slug}`,
-        identifier: props.article?.id,
-        title: props.slug,
-        theme: theme,
-    }
     const color = theme === 'dark' ? '#b8c1d2' : '#282828'
     const size = '18px'
 
@@ -120,17 +113,19 @@ const BlogDetails = (props) => {
                                 }
                             </div>
                         </div>
-                        {/*</motion.div>*/}
                     </div>
                     <div className="mostRead">
                         <MostPopularBlogs data={props.popular}/>
                     </div>
                 </div>
             </div>
-            <div className="mx-12 p-10 comments" style={{background:"white"}}>
-                <DiscussionEmbed
-                    shortname={disqusShortname}
-                    config={disqusConfig}
+            <div className="lg:mx-12 lg:p-10">
+                <DisqusComments
+                    shortname="portfolio-5auSOa4qCa"
+                    identifier={props.article?.id}
+                    title={props.slug}
+                    url={`https://portfolio-5auSOa4qCa.disqus.com/${props.slug}`}
+                    theme={theme}
                 />
             </div>
         </GuestLayout>

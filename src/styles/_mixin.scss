@@ -295,7 +295,7 @@
 }
 
 @mixin blogs($inputBg,$isGradientText,$bg, $dark) {
-  flex: .6;
+  flex: .7;
   margin-right: 20px;
   display: grid;
   grid-template-columns: auto auto;
@@ -376,7 +376,7 @@
 
 @mixin blogEntry($bg,$borderColor,$titleBg, $codeBg, $codeColor, $dark) {
   height: fit-content;
-  flex: .6;
+  flex: .7;
   margin-right: 20px;
   background-image: $bg;
   padding: 2rem;

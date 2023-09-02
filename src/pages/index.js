@@ -71,8 +71,7 @@ const Home = (props) => {
             <div
                 className={`mx-1 lg:mx-8 mb-5 lg:flex lg:justify-between md:grid md:grid-cols-1 ${theme === 'dark' ? ' opacity-80' : 'opacity-90'}`}>
                 <div className='rounded-xl lg:mr-2 pb-8 lg:w-9/12 md:w-screen'>
-                    {/*<h2 className='text-center text-2xl mt-10 mb-4'>Read Latest Articles</h2>*/}
-                    {/*<hr/>*/}
+                    <h2 className='text-center text-2xl mt-10 mb-4 hidden'>Read Latest Articles</h2>
                     <div className="dark:bg-gray-800 dark:text-gray-50">
                         <div className="grid grid-cols-12 mx-auto">
                             <div
