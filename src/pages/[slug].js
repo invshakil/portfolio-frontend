@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import GuestLayout from "../components/Layouts/GuestLayout"
 import MostPopularBlogs from "../components/mostPopularBlogs"
 import {useStateValue} from "../states/StateProvider"
@@ -14,10 +14,20 @@ import {AiFillTags} from "react-icons/ai"
 import Link from "next/link"
 import MetaSection from "../components/metaTags";
 import {BiArrowBack} from "react-icons/bi";
+import { useRouter } from 'next/router';
 
 const BlogDetails = (props) => {
 
     const [{theme}] = useStateValue()
+    const router = useRouter();
+
+    useEffect(() => {
+        console.log('article',props.article)
+        if(!props.article){
+            router.push('/404');
+        }
+    }, []);
+
 
     const disqusShortname = "portfolio-5auSOa4qCa"
     const disqusConfig = {
@@ -34,7 +44,7 @@ const BlogDetails = (props) => {
             <MetaSection
                 title={`${props.article?.title} - Shakil's Blog`}
                 description={props.article?.meta_description}
-                keywords={props.article?.tags.map(t => t.name)}
+                keywords={props.article?.tags?.map(t => t.name)}
             />
             <div className="singleBlogContainer">
                 <Link href={'/'}>
@@ -58,7 +68,7 @@ const BlogDetails = (props) => {
                                                       color={color} size={size}
                                 />
                                 {
-                                    props.article.categories.map(category => (
+                                    props.article?.categories?.map(category => (
                                         <div key={category.id}>
                                             {/*<Link*/}
                                             {/*    href={{pathname: `/blog`, query: {category: category.name}}}*/}
@@ -82,7 +92,7 @@ const BlogDetails = (props) => {
                                              color={color} size={size}
                                 />
                                 <span className="date">
-                                        {new Date(props.article.author.created_at).toDateString()}
+                                        {new Date(props.article?.author?.created_at).toDateString()}
                                     </span>
                             </h2>
 
@@ -90,7 +100,7 @@ const BlogDetails = (props) => {
                                 <FaUserAlt style={{marginRight: '10px'}} color={color}
                                            size={size}
                                 />
-                                <span> {props.article.author.name}</span>
+                                <span> {props.article?.author?.name}</span>
                             </h2>
                             <br/>
                             <section
@@ -107,7 +117,7 @@ const BlogDetails = (props) => {
                             <div className="spanIcon">
                                 <AiFillTags color={color} size={size}/>
                                 {
-                                    props.article.tags.map(tag => (
+                                    props.article.tags?.map(tag => (
                                         <ul key={tag.id}>
                                             <li className="border px-3"> {tag.name}</li>
                                         </ul>

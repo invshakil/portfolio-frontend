@@ -22,10 +22,10 @@ const MostPopularBlogs = ({data}) => {
                                 className={theme === 'dark' ? 'popularBlogs' : theme === 'light' && 'popularBlogsLight'}
                             >
                                 <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.image}`}
-                                     alt={blog.title}/>
+                                     alt={blog.title} style={{width:'100px', height:'100px', objectFit:'contain'}}/>
                                 <div className="popularBlogInfo">
                                     <h2 style={{fontSize:'21px'}} className='mb-2'>{blog.title}</h2>
-                                    <p className='text-xs'>{blog.meta_description.slice(0, 90)}...</p>
+                                    {/*<p className='text-xs'>{blog.meta_description.slice(0, 90)}...</p>*/}
                                 </div>
                             </article>
                         </a>

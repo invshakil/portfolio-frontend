@@ -3,6 +3,7 @@ import {FaFacebook, FaLinkedin, FaSkype, FaTwitter, FaYoutube} from "react-icons
 import {AiFillGithub, AiFillMail} from "react-icons/ai";
 import {useStateValue} from "../../states/StateProvider";
 import Api from "../../lib/axios"
+import Link from "next/link";
 
 const Footer = () => {
     const [data,setData]=useState()
@@ -47,7 +48,7 @@ const Footer = () => {
             </div>
 
             <div className='middleSection'>
-                <a href='#'>SITEMAP</a><span>|</span>
+                <Link href='/api/sitemap'>SITEMAP</Link><span>|</span>
                 <a href='#'>PRIVACY POLICY</a><span>|</span>
                 <a href='#'>ROBOTS</a>
             </div>

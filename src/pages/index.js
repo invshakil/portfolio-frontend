@@ -38,15 +38,15 @@ const Home = (props) => {
             })
     }, [])
 
-    useEffect(() => {
-        Api.get(`/about-me/etc`)
-            .then(response => {
-                // setETC(response.data)
-                // setSkills(response.data.skills)
-                // setWorkplace(response.data.workplace)
-                console.log(response.data)
-            })
-    }, []);
+    // useEffect(() => {
+    //     Api.get(`/about-me/etc`)
+    //         .then(response => {
+    //             // setETC(response.data)
+    //             // setSkills(response.data.skills)
+    //             // setWorkplace(response.data.workplace)
+    //             console.log(response.data)
+    //         })
+    // }, []);
 
     const getAge = (bd) => {
         let today = new Date()
@@ -101,8 +101,8 @@ const Home = (props) => {
                             <div
                                 className={`bg-white dark:bg-dark flex flex-col col-span-12 p-3 divide-y lg:col-span-6 lg:p-10 dark:divide-grey divide-bg-custom-dark lg:ml-2 shadow shadow-xl shadow-whiteLight dark:shadow-dark `}>
                                 {
-                                    props.featured?.slice(1).map(a => (
-                                        <div className="pt-7 text-xs pb-7 space-y-2">
+                                    props.featured?.slice(1).map((a,i) => (
+                                        <div className="pt-7 text-xs pb-7 space-y-2" key={i}>
                                             <span>{new Date(a?.created_at).toLocaleDateString('en-US', {
                                                 day: 'numeric',
                                                 month: 'long',
@@ -137,8 +137,8 @@ const Home = (props) => {
                         <section className="lg:py-1 sm:py-12 dark:bg-gray-800 dark:text-gray-100">
 
                             {
-                                props.categories?.map(cat => (
-                                    <div className="py-6 mx-auto space-y-5">
+                                props.categories?.map((cat,i) => (
+                                    <div className="py-6 mx-auto space-y-5" key={i}>
                                         <div className="space-y-2 text-left">
                                             <h2 className="text-3xl font-bold text-tomato hover:underline cursor-pointer">{cat.articles?.length > 0 ? cat.name : ''}</h2>
                                         </div>
@@ -148,6 +148,7 @@ const Home = (props) => {
                                                 cat.articles?.map((ar, index) => (
                                                     index < 3 &&
                                                     <article
+                                                        key={index}
                                                         className="flex flex-col dark:bg-gray-900 shadow shadow-xl dark:shadow-dark shadow-whiteLight">
                                                         <a rel="noopener noreferrer" href="#"
                                                            aria-label="Te nulla oportere reprimique his dolorum">

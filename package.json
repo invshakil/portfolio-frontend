@@ -27,6 +27,7 @@
     "react-toastify": "^9.0.8",
     "react-tsparticles": "^2.3.3",
     "sass": "^1.55.0",
+    "sitemap": "^7.1.1",
     "tsparticles": "^2.3.4"
   },
   "devDependencies": {

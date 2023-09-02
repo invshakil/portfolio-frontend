@@ -41,8 +41,7 @@
     }
 
     .popularBlogs {
-        min-height: 20vh;
-        max-height: 35vh;
+        height: fit-content;
         border-bottom: 1px solid #464646;
         margin-top: .3rem;
         border-radius: 8px;
@@ -53,8 +52,7 @@
     }
 
     .popularBlogsLight {
-        min-height: 20vh;
-        max-height: 35vh;
+        height: fit-content;
         background-image: $gradientSweet;
         margin-top: .3rem;
         border-radius: 8px;
