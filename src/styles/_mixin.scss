@@ -462,17 +462,7 @@
       }
     }
 
-    pre {
-      @if($dark){
-        border: 6px solid #acacbd;
-      }
-      @else {
-        border: 6px solid #4b4b4b;
-      }
-
-      padding: 0 0 0 20px;
-      background-color: $codeBg;
-      color: $codeColor;
+    pre, code {
       white-space: pre-line;
       font-size: .9rem;
       @media screen and (max-width: $bp-tablet) {

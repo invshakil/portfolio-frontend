@@ -12,7 +12,7 @@
     }
 
     .blogEntry {
-      @include blogEntry($greenLight,$greenDark, $body-bg-non-gradient, black, $white, false);
+      @include blogEntry($greenLight,$greenDark, $body-bg-non-gradient, #1c1c1c, $white, false);
     }
     .blogEntryLight{
       @include blogEntry($greenLight, $tomatoBright, white, #ffffff, black, true);

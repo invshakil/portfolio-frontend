@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from "react"
+import React from "react"
 import Head from "next/head"
-import Api from "../lib/axios"
 
 const MetaSection = ({title, keywords, description}) => {
 

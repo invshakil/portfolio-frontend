@@ -5,6 +5,7 @@ import GuestLayout from "../../components/Layouts/GuestLayout";
 import {useEffect, useState} from "react";
 import ReactPaginate from "react-paginate";
 import {GrCaretPrevious, GrCaretNext} from "react-icons/gr"
+import Link from "next/link";
 
 const Category = (props) => {
 
@@ -48,19 +49,25 @@ const Category = (props) => {
                     {
                         currentItems?.map((ar, index) => (
                             <article
+                                key={index}
                                 className="flex flex-col dark:bg-gray-900 shadow shadow-xl dark:shadow-dark shadow-whiteLight">
-                                <a rel="noopener noreferrer" href="#"
-                                   aria-label="Te nulla oportere reprimique his dolorum">
+                                <Link href={`/${ar.slug}`}>
                                     <img alt={ar.title}
-                                         className="object-cover w-full h-52 dark:bg-gray-500"
+                                         className="object-cover cursor-pointer w-full h-52 dark:bg-gray-500"
                                          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${ar.image}`}
                                     />
-                                </a>
+                                </Link>
                                 <div className="flex flex-col flex-1 p-6 bg-white dark:bg-dark">
-                                    <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{ar.title}</h3>
+                                    <Link href={`/${ar.slug}`}>
+                                        <h3 className="flex-1 py-2 cursor-pointer text-lg font-semibold leading-snug">{ar.title}</h3>
+                                    </Link>
                                     <div
                                         className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
-                                        <span>{new Date(ar.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                                        <span>{new Date(ar.created_at).toLocaleDateString('en-GB', {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric'
+                                        })}</span>
                                         <span>{ar.hit_count} views</span>
                                     </div>
                                 </div>
@@ -70,7 +77,7 @@ const Category = (props) => {
                 </section>
                 {
                     data?.length > perPage &&
-                    <div onClick={()=>window.scrollTo({top: 0, behavior: 'smooth'})}>
+                    <div onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
                         <ReactPaginate activeClassName="activeCLass"
                                        previousClassName="prevClass"
                                        nextClassName="prevClass"

@@ -2,8 +2,6 @@ import React, {useEffect} from "react"
 import GuestLayout from "../components/Layouts/GuestLayout"
 import MostPopularBlogs from "../components/mostPopularBlogs"
 import {useStateValue} from "../states/StateProvider"
-import {motion} from "framer-motion"
-import variants from "../helpers/animation"
 import {DiscussionEmbed} from "disqus-react"
 import Api from "../lib/axios"
 import {FaUserAlt} from "react-icons/fa"
@@ -14,7 +12,8 @@ import {AiFillTags} from "react-icons/ai"
 import Link from "next/link"
 import MetaSection from "../components/metaTags";
 import {BiArrowBack} from "react-icons/bi";
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
+import hljs from 'highlight.js';
 
 const BlogDetails = (props) => {
 
@@ -22,12 +21,17 @@ const BlogDetails = (props) => {
     const router = useRouter();
 
     useEffect(() => {
-        console.log('article',props.article)
-        if(!props.article){
+        // Find all code blocks and apply syntax highlighting
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (!props.article) {
             router.push('/404');
         }
     }, []);
-
 
     const disqusShortname = "portfolio-5auSOa4qCa"
     const disqusConfig = {
@@ -54,11 +58,6 @@ const BlogDetails = (props) => {
                     <div className={theme === 'dark' ? 'blogEntry'
                         : theme === 'light' && 'blogEntryLight'}
                     >
-                        {/*<motion.div*/}
-                        {/*    initial="hidden"*/}
-                        {/*    animate="visible"*/}
-                        {/*    variants={variants.slideInLeft}*/}
-                        {/*>*/}
                         <div className="blogTitle">
                             <h2>{props.article?.title} </h2>
                         </div>
@@ -70,18 +69,14 @@ const BlogDetails = (props) => {
                                 {
                                     props.article?.categories?.map(category => (
                                         <div key={category.id}>
-                                            {/*<Link*/}
-                                            {/*    href={{pathname: `/blog`, query: {category: category.name}}}*/}
-                                            {/*>*/}
-                                                <a>
+                                            <a>
                                                 <span className="border px-4 text-xs">
                                                     <Link key={category.id}
                                                           href={{pathname: `category/${category.slug}`}}>
                                                         {category.name}
                                                     </Link>
                                                 </span>
-                                                </a>
-                                            {/*</Link>*/}
+                                            </a>
                                         </div>
                                     ))
                                 }
@@ -132,7 +127,7 @@ const BlogDetails = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="mx-12 p-10 comments">
+            <div className="mx-12 p-10 comments" style={{background:"white"}}>
                 <DiscussionEmbed
                     shortname={disqusShortname}
                     config={disqusConfig}

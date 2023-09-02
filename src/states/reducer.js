@@ -1,6 +1,6 @@
 export const initialState = {
     user: {},
-    theme:'',
+    theme:'light',
     state:false
 };
 
